@@ -1,0 +1,13 @@
+# Intellij project files
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+
+# Compiled sources
+cmake-build-debug
+
+# macOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
