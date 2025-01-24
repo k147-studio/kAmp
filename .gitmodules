@@ -1,3 +1,6 @@
+[submodule "docs"]
+	path = docs
+	url = git@github.com:k147-studio/docs.git
 [submodule "JUCE"]
 	path = JUCE
 	url = https://github.com/juce-framework/JUCE.git

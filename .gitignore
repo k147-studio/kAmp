@@ -5,6 +5,7 @@
 
 # Compiled sources
 cmake-build-debug
+build-ios
 
 # macOS specific
 .DS_Store
