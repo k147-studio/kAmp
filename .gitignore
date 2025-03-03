@@ -4,8 +4,12 @@
 .idea/**/dictionaries
 
 # Compiled sources
-cmake-build-debug
-build-ios
+cmake-build-debug/
+build-ios/
+build/
+
+# JUCE dependencies
+JUCE/
 
 # macOS specific
 .DS_Store
