@@ -1,20 +1,17 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent()
-{
-    setSize (900, 700);
+MainComponent::MainComponent(): pedalboardComponent(manager.getPedalboard()), connectionComponent() {
+    setSize(900, 700);
+    addAndMakeVisible(pedalboardComponent);
+    addAndMakeVisible(connectionComponent);
 }
 
 //==============================================================================
 void MainComponent::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll ( juce::Colours::black);
-    g.setFont (juce::FontOptions (16.0f));
-    g.setColour (juce::Colours::white);
-    g.drawText ("Hello kAmp!", getLocalBounds(), juce::Justification::centred, true);
-
+    //g.fillAll(juce::Colours::grey);
 }
 
 void MainComponent::resized()
@@ -23,3 +20,17 @@ void MainComponent::resized()
     // If you add any child components, this is where you should
     // update their positions.
 }
+
+void MainComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate) {
+
+}
+
+void MainComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferToFill) {
+
+}
+
+void MainComponent::releaseResources() {
+
+}
+
+
