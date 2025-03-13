@@ -3,7 +3,7 @@
 #include "AbstractEffect.h"
 #include <juce_audio_utils/juce_audio_utils.h>
 
-class Pedalboard : AbstractEffect {
+class Pedalboard : public AbstractEffect {
   public:
     Pedalboard();
     Pedalboard(const std::vector<AbstractEffect*> &effects);

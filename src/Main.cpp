@@ -1,3 +1,5 @@
+#include <DelayEffect.h>
+
 #include "MainComponent.h"
 
 //==============================================================================
@@ -61,7 +63,9 @@ public:
                               allButtons)
         {
             setUsingNativeTitleBar (true);
-            setContentOwned (new MainComponent(), true);
+            Pedalboard* pedalboard = new Pedalboard();
+            Manager* manager = new Manager(pedalboard);
+            setContentOwned (new MainComponent(*manager), true);
 
            #if JUCE_IOS || JUCE_ANDROID
             setFullScreen (true);

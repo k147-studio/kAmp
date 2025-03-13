@@ -1,7 +1,11 @@
 #include "Manager.h"
 
+Manager::Manager(AbstractEffect* pedalboard) : pedalboard(pedalboard) {
+
+}
+
 void Manager::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
-    pedalboard.apply(bufferToFill);
+    pedalboard->apply(bufferToFill);
 }
 
 void Manager::import() {
@@ -9,7 +13,9 @@ void Manager::import() {
 }
 
 void Manager::append(AbstractEffect* effect) {
-    pedalboard.append(effect);
+    if (Pedalboard* pedalboard = dynamic_cast<Pedalboard*>(this->pedalboard)) {
+        pedalboard->append(effect);
+    }
 }
 
 void Manager::exportAll() {
@@ -20,6 +26,6 @@ void Manager::exportSelection() {
 
 }
 
-Pedalboard Manager::getPedalboard() {
+AbstractEffect* Manager::getPedalboard() {
     return pedalboard;
 }

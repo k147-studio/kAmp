@@ -4,12 +4,13 @@
 
 class Manager {
   public:
+    Manager(AbstractEffect* pedalboard);
     void apply(const juce::AudioSourceChannelInfo &bufferToFill);
     void import();
     void append(AbstractEffect* effect);
     void exportAll();
     void exportSelection();
-    Pedalboard getPedalboard();
+    AbstractEffect* getPedalboard();
   private:
-    Pedalboard pedalboard;
+    AbstractEffect* pedalboard;
 };

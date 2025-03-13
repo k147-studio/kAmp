@@ -8,6 +8,7 @@ class EffectComponent : public juce::Component
 {
 public:
     virtual void apply(const juce::AudioSourceChannelInfo &bufferToFill) = 0;
+    virtual void resized() override = 0;
 protected:
     explicit EffectComponent(AbstractEffect* effect);
     ~EffectComponent() = default;

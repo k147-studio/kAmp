@@ -2,19 +2,10 @@
 
 ConnectionComponent::ConnectionComponent() {
   usernameField.setTextToShowWhenEmpty("Username", juce::Colours::grey);
-
   passwordField.setTextToShowWhenEmpty("Password", juce::Colours::grey);
   passwordField.setPasswordCharacter('*');
   skipButton.setButtonText("Skip");
   loginButton.setButtonText("Login");
-
-  addAndMakeVisible(usernameField);
-  addAndMakeVisible(passwordField);
-  addAndMakeVisible(loginButton);
-  addAndMakeVisible(skipButton);
-
-  //loginButton.addListener(this);
-  //skipButton.addListener(this);
   skipButton.onClick = [this] { skipButtonClicked(); };
 };
 
@@ -26,7 +17,11 @@ void ConnectionComponent::skipButtonClicked() {
 }
 
 void ConnectionComponent::paint(juce::Graphics &g) {
-  // g.fillAll(juce::Colours::white);
+  g.fillAll(juce::Colours::white);
+  addAndMakeVisible(usernameField);
+  addAndMakeVisible(passwordField);
+  addAndMakeVisible(loginButton);
+  addAndMakeVisible(skipButton);
 }
 
 void ConnectionComponent::resized() {

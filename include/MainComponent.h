@@ -2,6 +2,8 @@
 
 #include "PedalboardComponent.h"
 #include "ConnectionComponent.h"
+#include "TopMenuBarComponent.h"
+#include "BottomMenuBarComponent.h"
 #include "Manager.h"
 
 // CMake builds don't use an AppConfig.h, so it's safe to include juce module headers
@@ -21,7 +23,7 @@ class MainComponent final : public juce::AudioAppComponent
 {
 public:
     //==============================================================================
-    MainComponent();
+    MainComponent(Manager manager);
 
     //==============================================================================
     void paint (juce::Graphics&) override;
@@ -32,8 +34,11 @@ public:
 private:
     //==============================================================================
     // Your private member variables go here...
+    juce::Grid grid;
     ConnectionComponent connectionComponent;
     PedalboardComponent pedalboardComponent;
+    TopMenuBarComponent topMenuBarComponent;
+    BottomMenuBarComponent bottomMenuBarComponent;
     Manager manager;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)

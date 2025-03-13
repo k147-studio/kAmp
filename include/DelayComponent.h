@@ -11,9 +11,11 @@ class DelayComponent : public EffectComponent {
     explicit DelayComponent(AbstractEffect* effect);
     ~DelayComponent() override;
     void apply(const juce::AudioSourceChannelInfo &bufferToFill) override;
+    void resized() override;
+    void paint(juce::Graphics &g) override;
 
   private:
-    DelayEffect* delayEffect;
+    juce::Grid grid;
     juce::Slider rateSlider;
     juce::Slider delaySlider;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DelayComponent)
