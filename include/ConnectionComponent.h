@@ -2,10 +2,10 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-class ConnectionComponent : public juce::Component {
+class LoginComponent final : public juce::Component {
   public:
-    ConnectionComponent();
-    ~ConnectionComponent();
+    LoginComponent();
+    ~LoginComponent() override;
     void paint(juce::Graphics &g) override;
     void resized() override;
   private:
@@ -15,5 +15,5 @@ class ConnectionComponent : public juce::Component {
     juce::TextButton skipButton;
 
     void skipButtonClicked();
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(ConnectionComponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LoginComponent)
 };

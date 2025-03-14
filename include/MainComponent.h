@@ -14,28 +14,20 @@
 #include <juce_audio_basics/juce_audio_basics.h>
 #include <juce_audio_utils/juce_audio_utils.h>
 
-//==============================================================================
-/*
-    This component lives inside our window, and this is where you should put all
-    your controls and content.
-*/
 class MainComponent final : public juce::AudioAppComponent
 {
 public:
-    //==============================================================================
-    MainComponent(Manager manager);
+    explicit MainComponent(Manager manager);
 
-    //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
     void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override;
     void releaseResources() override;
     void getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferToFill) override;
+
 private:
-    //==============================================================================
-    // Your private member variables go here...
     juce::Grid grid;
-    ConnectionComponent connectionComponent;
+    LoginComponent connectionComponent;
     PedalboardComponent pedalboardComponent;
     TopMenuBarComponent topMenuBarComponent;
     BottomMenuBarComponent bottomMenuBarComponent;

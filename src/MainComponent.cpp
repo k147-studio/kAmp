@@ -1,7 +1,7 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent(Manager manager): manager(manager), pedalboardComponent(manager.getPedalboard()), connectionComponent() {
+MainComponent::MainComponent(Manager manager): pedalboardComponent(manager.getPedalboard()), manager(manager) {
     setSize(900, 700);
     addAndMakeVisible(pedalboardComponent);
     addAndMakeVisible(topMenuBarComponent);

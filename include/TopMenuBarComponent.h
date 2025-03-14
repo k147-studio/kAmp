@@ -5,7 +5,7 @@
 class TopMenuBarComponent : public juce::Component {
   public:
     TopMenuBarComponent();
-    ~TopMenuBarComponent();
+    ~TopMenuBarComponent() override;
     void paint(juce::Graphics &g) override;
     void resized() override;
   private:
