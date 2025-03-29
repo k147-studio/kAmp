@@ -1,7 +1,8 @@
 #include "TopMenuBarComponent.h"
 
 TopMenuBarComponent::TopMenuBarComponent() {
-    addAndMakeVisible(menuBarComponent);
+  	settingsButton.setButtonText("Settings");
+    addAndMakeVisible(settingsButton);
 }
 
 TopMenuBarComponent::~TopMenuBarComponent() = default;
@@ -11,5 +12,11 @@ void TopMenuBarComponent::paint(juce::Graphics &g) {
 }
 
 void TopMenuBarComponent::resized() {
-    menuBarComponent.setBounds(getLocalBounds());
+    flexBox.justifyContent = juce::FlexBox::JustifyContent::flexEnd;
+    flexBox.alignItems = juce::FlexBox::AlignItems::center;
+
+    settingsButton.setBounds(0, 0, 100, 50);
+
+    flexBox.items.add(juce::FlexItem(settingsButton).withWidth(settingsButton.getWidth()).withHeight(settingsButton.getHeight()));
+    flexBox.performLayout(getLocalBounds());
 }

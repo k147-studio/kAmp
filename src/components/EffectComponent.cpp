@@ -4,3 +4,7 @@
 EffectComponent::EffectComponent(AbstractEffect* effect) : effect(effect) {
   this->effect = effect;
 }
+
+AbstractEffect* EffectComponent::getEffect() {
+  return effect;
+}

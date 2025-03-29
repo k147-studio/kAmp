@@ -1,10 +1,10 @@
 #include "EffectComponentFactory.h"
 #include "AbstractEffect.h"
-#include "DelayComponent.h"
+#include "DelayEffectComponent.h"
 
 EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect& effect) {
     if (dynamic_cast<DelayEffect&>(effect) == nullptr) {
-        return new DelayComponent(&effect);
+        return new DelayEffectComponent(&effect);
     }
     return nullptr;
 }

@@ -1,8 +1,8 @@
-#include "DelayComponent.h"
+#include "DelayEffectComponent.h"
 
-DelayComponent::DelayComponent() : EffectComponent(new DelayEffect()) {}
+DelayEffectComponent::DelayEffectComponent() : EffectComponent(new DelayEffect()) {}
 
-DelayComponent::DelayComponent(AbstractEffect* effect) : EffectComponent(effect) {
+DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) : EffectComponent(effect) {
     if (DelayEffect* delayEffect = dynamic_cast<DelayEffect *>(effect)) {
         using Track = juce::Grid::TrackInfo;
         using Fr = juce::Grid::Fr;
@@ -17,29 +17,37 @@ DelayComponent::DelayComponent(AbstractEffect* effect) : EffectComponent(effect)
         rateSlider.setRange(0.0, 100.0, 1);
         rateSlider.setValue(50.0);
         rateSlider.onValueChange = [this, delayEffect] { delayEffect->setRate(rateSlider.getValue()); };
+
+        rateLabel.setText("Rate", juce::dontSendNotification);
+        rateLabel.attachToComponent(&rateSlider, false);
+
         delaySlider.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
         delaySlider.setTextValueSuffix("ms");
         delaySlider.setTitle("Delay");
         delaySlider.setTextBoxStyle(juce::Slider::TextBoxAbove,false, 100, 20);
         delaySlider.setRange(0.0, 1000.0, 10);
         delaySlider.setValue(500.0);
+
+        delayLabel.setText("Delay", juce::dontSendNotification);
+        delayLabel.attachToComponent(&delaySlider, false);
     }
 }
 
-DelayComponent::~DelayComponent() = default;
+DelayEffectComponent::~DelayEffectComponent() = default;
 
-void DelayComponent::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
-    this->effect->apply(bufferToFill);
-}
-
-void DelayComponent::resized() {
+void DelayEffectComponent::resized() {
     rateSlider.setBounds(0, 0, 200, 200);
     delaySlider.setBounds(300, 0, 200, 200);
+    rateLabel.setBounds(rateSlider.getX(), rateSlider.getY() + 20, rateSlider.getWidth(), 20);
+    delayLabel.setBounds(delaySlider.getX(), delaySlider.getY() + 20, delaySlider.getWidth(), 20);
     grid.performLayout(getLocalBounds());
 }
 
-void DelayComponent::paint(juce::Graphics &g) {
-    g.fillAll(juce::Colours::darkred);
+void DelayEffectComponent::paint(juce::Graphics &g) {
+    g.setColour(juce::Colours::darkred);
+    g.fillRoundedRectangle(0, 0, getWidth(), getHeight(), 15);
     addAndMakeVisible(rateSlider);
+    addAndMakeVisible(rateLabel);
     addAndMakeVisible(delaySlider);
+    addAndMakeVisible(delayLabel);
 }

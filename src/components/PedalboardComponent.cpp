@@ -29,7 +29,3 @@ void PedalboardComponent::addEffect(EffectComponent* effect) {
     effectsComponents.push_back(effect);
     addAndMakeVisible(effect);
 }
-
-void PedalboardComponent::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
-    this->effect->apply(bufferToFill);
-}

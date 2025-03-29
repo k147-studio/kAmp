@@ -41,11 +41,10 @@ void MainComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate
 }
 
 void MainComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferToFill) {
-    this->pedalboardComponent.apply(bufferToFill);
+    this->manager.apply(bufferToFill);
 }
 
 void MainComponent::releaseResources() {
-
 }
 
 
