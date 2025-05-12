@@ -27,6 +27,7 @@ class TopMenuBarComponent : public juce::Component {
      * @brief Determines what to do when the component is resized.
      */
     void resized() override;
+
   private:
     /**
      * @brief The flexBox component that contains the menu items.
@@ -37,5 +38,10 @@ class TopMenuBarComponent : public juce::Component {
      * @brief The image button to open settings.
      */
     juce::TextButton settingsButton;
+    juce::TextButton accountButton;
+
+    void openSettingsPopup();
+    void openAccountPopup();
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
 };
