@@ -5,6 +5,9 @@ Manager::Manager(AbstractEffect* pedalboard) : pedalboard(pedalboard) {
 }
 
 void Manager::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
+    if (bufferToFill.buffer == nullptr) {
+        return;
+    }
     pedalboard->apply(bufferToFill);
 }
 

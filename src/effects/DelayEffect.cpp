@@ -8,22 +8,34 @@ DelayEffect::DelayEffect() {
 DelayEffect::~DelayEffect() = default;
 
 void DelayEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
-    auto* leftBuffer = bufferToFill.buffer->getWritePointer(0, bufferToFill.startSample);
-    auto* rightBuffer = bufferToFill.buffer->getWritePointer(1, bufferToFill.startSample);
+    auto* leftBuffer = bufferToFill.buffer->getWritePointer(0);
+    auto* rightBuffer = bufferToFill.buffer->getNumChannels() > 1
+                        ? bufferToFill.buffer->getWritePointer(1)
+                        : nullptr;
     auto numSamples = bufferToFill.numSamples;
-    auto sampleRate = bufferToFill.buffer->getNumSamples();
-    auto delaySamples = delay * sampleRate / 1000;
-    auto rateSamples = rate * sampleRate / 100;
 
-    for (int i = 0; i < numSamples; i++) {
-        auto delayedSample = i - delaySamples;
-        if (delayedSample < 0) {
-            leftBuffer[i] = leftBuffer[i] + leftBuffer[i] * rateSamples / 100;
-            rightBuffer[i] = rightBuffer[i] + rightBuffer[i] * rateSamples / 100;
-        } else {
-            leftBuffer[i] = leftBuffer[i] + rateSamples / 100;
-            rightBuffer[i] = rightBuffer[i] + rateSamples / 100;
+    auto sampleRate = 44100.0;
+    auto delaySamples = static_cast<int>(delay * sampleRate / 1000.0f);
+
+    if (circularBuffer.size() < delaySamples) {
+        circularBuffer.resize(delaySamples, 0.0f);
+        writePosition = 0;
+    }
+
+    for (int i = 0; i < numSamples; ++i) {
+        auto delayedSample = circularBuffer[writePosition];
+
+        auto inputSampleLeft = leftBuffer[i];
+        leftBuffer[i] = inputSampleLeft + delayedSample * (rate / 100.0f);
+
+        if (rightBuffer) {
+            auto inputSampleRight = rightBuffer[i];
+            rightBuffer[i] = inputSampleRight + delayedSample * (rate / 100.0f);
         }
+
+        circularBuffer[writePosition] = inputSampleLeft;
+
+        writePosition = (writePosition + 1) % delaySamples;
     }
 }
 

@@ -27,6 +27,7 @@ DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) : EffectCompo
         delaySlider.setTextBoxStyle(juce::Slider::TextBoxAbove,false, 100, 20);
         delaySlider.setRange(0.0, 1000.0, 10);
         delaySlider.setValue(500.0);
+        delaySlider.onValueChange = [this, delayEffect] { delayEffect->setDelay(delaySlider.getValue()); };
 
         delayLabel.setText("Delay", juce::dontSendNotification);
         delayLabel.attachToComponent(&delaySlider, false);
