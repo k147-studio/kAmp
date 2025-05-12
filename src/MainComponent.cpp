@@ -1,4 +1,5 @@
 #include "MainComponent.h"
+#include "SettingsComponent.h"
 
 //==============================================================================
 MainComponent::MainComponent(Manager manager): pedalboardComponent(manager.getPedalboard()), manager(manager) {
@@ -7,6 +8,7 @@ MainComponent::MainComponent(Manager manager): pedalboardComponent(manager.getPe
     addAndMakeVisible(topMenuBarComponent);
     addAndMakeVisible(bottomMenuBarComponent);
     addAndMakeVisible(connectionComponent);
+
 }
 
 //==============================================================================
