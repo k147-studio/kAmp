@@ -8,30 +8,43 @@ DelayEffect::DelayEffect() {
 DelayEffect::~DelayEffect() = default;
 
 void DelayEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
-    auto* leftBuffer = bufferToFill.buffer->getWritePointer(0, bufferToFill.startSample);
-    auto* rightBuffer = bufferToFill.buffer->getWritePointer(1, bufferToFill.startSample);
-    auto numSamples = bufferToFill.numSamples;
-    auto sampleRate = bufferToFill.buffer->getNumSamples();
-    auto delaySamples = delay * sampleRate / 1000;
-    auto rateSamples = rate * sampleRate / 100;
+    auto* leftBuffer = bufferToFill.buffer->getWritePointer(0);
+    auto* rightBuffer = bufferToFill.buffer->getNumChannels() > 1
+                        ? bufferToFill.buffer->getWritePointer(1)
+                        : nullptr;
+    const auto numSamples = bufferToFill.numSamples;
 
-    for (int i = 0; i < numSamples; i++) {
-        auto delayedSample = i - delaySamples;
-        if (delayedSample < 0) {
-            leftBuffer[i] = leftBuffer[i] + leftBuffer[i] * rateSamples / 100;
-            rightBuffer[i] = rightBuffer[i] + rightBuffer[i] * rateSamples / 100;
-        } else {
-            leftBuffer[i] = leftBuffer[i] + rateSamples / 100;
-            rightBuffer[i] = rightBuffer[i] + rateSamples / 100;
+    // TODO : Remove constants and check if they can be recovered with JUCE.
+    constexpr auto sampleRate = 44100.0;
+    const auto delaySamples = static_cast<int>(delay * sampleRate / 1000.0f);
+
+    if (circularBuffer.size() < delaySamples) {
+        circularBuffer.resize(delaySamples, 0.0f);
+        writePosition = 0;
+    }
+
+    for (int i = 0; i < numSamples; ++i) {
+        auto delayedSample = circularBuffer[writePosition];
+
+        auto inputSampleLeft = leftBuffer[i];
+        leftBuffer[i] = inputSampleLeft + delayedSample * (rate / 100.0f);
+
+        if (rightBuffer) {
+            auto inputSampleRight = rightBuffer[i];
+            rightBuffer[i] = inputSampleRight + delayedSample * (rate / 100.0f);
         }
+
+        circularBuffer[writePosition] = inputSampleLeft;
+
+        writePosition = (writePosition + 1) % delaySamples;
     }
 }
 
-void DelayEffect::setRate(float rate) {
+void DelayEffect::setRate(const float rate) {
     this->rate = rate;
 }
 
-void DelayEffect::setDelay(float delay) {
+void DelayEffect::setDelay(const float delay) {
     this->delay = delay;
 }
 

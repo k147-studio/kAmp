@@ -14,5 +14,5 @@ class EffectComponentFactory
    * @param effect The effect to create the component for.
    * @return The created effect component.
    */
-  static EffectComponent* CreateEffectComponent(AbstractEffect& effect);
+  static EffectComponent* CreateEffectComponent(AbstractEffect* effect);
 };

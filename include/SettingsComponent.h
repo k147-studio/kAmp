@@ -7,9 +7,7 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-
-class SettingsComponent : public juce::Component
-{
+class SettingsComponent : public juce::Component {
 public:
     explicit SettingsComponent(juce::AudioDeviceManager& deviceManager)
         : deviceSelector(deviceManager, 0, 2, 0, 2, true, true, false, false)
@@ -30,6 +28,5 @@ private:
     juce::Label label;
     juce::AudioDeviceSelectorComponent deviceSelector;
 };
-
 
 
