@@ -1,16 +1,15 @@
 #pragma once
 
-#include "PedalboardComponent.h"
-#include "ConnectionComponent.h"
-#include "TopMenuBarComponent.h"
 #include "BottomMenuBarComponent.h"
+#include "ConnectionComponent.h"
 #include "Manager.h"
+#include "PedalboardComponent.h"
+#include "TopMenuBarComponent.h"
 
 // CMake builds don't use an AppConfig.h, so it's safe to include juce module headers
 // directly. If you need to remain compatible with Projucer-generated builds, and
 // have called `juce_generate_juce_header(<thisTarget>)` in your CMakeLists.txt,
 // you could `#include <JuceHeader.h>` here instead, to make all your module headers visible.
-#include <juce_gui_extra/juce_gui_extra.h>
 #include <juce_audio_basics/juce_audio_basics.h>
 #include <juce_audio_utils/juce_audio_utils.h>
 
@@ -19,15 +18,14 @@
  * It is responsible for the layout of the components and the audio processing.
  * It contains the pedalboard, the top menu bar, the bottom menu bar and the connection component.
  */
-class MainComponent final : public juce::AudioAppComponent
-{
+class MainComponent final : public juce::AudioAppComponent {
 public:
-    explicit MainComponent(Manager manager);
+    explicit MainComponent(const Manager &manager);
 
     /**
      * Determines how the component is displayed.
      */
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics &) override;
 
     /**
      * Determines what to do when the component is resized.
@@ -86,5 +84,5 @@ private:
      */
     Manager manager;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };

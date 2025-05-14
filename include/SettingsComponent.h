@@ -5,7 +5,7 @@ class SettingsComponent : public juce::Component {
 public:
     SettingsComponent() {
         addAndMakeVisible(label);
-        label.setText("Réglages", juce::dontSendNotification);
+        label.setText("Settings", juce::dontSendNotification);
     }
 
     void resized() override {
@@ -15,5 +15,3 @@ public:
 private:
     juce::Label label;
 };
-
-
