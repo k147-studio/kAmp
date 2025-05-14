@@ -1,10 +1,12 @@
 #include "Pedalboard.h"
 
 #include "DelayEffect.h"
+#include "DistortionEffect.h"
 
 Pedalboard::Pedalboard() {
   effects = std::vector<AbstractEffect*>();
   this->append(new DelayEffect());
+  this->append(new DistortionEffect());
 };
 
 Pedalboard::~Pedalboard() = default;

@@ -6,7 +6,7 @@ PedalboardComponent::~PedalboardComponent() = default;
 PedalboardComponent::PedalboardComponent(AbstractEffect* pedalboard) : EffectComponent(pedalboard) {
     if (Pedalboard* pedalboard = dynamic_cast<Pedalboard*>(this->effect)) {
         for (AbstractEffect *effect : pedalboard->getEffects()) {
-            addEffect(EffectComponentFactory::CreateEffectComponent(*effect));
+            addEffect(EffectComponentFactory::CreateEffectComponent(effect));
         }
     }
 }
