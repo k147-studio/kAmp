@@ -1,17 +1,16 @@
 #pragma once
+
+#include <juce_audio_devices/juce_audio_devices.h>
+#include <juce_audio_utils/juce_audio_utils.h>
 #include <juce_gui_basics/juce_gui_basics.h>
 
 class SettingsComponent : public juce::Component {
 public:
-    SettingsComponent() {
-        addAndMakeVisible(label);
-        label.setText("Settings", juce::dontSendNotification);
-    }
+    explicit SettingsComponent(juce::AudioDeviceManager& deviceManager);
 
-    void resized() override {
-        label.setBounds(10, 10, getWidth() - 20, 30);
-    }
+    void resized() override;
 
 private:
     juce::Label label;
+    juce::AudioDeviceSelectorComponent deviceSelector;
 };
