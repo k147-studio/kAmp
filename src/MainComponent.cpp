@@ -2,7 +2,7 @@
 #include "SettingsComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent(Manager manager): pedalboardComponent(manager.getPedalboard()), manager(manager) {
+MainComponent::MainComponent(Manager manager): pedalboardComponent(manager.getPedalboard()), manager(manager), topMenuBarComponent(this->deviceManager) {
     setSize(900, 700);
     addAndMakeVisible(pedalboardComponent);
     addAndMakeVisible(topMenuBarComponent);

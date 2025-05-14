@@ -13,6 +13,8 @@
 #include <juce_gui_extra/juce_gui_extra.h>
 #include <juce_audio_basics/juce_audio_basics.h>
 #include <juce_audio_utils/juce_audio_utils.h>
+#include <juce_audio_devices/juce_audio_devices.h>
+
 
 /**
  * @brief The main component of the application that contains all the main UI.

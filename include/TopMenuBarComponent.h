@@ -1,5 +1,8 @@
 #pragma once
 
+#include <juce_audio_devices/juce_audio_devices.h>
+
+
 #include <juce_gui_basics/juce_gui_basics.h>
 
 /**
@@ -10,7 +13,7 @@ class TopMenuBarComponent : public juce::Component {
     /**
      * @brief Initializes a new instance of the TopMenuBarComponent class.
      */
-    TopMenuBarComponent();
+    explicit TopMenuBarComponent(juce::AudioDeviceManager& deviceManager);
 
     /**
      * @brief Destroys the instance of the TopMenuBarComponent class.
@@ -40,7 +43,7 @@ class TopMenuBarComponent : public juce::Component {
     juce::TextButton settingsButton;
     juce::TextButton accountButton;
 
-    void openSettingsPopup();
+    void openSettingsPopup(juce::AudioDeviceManager& deviceManager);
     void openAccountPopup();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
