@@ -14,6 +14,7 @@ void DelayEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
                         : nullptr;
     const auto numSamples = bufferToFill.numSamples;
 
+    // TODO : Remove constants and check if they can be recovered with JUCE.
     constexpr auto sampleRate = 44100.0;
     const auto delaySamples = static_cast<int>(delay * sampleRate / 1000.0f);
 
