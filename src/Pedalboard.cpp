@@ -10,7 +10,9 @@ Pedalboard::Pedalboard() {
 Pedalboard::~Pedalboard() = default;
 
 void Pedalboard::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
-  effects = std::vector<AbstractEffect*>();
+  if (effects.empty()) {
+    return;
+  }
   if (!effects.empty()) {
     for (AbstractEffect* effect : effects) {
       effect->apply(bufferToFill);

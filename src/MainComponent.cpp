@@ -3,6 +3,7 @@
 
 //==============================================================================
 MainComponent::MainComponent(Manager manager): pedalboardComponent(manager.getPedalboard()), manager(manager) {
+    setAudioChannels(2, 2);
     setSize(900, 700);
     addAndMakeVisible(pedalboardComponent);
     addAndMakeVisible(topMenuBarComponent);
@@ -43,6 +44,9 @@ void MainComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate
 }
 
 void MainComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferToFill) {
+    if (bufferToFill.buffer == nullptr) {
+        return;
+    }
     this->manager.apply(bufferToFill);
 }
 

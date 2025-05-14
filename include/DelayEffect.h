@@ -55,4 +55,7 @@ private:
    * @brief The delay of the effect.
    */
   float delay;
+
+  std::vector<float> circularBuffer;
+  int writePosition = 0;
 };
