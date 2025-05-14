@@ -1,14 +1,15 @@
 #include "MainComponent.h"
 #include "SettingsComponent.h"
 
-MainComponent::MainComponent(const Manager &manager): pedalboardComponent(manager.getPedalboard()), manager(manager) {
+MainComponent::MainComponent(const Manager &manager): pedalboardComponent(manager.getPedalboard()),
+                                                      topMenuBarComponent(this->deviceManager), manager(manager)
+{
     setAudioChannels(2, 2);
     setSize(900, 700);
     addAndMakeVisible(pedalboardComponent);
     addAndMakeVisible(topMenuBarComponent);
     addAndMakeVisible(bottomMenuBarComponent);
     addAndMakeVisible(connectionComponent);
-
 }
 
 //==============================================================================
