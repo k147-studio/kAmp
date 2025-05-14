@@ -12,10 +12,11 @@ void DelayEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
     auto* rightBuffer = bufferToFill.buffer->getNumChannels() > 1
                         ? bufferToFill.buffer->getWritePointer(1)
                         : nullptr;
-    auto numSamples = bufferToFill.numSamples;
+    const auto numSamples = bufferToFill.numSamples;
 
-    auto sampleRate = 44100.0;
-    auto delaySamples = static_cast<int>(delay * sampleRate / 1000.0f);
+    // TODO : Remove constants and check if they can be recovered with JUCE.
+    constexpr auto sampleRate = 44100.0;
+    const auto delaySamples = static_cast<int>(delay * sampleRate / 1000.0f);
 
     if (circularBuffer.size() < delaySamples) {
         circularBuffer.resize(delaySamples, 0.0f);
@@ -39,11 +40,11 @@ void DelayEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
     }
 }
 
-void DelayEffect::setRate(float rate) {
+void DelayEffect::setRate(const float rate) {
     this->rate = rate;
 }
 
-void DelayEffect::setDelay(float delay) {
+void DelayEffect::setDelay(const float delay) {
     this->delay = delay;
 }
 
