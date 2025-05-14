@@ -8,11 +8,11 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
 {
     if (auto* distEffect = dynamic_cast<DistortionEffect*>(effect)) {
         using Track = juce::Grid::TrackInfo;
-        using Fr    = juce::Grid::Fr;
+        using Fr = juce::Grid::Fr;
 
-        grid.templateRows    = { Track(Fr(1)) };
+        grid.templateRows = { Track(Fr(1)) };
         grid.templateColumns = { Track(Fr(1)), Track(Fr(1)) };
-        grid.items           = { juce::GridItem(driveSlider), juce::GridItem(mixSlider) };
+        grid.items = { juce::GridItem(driveSlider), juce::GridItem(mixSlider) };
 
         driveSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
         driveSlider.setTextBoxStyle(juce::Slider::TextBoxAbove, false, 100, 20);

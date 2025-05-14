@@ -4,10 +4,10 @@
 #include "DistortionEffectComponent.h"
 
 EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* effect) {
-    if (dynamic_cast<DelayEffect*>(effect) == nullptr) {
+    if (dynamic_cast<DelayEffect*>(effect) != nullptr) {
         return new DelayEffectComponent(effect);
     }
-    if (dynamic_cast<DistortionEffect*>(effect) == nullptr) {
+    if (dynamic_cast<DistortionEffect*>(effect) != nullptr) {
         return new DistortionEffectComponent(effect);
     }
     return nullptr;
