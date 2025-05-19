@@ -1,5 +1,4 @@
 #include "DistortionEffect.h"
-#include <juce_core/juce_core.h>
 
 // Lien de la doc : https://juce.com/tutorials/tutorial_dsp_convolution/
 
@@ -35,11 +34,11 @@ void DistortionEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
     int numSamples = bufferToFill.numSamples;
 
     for (int i = 0; i < numSamples; ++i) {
-        float inL = leftBuffer[i];
-        float inR = rightBuffer[i];
+        const float inL = leftBuffer[i];
+        const float inR = rightBuffer[i];
         // Apply drive and hard clip
-        float wetL = juce::jlimit(-1.0f, 1.0f, inL * drive);
-        float wetR = juce::jlimit(-1.0f, 1.0f, inR * drive);
+        const float wetL = juce::jlimit(-1.0f, 1.0f, inL * drive);
+        const float wetR = juce::jlimit(-1.0f, 1.0f, inR * drive);
 
         // Mix dry and wet signals
         leftBuffer[i] = inL * (1.0f - mix) + wetL * mix;

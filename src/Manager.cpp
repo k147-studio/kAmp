@@ -3,7 +3,7 @@
 Manager::Manager(AbstractEffect *pedalboard) : pedalboard(pedalboard) {
 }
 
-void Manager::apply(const juce::AudioSourceChannelInfo &bufferToFill) const {
+void Manager::apply(const AudioSourceChannelInfo &bufferToFill) const {
     if (bufferToFill.buffer == nullptr) {
         return;
     }

@@ -1,8 +1,6 @@
 #pragma once
 
-#include <juce_audio_utils/juce_audio_utils.h>
-#include "IEffect.h"
-#include "DistortionEffect.h"
+#include <JuceHeader.h>
 #include "EffectComponent.h"
 
 /**
@@ -35,14 +33,14 @@ public:
      * @brief Paints the component using the JUCE Graphics context.
      * @param g The graphics context.
      */
-    void paint(juce::Graphics& g) override;
+    void paint(Graphics& g) override;
 
 private:
-    juce::Grid grid;
-    juce::Slider driveSlider;
-    juce::Label driveLabel;
-    juce::Slider mixSlider;
-    juce::Label mixLabel;
+    Grid grid;
+    Slider driveSlider;
+    Label driveLabel;
+    Slider mixSlider;
+    Label mixLabel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DistortionEffectComponent)
 };
