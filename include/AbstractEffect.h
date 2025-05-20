@@ -18,7 +18,7 @@ class AbstractEffect : public IEffect {
     /**
     * Tells if the effect is enabled or not.
     */
-    bool* isEnabled = nullptr;
+    bool* isEnabled = new bool(true);
 
     /**
      * @brief Initializes a new instance of the AbstractEffect class.

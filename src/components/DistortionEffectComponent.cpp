@@ -2,21 +2,26 @@
 #include "DistortionEffectComponent.h"
 
 DistortionEffectComponent::DistortionEffectComponent()
-    : EffectComponent(new DistortionEffect()) {}
+    : BasePedalComponent(new DistortionEffect()) {}
 
 DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
-    : EffectComponent(effect)
+    : BasePedalComponent(effect)
 {
     if (auto* distEffect = dynamic_cast<DistortionEffect*>(effect)) {
         using Track = juce::Grid::TrackInfo;
         using Fr = juce::Grid::Fr;
 
-        grid.templateRows = { Track(Fr(1)) };
+        grid.templateRows = { Track(Fr(1)), Track(Fr(3)) };
         grid.templateColumns = { Track(Fr(1)), Track(Fr(1)) };
-        grid.items = { juce::GridItem(driveSlider), juce::GridItem(mixSlider) };
+        grid.items = {
+            juce::GridItem(driveLabel),
+            juce::GridItem(mixLabel),
+            juce::GridItem(driveSlider),
+            juce::GridItem(mixSlider),
+        };
 
         driveSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
-        driveSlider.setTextBoxStyle(juce::Slider::TextBoxAbove, false, 100, 20);
+        driveSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
         driveSlider.setTextValueSuffix("x");
         driveSlider.setTitle("Drive");
         driveSlider.setRange(0.0, 10.0, 0.1);
@@ -26,10 +31,11 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
         };
 
         driveLabel.setText("Drive", juce::dontSendNotification);
+        driveLabel.setJustificationType(juce::Justification::centred);
         driveLabel.attachToComponent(&driveSlider, false);
 
         mixSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
-        mixSlider.setTextBoxStyle(juce::Slider::TextBoxAbove, false, 100, 20);
+        mixSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
         mixSlider.setTextValueSuffix("");
         mixSlider.setTitle("Mix");
         mixSlider.setRange(0.0, 1.0, 0.01);
@@ -39,25 +45,16 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
         };
 
         mixLabel.setText("Mix", juce::dontSendNotification);
+        mixLabel.setJustificationType(juce::Justification::centred);
         mixLabel.attachToComponent(&mixSlider, false);
+
+        settingsLayout = new PedalSettingsLayoutComponent(&grid);
+
+        addAndMakeVisible(driveSlider);
+        addAndMakeVisible(driveLabel);
+        addAndMakeVisible(mixSlider);
+        addAndMakeVisible(mixLabel);
     }
 }
 
 DistortionEffectComponent::~DistortionEffectComponent() = default;
-
-void DistortionEffectComponent::resized() {
-    driveSlider.setBounds(0, 0, 200, 200);
-    mixSlider.setBounds(300, 0, 200, 200);
-    driveLabel.setBounds(driveSlider.getX(), driveSlider.getY() + 20, driveSlider.getWidth(), 20);
-    mixLabel.setBounds(mixSlider.getX(), mixSlider.getY() + 20, mixSlider.getWidth(), 20);
-    grid.performLayout(getLocalBounds());
-}
-
-void DistortionEffectComponent::paint(juce::Graphics& g) {
-    g.setColour(juce::Colours::darkgreen);
-    g.fillRoundedRectangle(0, 0, getWidth(), getHeight(), 15);
-    addAndMakeVisible(driveSlider);
-    addAndMakeVisible(driveLabel);
-    addAndMakeVisible(mixSlider);
-    addAndMakeVisible(mixLabel);
-}

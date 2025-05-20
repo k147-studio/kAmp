@@ -11,8 +11,11 @@ Pedalboard::~Pedalboard() = default;
 
 void Pedalboard::apply(const AudioSourceChannelInfo &bufferToFill) {
     for (AbstractEffect* effect : effects) {
-      effect->apply(bufferToFill);
-  }
+      if (*(effect->isEnabled))
+      {
+        effect->apply(bufferToFill);
+      }
+    }
 }
 
 void Pedalboard::append(AbstractEffect* effect) {

@@ -10,9 +10,10 @@ BasePedalComponent::BasePedalComponent(AbstractEffect* effect) : EffectComponent
     pedalLabel->setBounds(getWidth() / 2 - 50, 10, 100, 30);
     addAndMakeVisible(pedalLabel);
 
-    enablePedalButton = new juce::TextButton("Enable");
-    enablePedalButton->setBounds(getWidth() / 2 - 50, getHeight() - 40, 100, 30);
-    enablePedalButton->onClick = [this] {
+    Image powerImage = ImageFileFormat::loadFrom(File(File::getCurrentWorkingDirectory().getChildFile("resources/icons/power.png")));
+    enablePedalButton.setImages(true, true, true, powerImage, 1.0f, {}, powerImage, 1.0f, {}, powerImage, 1.0f, {});
+    enablePedalButton.setBounds(getWidth() / 2 - 50, getHeight() - 40, 100, 30);
+    enablePedalButton.onClick = [this] {
         this->onEnableButtonClicked();
     };
 
@@ -43,13 +44,13 @@ void BasePedalComponent::paint(juce::Graphics &g) {
 }
 
 void BasePedalComponent::resized() {
-    pedalLabel->setBounds(0, 0, getWidth(), getHeight() / 3);
-    enablePedalButton->setBounds(0, (getHeight() / 5) * 4, getWidth(), getHeight() / 5);
+    pedalLabel->setBounds(0, 0, getWidth(), getHeight() / 5);
     settingsLayout->setBounds(0, getHeight() / 5, getWidth(), (getHeight() / 5) * 3);
+    enablePedalButton.setBounds(0, (getHeight() / 5) * 4, getWidth(), getHeight() / 5);
     pedalLayout.performLayout(getLocalBounds());
 }
 
 void BasePedalComponent::onEnableButtonClicked() {
-    *isEnabled = !*isEnabled;
-    enablePedalButton->setToggleState(*isEnabled, juce::dontSendNotification);
+    *isEnabled = !(*isEnabled);
+    enablePedalButton.setToggleState(*isEnabled, juce::dontSendNotification);
 }

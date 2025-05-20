@@ -13,7 +13,7 @@ protected:
     juce::Grid pedalLayout;
     PedalSettingsLayoutComponent* settingsLayout;
     juce::Label* pedalLabel;
-    juce::Button* enablePedalButton;
+    juce::ImageButton enablePedalButton;
     bool* isEnabled;
     void onEnableButtonClicked();
 };

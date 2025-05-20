@@ -13,7 +13,7 @@ class TopMenuBarComponent : public juce::Component {
     /**
      * @brief Initializes a new instance of the TopMenuBarComponent class.
      */
-    explicit TopMenuBarComponent(juce::AudioDeviceManager& deviceManager);
+    explicit TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isMuted = nullptr);
 
     /**
      * @brief Destroys the instance of the TopMenuBarComponent class.
@@ -40,11 +40,15 @@ class TopMenuBarComponent : public juce::Component {
     /**
      * @brief The image button to open settings.
      */
-    juce::TextButton settingsButton;
-    juce::TextButton accountButton;
+    juce::ImageButton settingsButton;
+    juce::ImageButton accountButton;
+
+    bool* isSoundMuted = nullptr;
+    juce::ImageButton muteButton;
 
     void openSettingsPopup(juce::AudioDeviceManager& deviceManager);
     void openAccountPopup();
+    void toggleMute();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
 };

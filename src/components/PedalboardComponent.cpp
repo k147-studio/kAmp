@@ -9,20 +9,20 @@ PedalboardComponent::PedalboardComponent(AbstractEffect* pedalboard) : EffectCom
             addEffect(EffectComponentFactory::CreateEffectComponent(effect));
         }
     }
-}
-
-void PedalboardComponent::resized() {
+    flexBox.flexDirection = juce::FlexBox::Direction::row;
     flexBox.justifyContent = juce::FlexBox::JustifyContent::center;
     flexBox.alignItems = juce::FlexBox::AlignItems::center;
     for (auto &effectComponent : effectsComponents) {
         effectComponent->setSize(200, 300);
-        flexBox.items.add(juce::FlexItem(*effectComponent).withWidth(effectComponent->getWidth()).withHeight(effectComponent->getHeight()));
+        flexBox.items.add(juce::FlexItem(*effectComponent).withWidth(effectComponent->getWidth()).withHeight(effectComponent->getHeight()).withMargin(20));
     }
+}
+
+void PedalboardComponent::resized() {
     flexBox.performLayout(getLocalBounds());
 }
 
 void PedalboardComponent::paint(juce::Graphics &g) {
-    g.fillAll(juce::Colours::lightgrey);
 }
 
 void PedalboardComponent::addEffect(EffectComponent* effect) {

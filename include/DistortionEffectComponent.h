@@ -1,12 +1,13 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "EffectComponent.h"
+
+#include "BasePedalComponent.h"
 
 /**
  * @brief Represents a graphical component that contains and displays a distortion effect.
  */
-class DistortionEffectComponent : public EffectComponent {
+class DistortionEffectComponent : public BasePedalComponent {
 public:
     /**
      * @brief Initializes a new instance of the DistortionEffectComponent class.
@@ -23,17 +24,6 @@ public:
      * @brief Destroys the instance of the DistortionEffectComponent class.
      */
     ~DistortionEffectComponent() override;
-
-    /**
-     * @brief Called when the component is resized.
-     */
-    void resized() override;
-
-    /**
-     * @brief Paints the component using the JUCE Graphics context.
-     * @param g The graphics context.
-     */
-    void paint(Graphics& g) override;
 
 private:
     Grid grid;

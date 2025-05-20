@@ -56,6 +56,9 @@ public:
     void getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill) override;
 
 private:
+
+    ImageComponent backgroundImage;
+
     /**
      * The grid that contains the main components on the main page.
      */
@@ -85,6 +88,11 @@ private:
      * The manager that processes the audio stream and effects.
      */
     Manager manager;
+
+    /**
+     * Tells if the sound is muted or not.
+     */
+    bool isSoundMuted = false;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };
