@@ -1,5 +1,7 @@
 # kAmp
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a990f176aa0246e4ad5cffbea1b5e019)](https://app.codacy.com/gh/k147-studio/kAmp/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 ## How to build
 
 ### Prerequisites
