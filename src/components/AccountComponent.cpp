@@ -16,3 +16,4 @@ void AccountComponent::resized()
 {
     // À compléter si tu ajoutes des éléments internes
 }
+
