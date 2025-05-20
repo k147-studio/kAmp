@@ -31,7 +31,9 @@ juce_add_gui_app(kAmp
     # DOCUMENT_EXTENSIONS ...           # Specify file extensions that should be associated with this app
     BUNDLE_ID = "eu.k-147.kAmp"
     COMPANY_NAME  "K-147"
-    PRODUCT_NAME "kAmp")
+    PRODUCT_NAME "kAmp"
+    ICON_BIG "./resources/images/logo_kamp_avec_fond.png"
+    ICON_SMALL "./resources/images/logo_kamp_avec_fond.png")
 
 juce_generate_juce_header(kAmp)
 

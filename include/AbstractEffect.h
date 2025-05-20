@@ -1,15 +1,25 @@
 #pragma once
-
 #include <JuceHeader.h>
 #include "IEffect.h"
+#include <string>
 
 /**
  * @brief Abstract class that represents an effect by determining
- * the minimum characteristics an effect should have.
+ * the minimum caracteristics an effect should have.
  * Implements the IEffect interface.
  */
 class AbstractEffect : public IEffect {
-public:
+  public:
+    /**
+     * @brief The name of the effect.
+     */
+    std::string effectName;
+
+    /**
+    * Tells if the effect is enabled or not.
+    */
+    bool* isEnabled = nullptr;
+
     /**
      * @brief Initializes a new instance of the AbstractEffect class.
      */
@@ -49,13 +59,13 @@ public:
      * @param effect The effect to compare with.
      * @return True if the effect is equal to the given effect, false otherwise.
      */
-    virtual bool operator==(const AbstractEffect *effect) = 0;
+    virtual bool operator==(const AbstractEffect* effect) = 0;
 
     /**
      * @brief Applies the effect to the given audio buffer.
      * @param bufferToFill The audio buffer to apply the effect to.
      */
-    void apply(const AudioSourceChannelInfo &bufferToFill) override = 0;
+    void apply(const juce::AudioSourceChannelInfo &bufferToFill) override = 0;
 
     /**
      * @brief Serializes the effect to a JSON object.
@@ -90,7 +100,7 @@ public:
        */
     [[nodiscard]] virtual String getEffectType() const = 0;
 
-private:
+  private:
     /**
      * @brief The id of the effect.
      */

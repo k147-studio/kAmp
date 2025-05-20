@@ -3,6 +3,7 @@
 DelayEffect::DelayEffect() {
     rate = 50.0;
     delay = 500.0;
+    effectName = "Delay";
 }
 
 DelayEffect::~DelayEffect() = default;
@@ -49,5 +50,5 @@ void DelayEffect::setDelay(const float delay) {
 }
 
 bool DelayEffect::operator==(const AbstractEffect* effect) {
-    return true;
+    return this == effect;
 }
