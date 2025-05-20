@@ -43,7 +43,10 @@ void MainComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate
 
 }
 
-void MainComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferToFill) {
+void MainComponent::getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill) {
+    if (&bufferToFill == nullptr) {
+        return;
+    }
     if (bufferToFill.buffer == nullptr) {
         return;
     }

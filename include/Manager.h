@@ -13,7 +13,7 @@ public:
    * @brief Applies the effects from the pedalboard to the given audio buffer.
    * @param bufferToFill The audio buffer to apply the effects to.
    */
-  void apply(const juce::AudioSourceChannelInfo &bufferToFill) const;
+  void apply(const AudioSourceChannelInfo &bufferToFill) const;
 
   /**
    * @brief Imports a pedalboard.

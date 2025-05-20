@@ -7,7 +7,7 @@ DelayEffect::DelayEffect() {
 
 DelayEffect::~DelayEffect() = default;
 
-void DelayEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
+void DelayEffect::apply(const AudioSourceChannelInfo &bufferToFill) {
     auto* leftBuffer = bufferToFill.buffer->getWritePointer(0);
     auto* rightBuffer = bufferToFill.buffer->getNumChannels() > 1
                         ? bufferToFill.buffer->getWritePointer(1)
