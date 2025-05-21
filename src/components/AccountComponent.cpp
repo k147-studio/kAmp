@@ -28,8 +28,3 @@ void AccountComponent::apiResponseReceived(const String& content) {
     responseLabel.setText(content, dontSendNotification);
 }
 
-void AccountComponent::resized() {
-    auto bounds = getLocalBounds();
-    bounds.removeFromTop(50);
-    responseLabel.setBounds(bounds.reduced(20));
-}
