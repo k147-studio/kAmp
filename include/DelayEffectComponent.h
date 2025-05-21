@@ -1,14 +1,14 @@
 #pragma once
 
 #include <juce_audio_utils/juce_audio_utils.h>
-#include "IEffect.h"
+
+#include "BasePedalComponent.h"
 #include "DelayEffect.h"
-#include "EffectComponent.h"
 
 /**
  * @brief Represents a graphical component that contains and displays a delay effect.
  */
-class DelayEffectComponent : public EffectComponent {
+class DelayEffectComponent : public BasePedalComponent {
   public:
     /**
      * @brief Initializes a new instance of the DelayComponent class.
@@ -25,17 +25,6 @@ class DelayEffectComponent : public EffectComponent {
      * @brief Destroys the instance of the DelayComponent class.
      */
     ~DelayEffectComponent() override;
-
-    /**
-     * @brief Determines what to do when the component is resized.
-     */
-    void resized() override;
-
-    /**
-     * @brief Determines how to display the component.
-     * @param g The JUCE graphics context that paints the component.
-     */
-    void paint(juce::Graphics &g) override;
 
   private:
     /**

@@ -7,6 +7,7 @@
  */
 DistortionEffect::DistortionEffect() {
     // Default drive amount and mix
+    effectName = "Distortion";
     drive = 1.0f;
     mix = 0.5f;
 }
