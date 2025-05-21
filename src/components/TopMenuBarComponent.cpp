@@ -1,5 +1,5 @@
 #include "AccountComponent.h"
-#include "PopupWindow.h"
+#include "PopupContentComponent.h"
 #include "SettingsComponent.h"
 #include "TopMenuBarComponent.h"
 
@@ -41,11 +41,28 @@ void TopMenuBarComponent::resized()
 void TopMenuBarComponent::openSettingsPopup(juce::AudioDeviceManager& deviceManager)
 {
     auto* settings = new SettingsComponent(deviceManager);
-    new PopupWindow("Settings", settings); // auto-delete dans closeButtonPressed
+    settings->setSize(600, 400);
+
+    juce::DialogWindow::LaunchOptions options;
+    options.content.setOwned(settings); // prend possession et s'occupe de la mémoire
+    options.dialogTitle = "Settings";
+    options.componentToCentreAround = getTopLevelComponent(); // ou autre
+    options.useNativeTitleBar = true;
+    options.resizable = false;
+    options.launchAsync(); // modal async
 }
 
 void TopMenuBarComponent::openAccountPopup()
 {
     auto* account = new AccountComponent();
-    new PopupWindow("Account", account); // auto-delete dans closeButtonPressed
+    account->setSize(600, 400);
+
+    juce::DialogWindow::LaunchOptions options;
+    options.content.setOwned(account);
+    options.dialogTitle = "Account";
+    options.componentToCentreAround = getTopLevelComponent();
+    options.useNativeTitleBar = true;
+    options.resizable = false;
+    options.launchAsync();
 }
+
