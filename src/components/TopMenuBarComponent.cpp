@@ -1,10 +1,10 @@
 #include "AccountComponent.h"
-#include "PopupWindow.h"
+#include "PopupContentComponent.h"
 #include "SettingsComponent.h"
 #include "TopMenuBarComponent.h"
 
 
-TopMenuBarComponent::TopMenuBarComponent(juce::AudioDeviceManager& deviceManager)
+TopMenuBarComponent::TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isSoundMuted)
 {
     this->isSoundMuted = isSoundMuted;
 
@@ -19,6 +19,7 @@ TopMenuBarComponent::TopMenuBarComponent(juce::AudioDeviceManager& deviceManager
 
     addAndMakeVisible(settingsButton);
     addAndMakeVisible(accountButton);
+    addAndMakeVisible(muteButton);
 
     settingsButton.onClick = [this, &deviceManager]() { openSettingsPopup(deviceManager); };
     accountButton.onClick = [this]() { openAccountPopup(); };
