@@ -1,19 +1,30 @@
+#include <JuceHeader.h>
 #include "AccountComponent.h"
+#include "ApiClient.h"
 
-AccountComponent::AccountComponent()
-{
-    // Ajoute ici les éléments de compte si nécessaire
+AccountComponent::AccountComponent() {
+    addAndMakeVisible(responseLabel);
+
+    responseLabel.setFont(Font(FontOptions(20.0f, Font::bold)));
+    responseLabel.setJustificationType(Justification::centred);
+    responseLabel.setColour(Label::textColourId, Colours::black);
+    responseLabel.setText("Waiting for API response...", dontSendNotification);
+
+    auto replyFunc = [this](const String &content) {
+        apiResponseReceived(content);
+    };
+
+    ApiClient::runHTTP({"https://dummyjson.com/test"}, replyFunc);
 }
 
-void AccountComponent::paint(juce::Graphics& g)
-{
-    g.fillAll(juce::Colours::lightblue);
-    g.setColour(juce::Colours::black);
-    g.drawText("Account", getLocalBounds(), juce::Justification::centred, true);
+void AccountComponent::paint(Graphics &g) {
+    g.fillAll(Colours::lightblue);
+    g.setColour(Colours::black);
+    g.setFont(Font(FontOptions(20.0f, Font::bold)));
+    g.drawText("Account", getLocalBounds().removeFromTop(40), Justification::centred, true);
 }
 
-void AccountComponent::resized()
-{
-    // À compléter si tu ajoutes des éléments internes
+void AccountComponent::apiResponseReceived(const String& content) {
+    responseLabel.setText(content, dontSendNotification);
 }
 

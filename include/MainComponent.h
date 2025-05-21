@@ -20,14 +20,14 @@
  * It is responsible for the layout of the components and the audio processing.
  * It contains the pedalboard, the top menu bar, the bottom menu bar and the connection component.
  */
-class MainComponent final : public juce::AudioAppComponent {
+class MainComponent final : public AudioAppComponent {
 public:
     explicit MainComponent(const Manager &manager);
 
     /**
      * Determines how the component is displayed.
      */
-    void paint(juce::Graphics &) override;
+    void paint(Graphics &) override;
 
     /**
      * Determines what to do when the component is resized.
@@ -53,13 +53,13 @@ public:
      * @brief Gets the next audio block to process.
      * @param bufferToFill The audio buffer to apply the effects to.
      */
-    void getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferToFill) override;
+    void getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill) override;
 
 private:
     /**
      * The grid that contains the main components on the main page.
      */
-    juce::Grid grid;
+    Grid grid;
 
     /**
      * The component that allows the user to login.

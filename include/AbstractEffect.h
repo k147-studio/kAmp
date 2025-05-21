@@ -1,14 +1,15 @@
 #pragma once
+
+#include <JuceHeader.h>
 #include "IEffect.h"
-#include <string>
 
 /**
  * @brief Abstract class that represents an effect by determining
- * the minimum caracteristics an effect should have.
+ * the minimum characteristics an effect should have.
  * Implements the IEffect interface.
  */
 class AbstractEffect : public IEffect {
-  public:
+public:
     /**
      * @brief Initializes a new instance of the AbstractEffect class.
      */
@@ -48,15 +49,48 @@ class AbstractEffect : public IEffect {
      * @param effect The effect to compare with.
      * @return True if the effect is equal to the given effect, false otherwise.
      */
-    virtual bool operator==(const AbstractEffect* effect) = 0;
+    virtual bool operator==(const AbstractEffect *effect) = 0;
 
     /**
      * @brief Applies the effect to the given audio buffer.
      * @param bufferToFill The audio buffer to apply the effect to.
      */
-    void apply(const juce::AudioSourceChannelInfo &bufferToFill) override = 0;
+    void apply(const AudioSourceChannelInfo &bufferToFill) override = 0;
 
-  private:
+    /**
+     * @brief Serializes the effect to a JSON object.
+     * @return JSON object containing serialized effect data.
+     */
+    [[nodiscard]] virtual var toJSON() const {
+        const auto obj = new DynamicObject();
+        obj->setProperty("id", id);
+        obj->setProperty("author", var(author));
+        obj->setProperty("description", var(description));
+        obj->setProperty("version", var(version));
+        obj->setProperty("type", getEffectType());
+        return obj;
+    }
+
+    /**
+     * @brief Deserializes the effect from a JSON object.
+     * @param json JSON object containing serialized effect data.
+     */
+    virtual void fromJSON(const var &json) {
+        if (const auto *obj = json.getDynamicObject()) {
+            id = obj->getProperty("id");
+            author = obj->getProperty("author").toString().toStdString();
+            description = obj->getProperty("description").toString().toStdString();
+            version = obj->getProperty("version").toString().toStdString();
+        }
+    }
+
+    /**
+       * @brief Gets the type name of the effect for serialization purposes.
+       * @return A string representing the effect type.
+       */
+    [[nodiscard]] virtual String getEffectType() const = 0;
+
+private:
     /**
      * @brief The id of the effect.
      */

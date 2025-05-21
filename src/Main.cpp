@@ -1,23 +1,20 @@
-#include <DelayEffect.h>
-
-#include <memory>
-
+#include <JuceHeader.h>
 #include "MainComponent.h"
 
-class GuiAppApplication final : public juce::JUCEApplication {
+class GuiAppApplication final : public JUCEApplication {
 public:
     GuiAppApplication() = default;
 
     // We inject these as compile definitions from the CMakeLists.txt
     // If you've enabled the juce header with `juce_generate_juce_header(<thisTarget>)`
     // you could `#include <JuceHeader.h>` and use `ProjectInfo::projectName` etc. instead.
-    const juce::String getApplicationName() override { return JUCE_APPLICATION_NAME_STRING; }
-    const juce::String getApplicationVersion() override { return JUCE_APPLICATION_VERSION_STRING; }
+    const String getApplicationName() override { return JUCE_APPLICATION_NAME_STRING; }
+    const String getApplicationVersion() override { return JUCE_APPLICATION_VERSION_STRING; }
     bool moreThanOneInstanceAllowed() override { return false; }
 
-    void initialise(const juce::String &commandLine) override {
+    void initialise(const String &commandLine) override {
         // This method is where you should put your application's initialisation code..
-        juce::ignoreUnused(commandLine);
+        ignoreUnused(commandLine);
 
         mainWindow = std::make_unique<MainWindow>(getApplicationName());
     }
@@ -32,22 +29,22 @@ public:
         quit();
     }
 
-    void anotherInstanceStarted(const juce::String &commandLine) override {
+    void anotherInstanceStarted(const String &commandLine) override {
         // When another instance of the app is launched while this one is running,
         // this method is invoked, and the commandLine parameter tells you what
         // the other instance's command-line arguments were.
-        juce::ignoreUnused(commandLine);
+        ignoreUnused(commandLine);
     }
 
     /*
         This class implements the desktop window that contains an instance of
         our MainComponent class.
     */
-    class MainWindow final : public juce::DocumentWindow {
+    class MainWindow final : public DocumentWindow {
     public:
-        explicit MainWindow (juce::String name)
+        explicit MainWindow (String name)
             : DocumentWindow (name,
-                              juce::Desktop::getInstance().getDefaultLookAndFeel()
+                              Desktop::getInstance().getDefaultLookAndFeel()
                                                           .findColour (backgroundColourId),
                               allButtons)
         {

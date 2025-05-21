@@ -1,3 +1,4 @@
+#include "DistortionEffect.h"
 #include "DistortionEffectComponent.h"
 
 DistortionEffectComponent::DistortionEffectComponent()

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AbstractEffect.h"
-#include <juce_audio_utils/juce_audio_utils.h>
 
 /**
  * @brief Represents a pedalboard that contains all the effects and apply them on the audio stream.
@@ -29,7 +28,7 @@ public:
    * @brief Applies all the effects in the pedalboard to the given audio buffer.
    * @param bufferToFill The audio buffer to apply the effects to.
    */
-  void apply(const juce::AudioSourceChannelInfo &bufferToFill) override;
+  void apply(const AudioSourceChannelInfo &bufferToFill) override;
 
   /**
    * @brief Compares the pedalboard with the given effect.
@@ -62,6 +61,29 @@ public:
    * @return The collection of effects contained in the pedalboard.
    */
   std::vector<AbstractEffect *> getEffects();
+
+  /**
+   * @brief Gets the type name of the effect for serialization purposes.
+   * @return A string representing the effect type.
+   */
+  [[nodiscard]] String getEffectType() const override { return "DelayEffect"; }
+
+  /**
+   * @brief Serializes the delay effect to a JSON object.
+   * @return JSON object containing serialized effect data.
+   */
+  [[nodiscard]] var toJSON() const override {
+    auto obj = AbstractEffect::toJSON();
+    return obj;
+  }
+
+  /**
+   * @brief Deserializes the delay effect from a JSON object.
+   * @param json JSON object containing serialized effect data.
+   */
+  void fromJSON(const var &json) override {
+    AbstractEffect::fromJSON(json);
+  }
 
 private:
   /**
