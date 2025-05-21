@@ -4,6 +4,7 @@ DelayEffectComponent::DelayEffectComponent() : BasePedalComponent(new DelayEffec
 
 DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) : BasePedalComponent(effect) {
     if (DelayEffect* delayEffect = dynamic_cast<DelayEffect *>(effect)) {
+        primaryColor = juce::Colours::mediumblue;
         using Track = juce::Grid::TrackInfo;
         using Fr = juce::Grid::Fr;
         grid.templateRows = { Track (Fr (1)), Track (Fr (3)) };
@@ -16,6 +17,7 @@ DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) : BasePedalCo
         };
         rateSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
         rateSlider.setTextBoxStyle(juce::Slider::TextBoxBelow,false, 100, 20);
+        rateSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
         rateSlider.setTextValueSuffix("%");
         rateSlider.setTitle("Rate");
         rateSlider.setRange(0.0, 100.0, 1);
@@ -30,6 +32,7 @@ DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) : BasePedalCo
         delaySlider.setTextValueSuffix("ms");
         delaySlider.setTitle("Delay");
         delaySlider.setTextBoxStyle(juce::Slider::TextBoxBelow,false, 100, 20);
+        delaySlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
         delaySlider.setRange(0.0, 3000.0, 10);
         delaySlider.setValue(500.0);
         delaySlider.onValueChange = [this, delayEffect] { delayEffect->setDelay(delaySlider.getValue()); };
@@ -38,17 +41,19 @@ DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) : BasePedalCo
         delayLabel.setJustificationType(Justification::centred);
         delayLabel.attachToComponent(&delaySlider, false);
 
-        settingsLayout = new PedalSettingsLayoutComponent(&grid);
-
         rateSlider.setBounds(0, 0, 200, 200);
         delaySlider.setBounds(300, 0, 200, 200);
         rateLabel.setBounds(rateSlider.getX(), rateSlider.getY() + 20, rateSlider.getWidth(), 20);
         delayLabel.setBounds(delaySlider.getX(), delaySlider.getY() + 20, delaySlider.getWidth(), 20);
 
+        settingsLayout = new PedalSettingsLayoutComponent(&grid);
+
         addAndMakeVisible(rateSlider);
         addAndMakeVisible(rateLabel);
         addAndMakeVisible(delaySlider);
         addAndMakeVisible(delayLabel);
+
+        this->initializePedal();
     }
 }
 

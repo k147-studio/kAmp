@@ -8,6 +8,7 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
     : BasePedalComponent(effect)
 {
     if (auto* distEffect = dynamic_cast<DistortionEffect*>(effect)) {
+        primaryColor = juce::Colours::darkviolet;
         using Track = juce::Grid::TrackInfo;
         using Fr = juce::Grid::Fr;
 
@@ -22,6 +23,7 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
 
         driveSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
         driveSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
+        driveSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
         driveSlider.setTextValueSuffix("x");
         driveSlider.setTitle("Drive");
         driveSlider.setRange(0.0, 10.0, 0.1);
@@ -36,7 +38,8 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
 
         mixSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
         mixSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
-        mixSlider.setTextValueSuffix("");
+        mixSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
+        mixSlider.setTextValueSuffix("%");
         mixSlider.setTitle("Mix");
         mixSlider.setRange(0.0, 1.0, 0.01);
         mixSlider.setValue(0.5);
@@ -54,6 +57,8 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
         addAndMakeVisible(driveLabel);
         addAndMakeVisible(mixSlider);
         addAndMakeVisible(mixLabel);
+
+        this->initializePedal();
     }
 }
 
