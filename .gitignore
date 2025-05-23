@@ -17,3 +17,4 @@ JUCE/
 
 # Windows specific
 Thumbs.db
+/.idea/vcs.xml
