@@ -3,12 +3,14 @@
 #include <JuceHeader.h>
 #include "AbstractEffect.h"
 
+
 /**
  * @brief Represents a distortion effect that applies non-linear clipping to the audio stream.
  * Inherits from the AbstractEffect class.
  */
 class DistortionEffect : public AbstractEffect {
 public:
+
     /**
      * @brief Initializes a new instance of the DistortionEffect class.
      */
@@ -26,16 +28,16 @@ public:
     void apply(const AudioSourceChannelInfo &bufferToFill) override;
 
     /**
-     * @brief Sets the drive amount for the distortion effect.
+     * @brief Sets the range amount for the distortion effect.
      * @param driveValue The drive (gain) amount before clipping.
      */
-    void setDrive(float driveValue);
+    void setRange(float rangeValue);
 
-    /**
-     * @brief Sets the mix (dry/wet) of the distortion effect.
-     * @param mixValue The mix between dry and wet signal (0.0 = dry, 1.0 = wet).
-     */
-    void setMix(float mixValue);
+    static float DistortionEffect::clipWithCurrentRange(float x);
+
+
+
+    void reset() noexcept;
 
     /**
      * @brief Compares the effect with another given effect.
@@ -43,6 +45,15 @@ public:
      * @return True if the effect is equal to the given effect, false otherwise.
      */
     bool operator==(const AbstractEffect *effect) override;
+
+
+    void prepare(const juce::dsp::ProcessSpec& spec);
+
+    template <typename ProcessContext>
+    void process(const ProcessContext& context) noexcept;
+
+    float getRange() const;
+
 
     /**
    * @brief Gets the type name of the effect for serialization purposes.
@@ -57,8 +68,7 @@ public:
     [[nodiscard]] var toJSON() const override {
         auto obj = AbstractEffect::toJSON();
         if (auto *dynamicObj = obj.getDynamicObject()) {
-            dynamicObj->setProperty("drive", drive);
-            dynamicObj->setProperty("mix", mix);
+            dynamicObj->setProperty("range", currentRange);
         }
         return obj;
     }
@@ -71,19 +81,16 @@ public:
         AbstractEffect::fromJSON(json);
 
         if (const auto *obj = json.getDynamicObject()) {
-            drive = static_cast<float>(obj->getProperty("drive"));
-            mix = static_cast<float>(obj->getProperty("mix"));
+            currentRange = static_cast<float>(obj->getProperty("range"));
         }
     }
 
 private:
-    /**
-     * @brief The drive amount applied before clipping.
-     */
-    float drive;
+    static float currentRange;
 
-    /**
-     * @brief The dry/wet mix of the effect.
-     */
-    float mix;
+
+    enum {
+        waveshaperIndex // [2]
+    };
+    juce::dsp::ProcessorChain<juce::dsp::WaveShaper<float>> processorChain;
 };
