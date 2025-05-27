@@ -37,13 +37,15 @@ void DistortionEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
     for (int i = 0; i < numSamples; ++i) {
         const float inL = leftBuffer[i];
         const float inR = rightBuffer[i];
-        // Apply drive and hard clip
-        const float wetL = juce::jlimit(-1.0f, 1.0f, inL * drive);
-        const float wetR = juce::jlimit(-1.0f, 1.0f, inR * drive);
 
-        // Mix dry and wet signals
-        leftBuffer[i] = inL * (1.0f - mix) + wetL * mix;
-        rightBuffer[i] = inR * (1.0f - mix) + wetR * mix;
+        // Appliquer un gain d'entrée pour amplifier le signal
+        const float preGain = 50.0f; // Ajustez ce gain pour contrôler l'intensité
+        const float shapedL = std::tanh(inL * drive * preGain);
+        const float shapedR = std::tanh(inR * drive * preGain);
+
+        // Mélanger le signal dry et wet
+        leftBuffer[i] = inL * (1.0f - mix) + shapedL * mix;
+        rightBuffer[i] = inR * (1.0f - mix) + shapedR * mix;
     }
 }
 
