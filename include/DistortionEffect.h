@@ -1,6 +1,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include <juce_dsp/juce_dsp.h>
 #include "AbstractEffect.h"
 
 
@@ -33,7 +34,7 @@ public:
      */
     void setRange(float rangeValue);
 
-    static float DistortionEffect::clipWithCurrentRange(float x);
+    static float clipWithCurrentRange(float x);
 
 
 

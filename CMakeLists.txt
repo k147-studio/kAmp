@@ -111,6 +111,7 @@ target_link_libraries(kAmp
         juce::juce_audio_basics
         juce::juce_audio_utils
         juce::juce_gui_extra
+        juce::juce_dsp
     PUBLIC
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
