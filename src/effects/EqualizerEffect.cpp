@@ -1,4 +1,5 @@
 #include "EqualizerEffect.h"
+#include <juce_dsp/juce_dsp.h>
 
 EqualizerEffect::EqualizerEffect() {
     effectName = "Equalizer";

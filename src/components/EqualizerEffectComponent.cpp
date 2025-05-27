@@ -17,7 +17,7 @@ EqualizerEffectComponent::EqualizerEffectComponent(AbstractEffect* effect)
     using Fr = juce::Grid::Fr;
 
     // 2 lignes : sliders + labels
-    grid.templateRows = { Track(Fr(4)), Track(Fr(1)) };
+    grid.templateRows = { Track(Fr(1)), Track(Fr(3)) };
     grid.templateColumns = { Track(Fr(1)), Track(Fr(1)), Track(Fr(1)), Track(Fr(1)), Track(Fr(1)),
                              Track(Fr(1)), Track(Fr(1)), Track(Fr(1)), Track(Fr(1)), Track(Fr(1)) };
 
@@ -27,20 +27,31 @@ EqualizerEffectComponent::EqualizerEffectComponent(AbstractEffect* effect)
         sliders[i].setRange(-24.0, 24.0, 0.1);
         sliders[i].setValue(0.0);
         sliders[i].setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
-        sliders[i].onValueChange = [this, i] {
-            eqEffect->setGain(i, sliders[i].getValue());
+        sliders[i].onValueChange = [this, i]
+        {
+            if (static_cast<float>(sliders[i].getValue())) {
+                eqEffect->setGain(i, static_cast<float>(sliders[i].getValue()));
+            }
         };
         sliders[i].setTitle(freqLabels[i]);
+        sliders[i].setBounds(i * (getWidth() / 10), 0, getWidth() / 10, (getHeight() / 5) * 4);
 
         labels[i].setText(freqLabels[i], juce::dontSendNotification);
         labels[i].setJustificationType(juce::Justification::centred);
         labels[i].attachToComponent(&sliders[i], false);
-
-        grid.items.add(juce::GridItem(sliders[i]));
-        grid.items.add(juce::GridItem(labels[i]));
+        labels[i].setBounds(i * (getWidth() / 10), 0, getWidth() / 10, getHeight() / 5);
 
         addAndMakeVisible(sliders[i]);
         addAndMakeVisible(labels[i]);
+    }
+
+    for (int i = 0; i < 10; ++i)
+    {
+        grid.items.add(GridItem(labels[i]));
+    }
+    for (int i = 0; i < 10; ++i)
+    {
+        grid.items.add(juce::GridItem(sliders[i]));
     }
 
     settingsLayout = new PedalSettingsLayoutComponent(&grid);
@@ -57,19 +68,5 @@ void EqualizerEffectComponent::sliderValueChanged(juce::Slider* slider) {
             eqEffect->setGain(i, slider->getValue());
             break;
         }
-    }
-}
-
-void EqualizerEffectComponent::resized() {
-    auto bounds = getLocalBounds().reduced(10);
-
-    int sliderWidth = bounds.getWidth() / 10;
-    int sliderHeight = bounds.getHeight() - 70; // laisser place pour labels + bouton
-
-    // Position sliders et labels
-    for (int i = 0; i < 10; ++i) {
-        auto sliderArea = bounds.removeFromLeft(sliderWidth);
-        sliders[i].setBounds(sliderArea.removeFromTop(sliderHeight));
-        labels[i].setBounds(sliderArea);
     }
 }
