@@ -1,11 +1,13 @@
 #include "DelayEffect.h"
 #include "DistortionEffect.h"
 #include "Pedalboard.h"
+#include "EqualizerEffect.h"
 #include "NoiseGateEffect.h"
 
 Pedalboard::Pedalboard() {
   this->append(new DelayEffect());
   this->append(new DistortionEffect());
+  this->append(new EqualizerEffect());
   this->append(new NoiseGateEffect());
 }
 

@@ -33,7 +33,7 @@ public:
      */
     void setRange(float rangeValue);
 
-    static float DistortionEffect::clipWithCurrentRange(float x);
+    static float clipWithCurrentRange(float x);
 
 
 
