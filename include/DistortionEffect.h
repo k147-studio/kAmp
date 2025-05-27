@@ -65,27 +65,25 @@ public:
      * @brief Serializes the delay effect to a JSON object.
      * @return JSON object containing serialized effect data.
      */
-    // [[nodiscard]] var toJSON() const override {
-    //     auto obj = AbstractEffect::toJSON();
-    //     if (auto *dynamicObj = obj.getDynamicObject()) {
-    //         dynamicObj->setProperty("drive", drive);
-    //         dynamicObj->setProperty("mix", mix);
-    //     }
-    //     return obj;
-    // }
+    [[nodiscard]] var toJSON() const override {
+        auto obj = AbstractEffect::toJSON();
+        if (auto *dynamicObj = obj.getDynamicObject()) {
+            dynamicObj->setProperty("range", currentRange);
+        }
+        return obj;
+    }
 
     /**
      * @brief Deserializes the delay effect from a JSON object.
      * @param json JSON object containing serialized effect data.
      */
-    // void fromJSON(const var &json) override {
-    //     AbstractEffect::fromJSON(json);
-    //
-    //     if (const auto *obj = json.getDynamicObject()) {
-    //         drive = static_cast<float>(obj->getProperty("drive"));
-    //         mix = static_cast<float>(obj->getProperty("mix"));
-    //     }
-    // }
+    void fromJSON(const var &json) override {
+        AbstractEffect::fromJSON(json);
+
+        if (const auto *obj = json.getDynamicObject()) {
+            currentRange = static_cast<float>(obj->getProperty("range"));
+        }
+    }
 
 private:
     static float currentRange;
