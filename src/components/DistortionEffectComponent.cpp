@@ -13,51 +13,32 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
         using Fr = juce::Grid::Fr;
 
         grid.templateRows = { Track(Fr(1)), Track(Fr(3)) };
-        grid.templateColumns = { Track(Fr(1)), Track(Fr(1)) };
+        grid.templateColumns = { Track(Fr(1)) };
         grid.items = {
-            juce::GridItem(driveLabel),
-            juce::GridItem(mixLabel),
-            juce::GridItem(driveSlider),
-            juce::GridItem(mixSlider),
+            juce::GridItem(rangeLabel),
+            juce::GridItem(rangeSlider),
         };
 
-        driveSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
-        driveSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
-        driveSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
-        driveSlider.setTextValueSuffix("x");
-        driveSlider.setTitle("Drive");
-        driveSlider.setRange(0.0, 10.0, 0.1);
-        driveSlider.setValue(1.0);
-        driveSlider.onValueChange = [this, distEffect] {
-            distEffect->setDrive(static_cast<float>(driveSlider.getValue()));
+        rangeSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+        rangeSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
+        rangeSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
+        rangeSlider.setTextValueSuffix("x");
+        rangeSlider.setTitle("Range");
+        rangeSlider.setRange(0.0000, 1, 0.0001);
+        rangeSlider.setValue(0);
+        rangeSlider.onValueChange = [this, distEffect] {
+            distEffect->setRange(static_cast<float>(rangeSlider.getValue()));
         };
 
-        driveLabel.setText("Drive", juce::dontSendNotification);
-        driveLabel.setJustificationType(juce::Justification::centred);
-        driveLabel.attachToComponent(&driveSlider, false);
+        rangeLabel.setText("Range", juce::dontSendNotification);
+        rangeLabel.setJustificationType(juce::Justification::centred);
+        rangeLabel.attachToComponent(&rangeSlider, false);
 
-        mixSlider.setSliderStyle(juce::Slider::RotaryVerticalDrag);
-        mixSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 100, 20);
-        mixSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
-        mixSlider.setTextValueSuffix("%");
-        mixSlider.setTitle("Mix");
-        mixSlider.setRange(0.0, 1.0, 0.01);
-        mixSlider.setValue(0.5);
-        mixSlider.onValueChange = [this, distEffect] {
-            distEffect->setMix(static_cast<float>(mixSlider.getValue()));
-        };
-
-        mixLabel.setText("Mix", juce::dontSendNotification);
-        mixLabel.setJustificationType(juce::Justification::centred);
-        mixLabel.attachToComponent(&mixSlider, false);
 
         settingsLayout = new PedalSettingsLayoutComponent(&grid);
 
-        addAndMakeVisible(driveSlider);
-        addAndMakeVisible(driveLabel);
-        addAndMakeVisible(mixSlider);
-        addAndMakeVisible(mixLabel);
-
+        addAndMakeVisible(rangeSlider);
+        addAndMakeVisible(rangeLabel);
         this->initializePedal();
     }
 }

@@ -10,6 +10,7 @@
  */
 class DistortionEffect : public AbstractEffect {
 public:
+
     /**
      * @brief Initializes a new instance of the DistortionEffect class.
      */
@@ -27,16 +28,16 @@ public:
     void apply(const AudioSourceChannelInfo &bufferToFill) override;
 
     /**
-     * @brief Sets the drive amount for the distortion effect.
+     * @brief Sets the range amount for the distortion effect.
      * @param driveValue The drive (gain) amount before clipping.
      */
-    void setDrive(float driveValue);
+    void setRange(float rangeValue);
 
-    /**
-     * @brief Sets the mix (dry/wet) of the distortion effect.
-     * @param mixValue The mix between dry and wet signal (0.0 = dry, 1.0 = wet).
-     */
-    void setMix(float mixValue);
+    static float DistortionEffect::clipWithCurrentRange(float x);
+
+
+
+    void reset() noexcept;
 
     /**
      * @brief Compares the effect with another given effect.
@@ -48,6 +49,12 @@ public:
 
     void prepare(const juce::dsp::ProcessSpec& spec);
 
+    template <typename ProcessContext>
+    void process(const ProcessContext& context) noexcept;
+
+    float getRange() const;
+
+
     /**
    * @brief Gets the type name of the effect for serialization purposes.
    * @return A string representing the effect type.
@@ -58,44 +65,34 @@ public:
      * @brief Serializes the delay effect to a JSON object.
      * @return JSON object containing serialized effect data.
      */
-    [[nodiscard]] var toJSON() const override {
-        auto obj = AbstractEffect::toJSON();
-        if (auto *dynamicObj = obj.getDynamicObject()) {
-            dynamicObj->setProperty("drive", drive);
-            dynamicObj->setProperty("mix", mix);
-        }
-        return obj;
-    }
+    // [[nodiscard]] var toJSON() const override {
+    //     auto obj = AbstractEffect::toJSON();
+    //     if (auto *dynamicObj = obj.getDynamicObject()) {
+    //         dynamicObj->setProperty("drive", drive);
+    //         dynamicObj->setProperty("mix", mix);
+    //     }
+    //     return obj;
+    // }
 
     /**
      * @brief Deserializes the delay effect from a JSON object.
      * @param json JSON object containing serialized effect data.
      */
-    void fromJSON(const var &json) override {
-        AbstractEffect::fromJSON(json);
-
-        if (const auto *obj = json.getDynamicObject()) {
-            drive = static_cast<float>(obj->getProperty("drive"));
-            mix = static_cast<float>(obj->getProperty("mix"));
-        }
-    }
+    // void fromJSON(const var &json) override {
+    //     AbstractEffect::fromJSON(json);
+    //
+    //     if (const auto *obj = json.getDynamicObject()) {
+    //         drive = static_cast<float>(obj->getProperty("drive"));
+    //         mix = static_cast<float>(obj->getProperty("mix"));
+    //     }
+    // }
 
 private:
-    /**
-     * @brief The drive amount applied before clipping.
-     */
-    float drive;
+    static float currentRange;
 
-    /**
-     * @brief The dry/wet mix of the effect.
-     */
-    float mix;
 
-    enum
-    {
-        waveshaperIndex
+    enum {
+        waveshaperIndex // [2]
     };
-
-    using ShaperType = juce::dsp::WaveShaper<float, std::function<float(float)>>;
-    juce::dsp::ProcessorChain<ShaperType> processorChain;
+    juce::dsp::ProcessorChain<juce::dsp::WaveShaper<float>> processorChain;
 };

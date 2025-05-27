@@ -27,10 +27,8 @@ public:
 
 private:
     Grid grid;
-    Slider driveSlider;
-    Label driveLabel;
-    Slider mixSlider;
-    Label mixLabel;
+    Slider rangeSlider;
+    Label rangeLabel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DistortionEffectComponent)
 };
