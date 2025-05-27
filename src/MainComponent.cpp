@@ -1,19 +1,34 @@
 #include "MainComponent.h"
 #include "SettingsComponent.h"
+#include "ResourceManager.h"
+
+
+
 
 MainComponent::MainComponent(const Manager &manager): pedalboardComponent(manager.getPedalboard()),
                                                       topMenuBarComponent(this->deviceManager, &isSoundMuted), manager(manager)
 {
     setAudioChannels(2, 2);
-    Image background = ImageFileFormat::loadFrom(File(File::getCurrentWorkingDirectory().getChildFile("resources/images/background.png")));
-    backgroundImage.setImage(background);
-    backgroundImage.setImagePlacement(RectanglePlacement(RectanglePlacement::stretchToFit));
 
-    addAndMakeVisible(backgroundImage);
+    Image background = ResourceManager::loadImage("resources/images/background.png");
+    if (background.isValid()) {
+        backgroundImage.setImage(background);
+        backgroundImage.setImagePlacement(juce::RectanglePlacement::stretchToFit);
+        addAndMakeVisible(backgroundImage);
+    } else {
+        DBG("Erreur : image de fond introuvable ou invalide.");
+    }
+
+
+
+
     addAndMakeVisible(pedalboardComponent);
     addAndMakeVisible(topMenuBarComponent);
     addAndMakeVisible(bottomMenuBarComponent);
     addAndMakeVisible(connectionComponent);
+
+
+
 }
 
 //==============================================================================
