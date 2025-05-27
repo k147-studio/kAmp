@@ -31,7 +31,18 @@ public:
      * @brief Resizes the component.
      */
     void resized() override;
+
 protected:
+    /**
+     * @brief The default width of the component.
+     */
+    const float DEFAULT_WIDTH = 200.0f;
+
+    /**
+     * @brief The default height of the component.
+     */
+    const float DEFAULT_HEIGHT = 300.0f;
+
     /**
      * @brief The main layout for the pedal component.
      */
@@ -41,6 +52,11 @@ protected:
      * @brief The primary color of the pedal component. Used as background color.
      */
     juce::Colour primaryColor;
+
+    /**
+    * @brief The secondary color of the pedal component. Used as background color.
+    */
+    juce::Colour secondaryColor;
 
     /**
      * @brief The layout for the pedal settings.

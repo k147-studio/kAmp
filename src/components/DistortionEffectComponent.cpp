@@ -58,6 +58,8 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
         addAndMakeVisible(mixSlider);
         addAndMakeVisible(mixLabel);
 
+        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+
         this->initializePedal();
     }
 }
