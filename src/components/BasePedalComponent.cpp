@@ -1,4 +1,5 @@
 #include "BasePedalComponent.h"
+#include "ResourceManager.h"
 
 BasePedalComponent::BasePedalComponent(AbstractEffect* effect) : EffectComponent(effect)
 {
@@ -29,14 +30,21 @@ void BasePedalComponent::initializePedal() {
     pedalLabel->setJustificationType(juce::Justification::centred);
     pedalLabel->setFont(juce::Font(30.0f, juce::Font::bold));
 
-    Image powerImage = ImageFileFormat::loadFrom(File(File::getCurrentWorkingDirectory().getChildFile("resources/icons/power.png")));
-    enablePedalButton.setImages(true, true, true, powerImage, 1.0f, {}, powerImage, 1.0f, {}, powerImage, 1.0f, {});
-    enablePedalButton.onClick = [this] {
-        this->onEnableButtonClicked();
-    };
+    juce::Image powerImage = ResourceManager::loadImage("resources/icons/power.png");
+    if (powerImage.isValid()) {
+        enablePedalButton.setImages(true, true, true,
+                                    powerImage, 1.0f, {},
+                                    powerImage, 1.0f, {},
+                                    powerImage, 1.0f, {});
+        enablePedalButton.onClick = [this] {
+            this->onEnableButtonClicked();
+        };
+        addAndMakeVisible(enablePedalButton);
+    } else {
+        DBG("Erreur : image power.png introuvable ou invalide.");
+    }
 
     addAndMakeVisible(*pedalLabel);
-    addAndMakeVisible(enablePedalButton);
     addAndMakeVisible(*isEnabledIndicator);
 
     using Track = juce::Grid::TrackInfo;

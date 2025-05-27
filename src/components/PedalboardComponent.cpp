@@ -13,7 +13,6 @@ PedalboardComponent::PedalboardComponent(AbstractEffect* pedalboard) : EffectCom
     flexBox.justifyContent = juce::FlexBox::JustifyContent::center;
     flexBox.alignItems = juce::FlexBox::AlignItems::center;
     for (auto &effectComponent : effectsComponents) {
-        effectComponent->setSize(200, 300);
         flexBox.items.add(juce::FlexItem(*effectComponent).withWidth(effectComponent->getWidth()).withHeight(effectComponent->getHeight()).withMargin(20));
     }
 }

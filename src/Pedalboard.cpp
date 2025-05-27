@@ -1,10 +1,12 @@
 #include "DelayEffect.h"
 #include "DistortionEffect.h"
 #include "Pedalboard.h"
+#include "NoiseGateEffect.h"
 
 Pedalboard::Pedalboard() {
   this->append(new DelayEffect());
   this->append(new DistortionEffect());
+  this->append(new NoiseGateEffect());
 }
 
 Pedalboard::~Pedalboard() = default;

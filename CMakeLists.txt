@@ -49,6 +49,22 @@ file(
     src/*.cpp
 )
 
+if(APPLE)
+    # Sur macOS, copie dans le bundle app (Contents/Resources)
+    add_custom_command(TARGET kAmp POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/resources
+            $<TARGET_FILE_DIR:kAmp>/../Resources/resources
+    )
+else()
+    # Sur Linux/Windows, copie dans le dossier de build à côté de l'exe
+    add_custom_command(TARGET kAmp POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/resources
+            $<TARGET_FILE_DIR:kAmp>/resources
+    )
+endif()
+
 
 target_sources(kAmp
     PRIVATE

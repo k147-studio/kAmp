@@ -2,24 +2,42 @@
 #include "PopupContentComponent.h"
 #include "SettingsComponent.h"
 #include "TopMenuBarComponent.h"
+#include "ResourceManager.h"
 
 
 TopMenuBarComponent::TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isSoundMuted)
 {
     this->isSoundMuted = isSoundMuted;
 
-    Image settingsImage = ImageFileFormat::loadFrom(File(File::getCurrentWorkingDirectory().getChildFile("resources/icons/settings.png")));
-    settingsButton.setImages(true, true, true, settingsImage, 1.0f, {}, settingsImage, 1.0f, {}, settingsImage, 1.0f, {});
 
-    Image accountImage = ImageFileFormat::loadFrom(File(File::getCurrentWorkingDirectory().getChildFile("resources/icons/account.png")));
-    accountButton.setImages(true, true, true, accountImage, 1.0f, {}, accountImage, 1.0f, {}, accountImage, 1.0f, {});
+    juce::Image settingsImage = ResourceManager::loadImage("resources/icons/settings.png");
+    if (settingsImage.isValid()) {
+        settingsButton.setImages(true, true, true,settingsImage, 1.0f, {},settingsImage, 1.0f, {},settingsImage, 1.0f, {});
+        settingsButton.setSize(settingsImage.getWidth(), settingsImage.getHeight());
+        addAndMakeVisible(settingsButton);
+    } else {
+        DBG("Erreur : image settings.png introuvable ou invalide.");
+    }
 
-    Image muteImage = ImageFileFormat::loadFrom(File(File::getCurrentWorkingDirectory().getChildFile("resources/icons/mute.png")));
-    muteButton.setImages(true, true, true, muteImage, 1.0f, {}, muteImage, 1.0f, {}, muteImage, 1.0f, {});
+    juce::Image accountImage = ResourceManager::loadImage("resources/icons/account.png");
+    if (accountImage.isValid()) {
+        accountButton.setImages(true, true, true,accountImage, 1.0f, {}, accountImage, 1.0f, {},accountImage, 1.0f, {});
+        accountButton.setSize(accountImage.getWidth(), accountImage.getHeight());
+        addAndMakeVisible(accountButton);
+    } else {
+        DBG("Erreur : image account.png introuvable ou invalide.");
+    }
 
-    addAndMakeVisible(settingsButton);
-    addAndMakeVisible(accountButton);
-    addAndMakeVisible(muteButton);
+    juce::Image muteImage = ResourceManager::loadImage("resources/icons/unmute.png");
+    if (muteImage.isValid()) {
+        muteButton.setImages(true, true, true, muteImage, 1.0f, {},  muteImage, 1.0f, {}, muteImage, 1.0f, {});
+        muteButton.setSize(muteImage.getWidth(), muteImage.getHeight());
+        addAndMakeVisible(muteButton);
+    } else {
+        DBG("Erreur : image mute.png introuvable ou invalide.");
+    }
+
+
 
     settingsButton.onClick = [this, &deviceManager]() { openSettingsPopup(deviceManager); };
     accountButton.onClick = [this]() { openAccountPopup(); };
@@ -82,13 +100,23 @@ void TopMenuBarComponent::toggleMute()
 {
     if (*this->isSoundMuted)
     {
-        Image muteImage = ImageFileFormat::loadFrom(File(File::getCurrentWorkingDirectory().getChildFile("resources/icons/mute.png")));
-        muteButton.setImages(false, true, true, muteImage, 1.0f, {}, muteImage, 1.0f, {}, muteImage, 1.0f, {});
+        juce::Image muteImage = ResourceManager::loadImage("resources/icons/unmute.png");
+        if (muteImage.isValid()) {
+            muteButton.setImages(false, true, true, muteImage, 1.0f, {},  muteImage, 1.0f, {}, muteImage, 1.0f, {});
+            addAndMakeVisible(muteButton);
+        } else {
+            DBG("Erreur : image mute.png introuvable ou invalide.");
+        }
     }
     else
     {
-        Image muteImage = ImageFileFormat::loadFrom(File(File::getCurrentWorkingDirectory().getChildFile("resources/icons/unmute.png")));
-        muteButton.setImages(false, true, true, muteImage, 1.0f, {}, muteImage, 1.0f, {}, muteImage, 1.0f, {});
+        juce::Image muteImage = ResourceManager::loadImage("resources/icons/mute.png");
+        if (muteImage.isValid()) {
+            muteButton.setImages(false, true, true, muteImage, 1.0f, {},  muteImage, 1.0f, {}, muteImage, 1.0f, {});
+            addAndMakeVisible(muteButton);
+        } else {
+            DBG("Erreur : image mute.png introuvable ou invalide.");
+        }
     }
     *(this->isSoundMuted) = !(*(this->isSoundMuted));
 }
