@@ -5,17 +5,30 @@
 /**
  * @brief Initializes a new instance of the DistortionEffect class.
  */
-DistortionEffect::DistortionEffect() {
-    // Default drive amount and mix
+DistortionEffect::DistortionEffect()
+    : drive(1.0f), mix(1.0f)
+{
     effectName = "Distortion";
-    drive = 1.0f;
-    mix = 0.5f;
+    auto& sh = processorChain.get<waveshaperIndex>();
+    sh.functionToUse = [this](float x)
+    {
+        return std::tanh(drive * x);
+    };
 }
 
 /**
  * @brief Destroys the instance of the DistortionEffect class.
  */
 DistortionEffect::~DistortionEffect() = default;
+
+
+
+void DistortionEffect::prepare(const juce::dsp::ProcessSpec& spec)
+{
+    processorChain.prepare(spec);
+    processorChain.reset();
+}
+
 
 /**
  * @brief Applies the distortion effect to the given audio buffer.
@@ -29,23 +42,28 @@ DistortionEffect::~DistortionEffect() = default;
  * For a more advanced waveshaping approach, see:
  * https://docs.juce.com/master/structdsp_1_1WaveShaper.html
  */
-void DistortionEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
-    auto *leftBuffer = bufferToFill.buffer->getWritePointer(0, bufferToFill.startSample);
-    auto *rightBuffer = bufferToFill.buffer->getWritePointer(1, bufferToFill.startSample);
-    int numSamples = bufferToFill.numSamples;
+void DistortionEffect::apply (const juce::AudioSourceChannelInfo& bufferToFill)
+{
+    auto* buffer      = bufferToFill.buffer;
+    const auto start  = (size_t) bufferToFill.startSample;
+    const auto length = (size_t) bufferToFill.numSamples;
 
-    for (int i = 0; i < numSamples; ++i) {
-        const float inL = leftBuffer[i];
-        const float inR = rightBuffer[i];
-        // Apply drive and hard clip
-        const float wetL = juce::jlimit(-1.0f, 1.0f, inL * drive);
-        const float wetR = juce::jlimit(-1.0f, 1.0f, inR * drive);
+    auto fullBlock = juce::dsp::AudioBlock<float>(*buffer, start);
 
-        // Mix dry and wet signals
-        leftBuffer[i] = inL * (1.0f - mix) + wetL * mix;
-        rightBuffer[i] = inR * (1.0f - mix) + wetR * mix;
+    auto subBlock = fullBlock.getSubBlock (0, length);
+
+    dsp::ProcessContextReplacing ctx (subBlock);
+    processorChain.process (ctx);
+
+    for (int ch = 0; ch < buffer->getNumChannels(); ++ch)
+    {
+        auto* write = buffer->getWritePointer (ch, bufferToFill.startSample);
+        auto* read  = buffer->getReadPointer  (ch, bufferToFill.startSample);
+        for (int i = 0; i < bufferToFill.numSamples; ++i)
+            write[i] = read[i] * (1.0f - mix) + write[i] * mix;
     }
 }
+
 
 /**
  * @brief Sets the drive amount for the distortion effect.
@@ -53,6 +71,11 @@ void DistortionEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
  */
 void DistortionEffect::setDrive(float driveValue) {
     drive = driveValue;
+    auto& sh = processorChain.get<waveshaperIndex>();
+    sh.functionToUse = [this](float x)
+    {
+        return std::tanh(drive * x);
+    };
 }
 
 /**
@@ -60,7 +83,7 @@ void DistortionEffect::setDrive(float driveValue) {
  * @param mixValue The mix between dry and wet signal (0.0 = dry, 1.0 = wet).
  */
 void DistortionEffect::setMix(float mixValue) {
-    mix = mixValue;
+    mix = juce::jlimit(0.0f, 1.0f, mixValue);
 }
 
 /**

@@ -3,6 +3,7 @@
 #include <JuceHeader.h>
 #include "AbstractEffect.h"
 
+
 /**
  * @brief Represents a distortion effect that applies non-linear clipping to the audio stream.
  * Inherits from the AbstractEffect class.
@@ -43,6 +44,9 @@ public:
      * @return True if the effect is equal to the given effect, false otherwise.
      */
     bool operator==(const AbstractEffect *effect) override;
+
+
+    void prepare(const juce::dsp::ProcessSpec& spec);
 
     /**
    * @brief Gets the type name of the effect for serialization purposes.
@@ -86,4 +90,12 @@ private:
      * @brief The dry/wet mix of the effect.
      */
     float mix;
+
+    enum
+    {
+        waveshaperIndex
+    };
+
+    using ShaperType = juce::dsp::WaveShaper<float, std::function<float(float)>>;
+    juce::dsp::ProcessorChain<ShaperType> processorChain;
 };
