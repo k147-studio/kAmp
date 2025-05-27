@@ -2,20 +2,57 @@
 
 // Lien de la doc : https://juce.com/tutorials/tutorial_dsp_convolution/
 
+float DistortionEffect::currentRange = 0;
+
+float DistortionEffect::clipWithCurrentRange(float x) {
+    if (currentRange >= 1 || currentRange <= 0) {
+        return juce::jlimit(-1.0f, 1.0f, x);
+    }
+    return juce::jlimit(-(1-currentRange), 1-currentRange, x);
+}
 /**
  * @brief Initializes a new instance of the DistortionEffect class.
  */
 DistortionEffect::DistortionEffect() {
-    // Default drive amount and mix
+    currentRange = 0;
     effectName = "Distortion";
-    drive = 1.0f;
-    mix = 0.5f;
+    auto &waveshaper = processorChain.template get<waveshaperIndex>();
+    waveshaper.functionToUse = &clipWithCurrentRange;
 }
 
 /**
  * @brief Destroys the instance of the DistortionEffect class.
  */
 DistortionEffect::~DistortionEffect() = default;
+
+
+
+void DistortionEffect::prepare (const juce::dsp::ProcessSpec& spec)
+{
+    processorChain.prepare (spec);
+}
+
+
+void DistortionEffect::reset() noexcept
+{
+    processorChain.reset();
+}
+
+template <typename ProcessContext>
+void DistortionEffect::process (const ProcessContext& context) noexcept
+{
+    processorChain.process (context);
+}
+
+void DistortionEffect::setRange(float rangeValue) {
+    currentRange = rangeValue;
+    auto& waveshaper = processorChain.template get<waveshaperIndex>();
+    waveshaper.functionToUse = &clipWithCurrentRange;
+}
+
+float DistortionEffect::getRange() const {
+    return currentRange;
+}
 
 /**
  * @brief Applies the distortion effect to the given audio buffer.
@@ -29,41 +66,21 @@ DistortionEffect::~DistortionEffect() = default;
  * For a more advanced waveshaping approach, see:
  * https://docs.juce.com/master/structdsp_1_1WaveShaper.html
  */
-void DistortionEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
-    auto *leftBuffer = bufferToFill.buffer->getWritePointer(0, bufferToFill.startSample);
-    auto *rightBuffer = bufferToFill.buffer->getWritePointer(1, bufferToFill.startSample);
-    int numSamples = bufferToFill.numSamples;
 
-    for (int i = 0; i < numSamples; ++i) {
-        const float inL = leftBuffer[i];
-        const float inR = rightBuffer[i];
+void DistortionEffect::apply(const juce::AudioSourceChannelInfo& bufferToFill)
+{
+    if (bufferToFill.buffer == nullptr) return;
 
-        // Appliquer un gain d'entrée pour amplifier le signal
-        const float preGain = 50.0f; // Ajustez ce gain pour contrôler l'intensité
-        const float shapedL = std::tanh(inL * drive * preGain);
-        const float shapedR = std::tanh(inR * drive * preGain);
+    juce::dsp::AudioBlock<float> block(*bufferToFill.buffer,
+                                       (size_t) bufferToFill.startSample);
+    auto subBlock = block.getSubBlock(0, (size_t) bufferToFill.numSamples);
+    juce::dsp::ProcessContextReplacing<float> context(subBlock);
 
-        // Mélanger le signal dry et wet
-        leftBuffer[i] = inL * (1.0f - mix) + shapedL * mix;
-        rightBuffer[i] = inR * (1.0f - mix) + shapedR * mix;
-    }
+    process(context);
 }
 
-/**
- * @brief Sets the drive amount for the distortion effect.
- * @param driveValue The drive (gain) amount before clipping.
- */
-void DistortionEffect::setDrive(float driveValue) {
-    drive = driveValue;
-}
 
-/**
- * @brief Sets the mix (dry/wet) of the distortion effect.
- * @param mixValue The mix between dry and wet signal (0.0 = dry, 1.0 = wet).
- */
-void DistortionEffect::setMix(float mixValue) {
-    mix = mixValue;
-}
+
 
 /**
  * @brief Compares the effect with another given effect.
@@ -71,9 +88,6 @@ void DistortionEffect::setMix(float mixValue) {
  * @return True if the effect is equal to the given effect, false otherwise.
  */
 bool DistortionEffect::operator==(const AbstractEffect *effect) {
-    if (auto other = dynamic_cast<const DistortionEffect *>(effect)) {
-        return drive == other->drive && mix == other->mix;
-    }
-    return false;
+    return dynamic_cast<const DistortionEffect *>(effect) != nullptr;
 }
 
