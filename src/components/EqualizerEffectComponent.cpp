@@ -56,8 +56,8 @@ EqualizerEffectComponent::EqualizerEffectComponent(AbstractEffect* effect)
 
     settingsLayout = new PedalSettingsLayoutComponent(&grid);
 
-    setSize(400, 300);
     this->initializePedal();
+    setSize(400, 300);
 }
 
 

@@ -9,11 +9,19 @@ EqualizerEffect::EqualizerEffect() {
 }
 
 void EqualizerEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
-    juce::dsp::AudioBlock<float> block(*bufferToFill.buffer);
-    juce::dsp::ProcessContextReplacing<float> context(block);
+    auto* buffer = bufferToFill.buffer;
+    const int numChannels = buffer->getNumChannels();
+    const int numSamples = bufferToFill.numSamples;
 
-    for (int i = 0; i < numBands; ++i) {
-        filters[i].process(context);
+    juce::dsp::AudioBlock<float> block(*buffer);
+
+    for (int channel = 0; channel < numChannels; ++channel) {
+        auto channelBlock = block.getSingleChannelBlock((size_t)channel);
+        juce::dsp::ProcessContextReplacing<float> context(channelBlock);
+
+        for (int i = 0; i < numBands; ++i) {
+            filters[i].process(context);
+        }
     }
 }
 

@@ -75,6 +75,7 @@ void DistortionEffect::apply(const juce::AudioSourceChannelInfo& bufferToFill)
                                        (size_t) bufferToFill.startSample);
     auto subBlock = block.getSubBlock(0, (size_t) bufferToFill.numSamples);
     juce::dsp::ProcessContextReplacing<float> context(subBlock);
+    subBlock.multiplyBy(1.0f / std::max(1.0f - currentRange, 0.01f)); // Normalisation du volume
 
     process(context);
 }
