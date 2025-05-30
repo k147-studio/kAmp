@@ -53,9 +53,8 @@ DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) : BasePedalCo
         addAndMakeVisible(delaySlider);
         addAndMakeVisible(delayLabel);
 
-        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-
         this->initializePedal();
+        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 }
 

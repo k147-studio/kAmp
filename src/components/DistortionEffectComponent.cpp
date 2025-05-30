@@ -40,9 +40,8 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
         addAndMakeVisible(rangeSlider);
         addAndMakeVisible(rangeLabel);
 
-
-        setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
         this->initializePedal();
+        setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
     }
 }
 

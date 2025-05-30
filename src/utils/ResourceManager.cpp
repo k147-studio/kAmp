@@ -1,23 +1,23 @@
 #include "ResourceManager.h"
 
-ResourceManager::ResourceManager() {}
-ResourceManager::~ResourceManager() {}
+ResourceManager::ResourceManager() = default;
+ResourceManager::~ResourceManager() = default;
 
-juce::Image ResourceManager::loadImage(const juce::String& relativePath)
+Image ResourceManager::loadImage(const String& relativePath)
 {
-    juce::File imageFile;
+    File imageFile;
 
 #if JUCE_MAC
-    imageFile = juce::File::getSpecialLocation(juce::File::currentApplicationFile)
-                    .getParentDirectory()
-                    .getParentDirectory()
-                    .getParentDirectory()
-                    .getChildFile(relativePath);
+    imageFile = File::getSpecialLocation(File::currentApplicationFile)
+                .getParentDirectory()
+                .getParentDirectory()
+                .getParentDirectory()
+                .getChildFile(relativePath);
 #else
     imageFile = juce::File::getCurrentWorkingDirectory().getChildFile(relativePath);
 #endif
 
-    juce::Image image = juce::ImageFileFormat::loadFrom(imageFile);
+    Image image = ImageFileFormat::loadFrom(imageFile);
 
     if (image.isNull())
     {

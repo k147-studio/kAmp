@@ -75,9 +75,8 @@ NoiseGateEffectComponent::NoiseGateEffectComponent(AbstractEffect* effect): Base
         addAndMakeVisible(releaseSlider);
         addAndMakeVisible(releaseLabel);
 
-        setSize(300, 300);
-
         this->initializePedal();
+        setSize(300, 300);
     }
 }
 
