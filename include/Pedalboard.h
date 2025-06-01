@@ -44,6 +44,12 @@ public:
   void append(AbstractEffect *effect);
 
   /**
+   * @brief Adds all the effects from the given vector to the pedalboard.
+   * @param effects The vector of effects to add to the pedalboard.
+   */
+  void appendAll(std::vector<AbstractEffect*> effects);
+
+  /**
    * @brief Inserts an effect at the given index in the pedalboard.
    * @param effect The effect to insert into the pedalboard.
    * @param index The index where to insert the effect.

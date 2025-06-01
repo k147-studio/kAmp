@@ -70,6 +70,12 @@ private:
     LoginComponent connectionComponent;
 
     /**
+     * Component that contains the pedalboard and that automatically adjust rendering so it becomes
+     * scrollable if necessary.
+     */
+    juce::Viewport pedalboardContainer;
+
+    /**
      * The component that displays the pedalboard.
      */
     PedalboardComponent pedalboardComponent;

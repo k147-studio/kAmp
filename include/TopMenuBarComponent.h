@@ -1,9 +1,11 @@
 #pragma once
 
 #include <juce_audio_devices/juce_audio_devices.h>
-
-
 #include <juce_gui_basics/juce_gui_basics.h>
+
+#include "ModalOverlayComponent.h"
+#include "SettingsComponent.h"
+#include "AccountComponent.h"
 
 /**
  * @brief Represents a graphical component that contains and displays the top menu bar.
@@ -37,11 +39,16 @@ class TopMenuBarComponent : public juce::Component {
      */
     juce::FlexBox flexBox;
 
+   ModalOverlayComponent* modalOverlay;
+
     /**
      * @brief The image button to open settings.
      */
     juce::ImageButton settingsButton;
+    SettingsComponent* settingsComponent;
+
     juce::ImageButton accountButton;
+    AccountComponent* accountComponent;
 
     bool* isSoundMuted = nullptr;
     juce::ImageButton muteButton;

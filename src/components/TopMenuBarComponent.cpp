@@ -2,6 +2,8 @@
 #include "PopupContentComponent.h"
 #include "SettingsComponent.h"
 #include "TopMenuBarComponent.h"
+
+#include "ModalOverlayComponent.h"
 #include "ResourceManager.h"
 
 
@@ -38,8 +40,9 @@ TopMenuBarComponent::TopMenuBarComponent(juce::AudioDeviceManager& deviceManager
     }
 
 
-
-    settingsButton.onClick = [this, &deviceManager]() { openSettingsPopup(deviceManager); };
+    #if !JUCE_IOS
+        settingsButton.onClick = [this, &deviceManager]() { openSettingsPopup(deviceManager); };
+    #endif
     accountButton.onClick = [this]() { openAccountPopup(); };
     muteButton.onClick = [this]() { toggleMute(); };
 
@@ -65,35 +68,46 @@ void TopMenuBarComponent::paint(juce::Graphics& g)
 
 void TopMenuBarComponent::resized()
 {
+    auto* mainWindow = getTopLevelComponent();
+    if (mainWindow == nullptr)
+        return;
+    if (modalOverlay != nullptr)
+    {
+        modalOverlay->setBounds(mainWindow->getLocalBounds());
+    }
+    if (settingsComponent != nullptr)
+    {
+        settingsComponent->setBounds(mainWindow->getLocalBounds());
+    }
+    if (accountComponent != nullptr)
+    {
+        accountComponent->setBounds(mainWindow->getLocalBounds());
+    }
     flexBox.performLayout(getLocalBounds());
 }
 
 void TopMenuBarComponent::openSettingsPopup(juce::AudioDeviceManager& deviceManager)
 {
-    auto* settings = new SettingsComponent(deviceManager);
-    settings->setSize(600, 400);
+    settingsComponent = new SettingsComponent(deviceManager);
+    auto* mainWindow = getTopLevelComponent();
+    if (mainWindow == nullptr)
+        return;
 
-    juce::DialogWindow::LaunchOptions options;
-    options.content.setOwned(settings); // prend possession et s'occupe de la mémoire
-    options.dialogTitle = "Settings";
-    options.componentToCentreAround = getTopLevelComponent(); // ou autre
-    options.useNativeTitleBar = true;
-    options.resizable = false;
-    options.launchAsync(); // modal async
+    modalOverlay = new ModalOverlayComponent("Audio settings", settingsComponent);
+    mainWindow->addAndMakeVisible(modalOverlay);
+    modalOverlay->setBounds(mainWindow->getLocalBounds());
 }
 
 void TopMenuBarComponent::openAccountPopup()
 {
-    auto* account = new AccountComponent();
-    account->setSize(600, 400);
+    accountComponent = new AccountComponent();
+    auto* mainWindow = getTopLevelComponent();
+    if (mainWindow == nullptr)
+        return;
 
-    juce::DialogWindow::LaunchOptions options;
-    options.content.setOwned(account);
-    options.dialogTitle = "Account";
-    options.componentToCentreAround = getTopLevelComponent();
-    options.useNativeTitleBar = true;
-    options.resizable = false;
-    options.launchAsync();
+    modalOverlay = new ModalOverlayComponent("Account", accountComponent);
+    mainWindow->addAndMakeVisible(modalOverlay);
+    modalOverlay->setBounds(mainWindow->getLocalBounds());
 }
 
 void TopMenuBarComponent::toggleMute()

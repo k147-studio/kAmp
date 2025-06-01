@@ -4,12 +4,7 @@
 #include "EqualizerEffect.h"
 #include "NoiseGateEffect.h"
 
-Pedalboard::Pedalboard() {
-  this->append(new DelayEffect());
-  this->append(new DistortionEffect());
-  this->append(new EqualizerEffect());
-  this->append(new NoiseGateEffect());
-}
+Pedalboard::Pedalboard() { };
 
 Pedalboard::~Pedalboard() = default;
 
@@ -24,6 +19,10 @@ void Pedalboard::apply(const AudioSourceChannelInfo &bufferToFill) {
 
 void Pedalboard::append(AbstractEffect* effect) {
   effects.push_back(effect);
+}
+
+void Pedalboard::appendAll(std::vector<AbstractEffect*> effects) {
+  this->effects.insert(this->effects.end(), effects.begin(), effects.end());
 }
 
 void Pedalboard::insert(AbstractEffect* effect, int index) {

@@ -36,7 +36,25 @@ class PedalboardComponent : public EffectComponent {
      * @param g The JUCE graphics context that paints the component.
      */
     void paint(juce::Graphics &g) override;
+
+    /**
+     * @brief Gets the required width for the pedalboard based on its effects.
+     * @return The required width for the pedalboard.
+     */
+    int getRequiredWidth() const;
+
+    /**
+     * @brief Gets the required height for the pedalboard based on its effects.
+     * @return The required height for the pedalboard.
+     */
+    int getRequiredHeight(const int boardWidth) const;
   private:
+
+    /**
+     * @brief The default margin between pedals.
+     */
+    const int PEDALS_MARGIN = 20;
+
     /**
      * @brief The collection of the effect components in the pedalboard.
      */
