@@ -6,7 +6,7 @@
 
 
 MainComponent::MainComponent(const Manager &manager): pedalboardComponent(manager.getPedalboard()),
-                                                      topMenuBarComponent(this->deviceManager, &isSoundMuted), manager(manager)
+                                                      topMenuBarComponent(this->deviceManager, &isSoundMuted, &tuningFunction), manager(manager)
 {
     setAudioChannels(2, 2);
 
@@ -75,6 +75,9 @@ void MainComponent::getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill
     else
     {
         bufferToFill.clearActiveBufferRegion();
+    }
+    if (tuningFunction != nullptr) {
+        tuningFunction(bufferToFill);
     }
 }
 

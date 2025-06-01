@@ -6,6 +6,7 @@
 #include "ModalOverlayComponent.h"
 #include "SettingsComponent.h"
 #include "AccountComponent.h"
+#include "ChromaticTunerComponent.h"
 
 /**
  * @brief Represents a graphical component that contains and displays the top menu bar.
@@ -15,7 +16,7 @@ class TopMenuBarComponent : public juce::Component {
     /**
      * @brief Initializes a new instance of the TopMenuBarComponent class.
      */
-    explicit TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isMuted = nullptr);
+    explicit TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isMuted = nullptr, std::function<void(const juce::AudioSourceChannelInfo&)>* tuningFunction = nullptr);
 
     /**
      * @brief Destroys the instance of the TopMenuBarComponent class.
@@ -50,11 +51,16 @@ class TopMenuBarComponent : public juce::Component {
     juce::ImageButton accountButton;
     AccountComponent* accountComponent;
 
+    juce::ImageButton tunerButton;
+    ChromaticTunerComponent* tunerComponent;
+    std::function<void(const juce::AudioSourceChannelInfo&)>* tuningFunction;
+
     bool* isSoundMuted = nullptr;
     juce::ImageButton muteButton;
 
     void openSettingsPopup(juce::AudioDeviceManager& deviceManager);
     void openAccountPopup();
+    void openTunerPopup();
     void toggleMute();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)

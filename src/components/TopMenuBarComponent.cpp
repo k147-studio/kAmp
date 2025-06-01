@@ -7,11 +7,10 @@
 #include "ResourceManager.h"
 
 
-TopMenuBarComponent::TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isSoundMuted)
+TopMenuBarComponent::TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isSoundMuted, std::function<void(const juce::AudioSourceChannelInfo&)>* tuningFunction)
 {
     this->isSoundMuted = isSoundMuted;
-
-
+    this->tuningFunction = tuningFunction;
     juce::Image settingsImage = ResourceManager::loadImage("resources/icons/settings.png");
     if (settingsImage.isValid()) {
         settingsButton.setImages(true, true, true,settingsImage, 1.0f, {},settingsImage, 1.0f, {},settingsImage, 1.0f, {});
@@ -39,18 +38,32 @@ TopMenuBarComponent::TopMenuBarComponent(juce::AudioDeviceManager& deviceManager
         DBG("Erreur : image mute.png introuvable ou invalide.");
     }
 
+    juce::Image tunerImage = ResourceManager::loadImage("resources/icons/tuner.png");
+    if (tunerImage.isValid()) {
+        tunerButton.setImages(true, true, true, tunerImage, 1.0f, {},  tunerImage, 1.0f, {}, tunerImage, 1.0f, {});
+        tunerButton.setSize(tunerImage.getWidth(), tunerImage.getHeight());
+        addAndMakeVisible(tunerButton);
+    } else {
+        DBG("Erreur : image tuner.png introuvable ou invalide.");
+    }
+
 
     #if !JUCE_IOS
         settingsButton.onClick = [this, &deviceManager]() { openSettingsPopup(deviceManager); };
     #endif
     accountButton.onClick = [this]() { openAccountPopup(); };
     muteButton.onClick = [this]() { toggleMute(); };
+    tunerButton.onClick = [this]() { openTunerPopup(); };
 
     settingsButton.setBounds(0, 0, 100, 50);
     accountButton.setBounds(0, 0, 100, 50);
     muteButton.setBounds(0, 0, 100, 50);
+    tunerButton.setBounds(0, 0, 100, 50);
+
     flexBox.justifyContent = juce::FlexBox::JustifyContent::flexEnd;
     flexBox.alignItems = juce::FlexBox::AlignItems::center;
+    flexBox.items.add(
+        juce::FlexItem(tunerButton).withWidth(tunerButton.getWidth()).withHeight(tunerButton.getHeight()));
     flexBox.items.add(
         juce::FlexItem(muteButton).withWidth(muteButton.getWidth()).withHeight(muteButton.getHeight()));
     flexBox.items.add(
@@ -82,6 +95,10 @@ void TopMenuBarComponent::resized()
     if (accountComponent != nullptr)
     {
         accountComponent->setBounds(mainWindow->getLocalBounds());
+    }
+    if (tunerComponent != nullptr)
+    {
+        tunerComponent->setBounds(mainWindow->getLocalBounds());
     }
     flexBox.performLayout(getLocalBounds());
 }
@@ -133,4 +150,21 @@ void TopMenuBarComponent::toggleMute()
         }
     }
     *(this->isSoundMuted) = !(*(this->isSoundMuted));
+}
+
+void TopMenuBarComponent::openTunerPopup()
+{
+    tunerComponent = new ChromaticTunerComponent(44100, 9); // Sample rate and FFT order can be adjusted as needed
+    auto* mainWindow = getTopLevelComponent();
+    if (mainWindow == nullptr)
+        return;
+
+    *this->tuningFunction = [&](const juce::AudioSourceChannelInfo& buffer) {
+        if (tunerComponent != nullptr)
+            tunerComponent->tune(buffer);
+    };
+
+    modalOverlay = new ModalOverlayComponent("Chromatic Tuner", tunerComponent);
+    mainWindow->addAndMakeVisible(modalOverlay);
+    modalOverlay->setBounds(mainWindow->getLocalBounds());
 }
