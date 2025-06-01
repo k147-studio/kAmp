@@ -1,10 +1,15 @@
 #include "MainComponent.h"
+#include "SettingsComponent.h"
 #include "ResourceManager.h"
 
-MainComponent::MainComponent(const Manager& manager):
-	pedalboardComponent(manager.getPedalboard()),
-	topMenuBarComponent(this->deviceManager, &isSoundMuted), manager(manager) {
-	setAudioChannels(2, 2);
+
+
+
+MainComponent::MainComponent(const Manager &manager):
+    pedalboardComponent(manager.getPedalboard()),
+    topMenuBarComponent(this->deviceManager, &isSoundMuted, &tuningFunction),
+    manager(manager) {
+    setAudioChannels(2, 2);
 
 	const Image background = ResourceManager::loadImage(
 		"resources/images/background.png");
@@ -63,6 +68,9 @@ void MainComponent::getNextAudioBlock(
 		this->manager.apply(bufferToFill);
 	} else {
 		bufferToFill.clearActiveBufferRegion();
+	}
+	if (tuningFunction != nullptr) {
+		tuningFunction(bufferToFill);
 	}
 }
 

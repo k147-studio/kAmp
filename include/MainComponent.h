@@ -100,5 +100,7 @@ private:
      */
     bool isSoundMuted = false;
 
+    std::function<void(const juce::AudioSourceChannelInfo&)> tuningFunction;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };
