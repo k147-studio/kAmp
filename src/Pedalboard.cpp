@@ -3,12 +3,14 @@
 #include "Pedalboard.h"
 #include "EqualizerEffect.h"
 #include "NoiseGateEffect.h"
+#include "ChorusEffect.h"
 
 Pedalboard::Pedalboard() {
   this->append(new DelayEffect());
   this->append(new DistortionEffect());
   this->append(new EqualizerEffect());
   this->append(new NoiseGateEffect());
+  this->append(new ChorusEffect());
 }
 
 Pedalboard::~Pedalboard() = default;

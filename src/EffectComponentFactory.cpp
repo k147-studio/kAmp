@@ -7,6 +7,8 @@
 #include "EqualizerEffectComponent.h"
 #include "NoiseGateEffect.h"
 #include "NoiseGateEffectComponent.h"
+#include "ChorusEffect.h"
+#include "ChorusEffectComponent.h"
 
 EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* effect) {
     if (dynamic_cast<DelayEffect*>(effect) != nullptr) {
@@ -21,6 +23,10 @@ EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* e
     }
     if (dynamic_cast<NoiseGateEffect*>(effect) != nullptr) {
         return new NoiseGateEffectComponent(effect);
+    }
+    if (dynamic_cast<ChorusEffect*>(effect) != nullptr)
+    {
+        return new ChorusEffectComponent(effect);
     }
     return nullptr;
 }
