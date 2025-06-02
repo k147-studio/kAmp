@@ -19,16 +19,13 @@ MainComponent::MainComponent(const Manager &manager): pedalboardComponent(manage
         DBG("Erreur : image de fond introuvable ou invalide.");
     }
 
+    pedalboardContainer.setViewedComponent(&pedalboardComponent, true);
+    pedalboardContainer.setScrollBarsShown(true, false);
 
-
-
-    addAndMakeVisible(pedalboardComponent);
+    addAndMakeVisible(pedalboardContainer);
     addAndMakeVisible(topMenuBarComponent);
     addAndMakeVisible(bottomMenuBarComponent);
     addAndMakeVisible(connectionComponent);
-
-
-
 }
 
 //==============================================================================
@@ -43,14 +40,19 @@ void MainComponent::resized()
     // update their positions.
     backgroundImage.setBounds(getLocalBounds());
     connectionComponent.setBounds(getLocalBounds());
+
+    int pedalboardWidth = getWidth();
+    int pedalboardHeight = pedalboardComponent.getRequiredHeight(getWidth());
+    pedalboardComponent.setSize(pedalboardWidth, pedalboardHeight);
+
     using Track = juce::Grid::TrackInfo;
     using Px = juce::Grid::Px;
     using Fr = juce::Grid::Fr;
-    grid.templateRows = { Track (Px (50)), Track (Px(getHeight() - 150)) };
+    grid.templateRows = { Track (Px (50)), Track (Fr(1)) };
     grid.templateColumns = { Track (Fr(1)) };
     grid.items = {
         juce::GridItem(topMenuBarComponent),
-        juce::GridItem(pedalboardComponent)
+        juce::GridItem(pedalboardContainer)
     };
     grid.performLayout(getLocalBounds());
 }

@@ -11,6 +11,5 @@ public:
     void resized() override;
 
 private:
-    juce::Label label;
     juce::AudioDeviceSelectorComponent deviceSelector;
 };

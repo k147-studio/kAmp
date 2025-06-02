@@ -7,7 +7,7 @@ AccountComponent::AccountComponent() {
 
     responseLabel.setFont(Font(FontOptions(20.0f, Font::bold)));
     responseLabel.setJustificationType(Justification::centred);
-    responseLabel.setColour(Label::textColourId, Colours::black);
+    responseLabel.setColour(Label::textColourId, Colours::white);
     responseLabel.setText("Waiting for API response...", dontSendNotification);
 
     auto replyFunc = [this](const String &content) {
@@ -18,10 +18,6 @@ AccountComponent::AccountComponent() {
 }
 
 void AccountComponent::paint(Graphics &g) {
-    g.fillAll(Colours::lightblue);
-    g.setColour(Colours::black);
-    g.setFont(Font(FontOptions(20.0f, Font::bold)));
-    g.drawText("Account", getLocalBounds().removeFromTop(40), Justification::centred, true);
 }
 
 void AccountComponent::apiResponseReceived(const String& content) {

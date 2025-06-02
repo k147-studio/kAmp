@@ -1,4 +1,6 @@
 #include <JuceHeader.h>
+
+#include "EffectsFactory.h"
 #include "MainComponent.h"
 
 class GuiAppApplication final : public JUCEApplication {
@@ -50,6 +52,7 @@ public:
         {
             setUsingNativeTitleBar (true);
             Pedalboard* pedalboard = new Pedalboard();
+            pedalboard->appendAll(EffectsFactory::createAllEffects());
             Manager* manager = new Manager(pedalboard);
             setContentOwned (new MainComponent(*manager), true);
 

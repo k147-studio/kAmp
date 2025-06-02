@@ -1,94 +1,90 @@
 #include "DistortionEffect.h"
+#include <cmath>
 
-// Lien de la doc : https://juce.com/tutorials/tutorial_dsp_convolution/
+float gDrive = 1.0f;
+bool gTurbo = false;
 
-float DistortionEffect::currentRange = 0;
-
-float DistortionEffect::clipWithCurrentRange(float x) {
-    if (currentRange >= 1 || currentRange <= 0) {
-        return juce::jlimit(-1.0f, 1.0f, x);
-    }
-    return juce::jlimit(-(1-currentRange), 1-currentRange, x);
-}
-/**
- * @brief Initializes a new instance of the DistortionEffect class.
- */
 DistortionEffect::DistortionEffect() {
-    currentRange = 0;
     effectName = "Distortion";
-    auto &waveshaper = processorChain.template get<waveshaperIndex>();
-    waveshaper.functionToUse = &clipWithCurrentRange;
+    updateWaveshaper();
+    updateTone();
+    processorChain.get<3>().setGainLinear(level);
 }
 
-/**
- * @brief Destroys the instance of the DistortionEffect class.
- */
 DistortionEffect::~DistortionEffect() = default;
 
-
-
-void DistortionEffect::prepare (const juce::dsp::ProcessSpec& spec)
-{
-    processorChain.prepare (spec);
+void DistortionEffect::prepare(const juce::dsp::ProcessSpec& spec) {
+    processorChain.prepare(spec);
+    // High-pass à 120 Hz
+    *processorChain.get<0>().coefficients = *juce::dsp::IIR::Coefficients<float>::makeHighPass(spec.sampleRate, 120.0f);
+    updateTone();
 }
 
-
-void DistortionEffect::reset() noexcept
-{
+void DistortionEffect::reset() noexcept {
     processorChain.reset();
 }
 
-template <typename ProcessContext>
-void DistortionEffect::process (const ProcessContext& context) noexcept
-{
-    processorChain.process (context);
-}
-
-void DistortionEffect::setRange(float rangeValue) {
-    currentRange = rangeValue;
-    auto& waveshaper = processorChain.template get<waveshaperIndex>();
-    waveshaper.functionToUse = &clipWithCurrentRange;
-}
-
-float DistortionEffect::getRange() const {
-    return currentRange;
-}
-
-/**
- * @brief Applies the distortion effect to the given audio buffer.
- * @param bufferToFill The audio buffer to apply the effect to.
- *
- * This implementation applies a simple hard-clipping distortion by multiplying
- * the input signal by the drive amount, then limiting it between -1.0 and 1.0.
- * Finally, it mixes the distorted (wet) signal with the original (dry) signal
- * according to the mix parameter.
- *
- * For a more advanced waveshaping approach, see:
- * https://docs.juce.com/master/structdsp_1_1WaveShaper.html
- */
-
-void DistortionEffect::apply(const juce::AudioSourceChannelInfo& bufferToFill)
-{
+void DistortionEffect::apply(const juce::AudioSourceChannelInfo& bufferToFill) {
     if (bufferToFill.buffer == nullptr) return;
-
-    juce::dsp::AudioBlock<float> block(*bufferToFill.buffer,
-                                       (size_t) bufferToFill.startSample);
-    auto subBlock = block.getSubBlock(0, (size_t) bufferToFill.numSamples);
-    juce::dsp::ProcessContextReplacing<float> context(subBlock);
-    subBlock.multiplyBy(1.0f / std::max(1.0f - currentRange, 0.01f)); // Normalisation du volume
-
-    process(context);
+    juce::dsp::AudioBlock<float> block(*bufferToFill.buffer, (size_t) bufferToFill.startSample);
+    const int numChannels = block.getNumChannels();
+    // auto subBlock = block.getSubBlock(0, (size_t) bufferToFill.numSamples);
+    // juce::dsp::ProcessContextReplacing<float> context(subBlock);
+    for (int channel = 0; channel < numChannels; ++channel)
+    {
+        auto channelBlock = block.getSingleChannelBlock((size_t)channel);
+        juce::dsp::ProcessContextReplacing<float> context(channelBlock);
+        processorChain.process(context);
+    }
 }
 
+// --- Paramètres ---
 
-
-
-/**
- * @brief Compares the effect with another given effect.
- * @param effect The effect to compare with.
- * @return True if the effect is equal to the given effect, false otherwise.
- */
-bool DistortionEffect::operator==(const AbstractEffect *effect) {
-    return dynamic_cast<const DistortionEffect *>(effect) != nullptr;
+void DistortionEffect::setLevel(float value) {
+    level = juce::jlimit(0.0f, 1.0f, value);
+    processorChain.get<3>().setGainLinear(level);
+}
+void DistortionEffect::setTone(float value) {
+    tone = juce::jlimit(0.0f, 1.0f, value);
+    updateTone();
+}
+void DistortionEffect::setDist(float value) {
+    dist = juce::jlimit(0.0f, 10.0f, value);
+    updateWaveshaper();
+}
+void DistortionEffect::setTurbo(bool enabled) {
+    turbo = enabled;
+    updateWaveshaper();
+    updateTone();
 }
 
+float DistortionEffect::getLevel() const { return level; }
+float DistortionEffect::getTone() const { return tone; }
+float DistortionEffect::getDist() const { return dist; }
+bool DistortionEffect::isTurbo() const { return turbo; }
+
+// --- DSP interne ---
+
+void DistortionEffect::updateTone() {
+    // Tone = low-pass variable, Turbo = plus d'aigus
+    float freq = 2000.0f + tone * (turbo ? 8000.0f : 4000.0f); // 2kHz à 10kHz (Turbo) ou 2kHz à 6kHz
+    *processorChain.get<2>().coefficients = *juce::dsp::IIR::Coefficients<float>::makeLowPass(44100, freq);
+}
+
+float DistortionEffect::waveshaperFunc(float x) {
+    // Utilise les membres statiques pour le drive/turbo
+    // (Attention, non thread-safe, mais simple pour un test)
+    extern float gDrive;
+    extern bool gTurbo;
+    if (gTurbo)
+        return std::tanh(gDrive * x) * 1.2f;
+    else
+        return std::tanh(gDrive * x);
+}
+
+void DistortionEffect::updateWaveshaper() {
+    float drive = 1.0f + dist * (turbo ?  100.0f : 50.0f); // Turbo = plus de gain
+    gDrive = drive;
+    gTurbo = turbo;
+    processorChain.get<1>().functionToUse = &DistortionEffect::waveshaperFunc;
+}
