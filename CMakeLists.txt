@@ -2,17 +2,11 @@ cmake_minimum_required(VERSION 3.22)
 
 project(kAmp VERSION 0.0.1)
 
-# To get started on a new GUI app, copy this entire folder (containing this file and C++ sources) to
-# a convenient location, and then start making modifications. For other examples of CMakeLists for
-# GUI apps, check `extras/Projucer` and `examples/DemoRunner` in the JUCE repo.
-
 # If you've installed JUCE somehow (via a package manager, or directly using the CMake install
 # target), you'll need to tell this project that it depends on the installed copy of JUCE. If you've
 # included JUCE directly in your source tree (perhaps as a submodule), you'll need to tell CMake to
 # include that subdirectory as part of the build.
 
-# find_package(JUCE CONFIG REQUIRED)        # If you've installed JUCE to your system
-# or
 add_subdirectory(JUCE)                    # If you've put JUCE in a subdirectory called JUCE
 
 # If your app depends the VST2 SDK, perhaps to host VST2 plugins, CMake needs to be told where
@@ -64,9 +58,6 @@ else()
             $<TARGET_FILE_DIR:kAmp>/resources
     )
 endif()
-
-
-
 
 target_sources(kAmp
     PRIVATE

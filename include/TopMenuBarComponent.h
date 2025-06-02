@@ -1,21 +1,18 @@
 #pragma once
 
-#include <juce_audio_devices/juce_audio_devices.h>
-#include <juce_gui_basics/juce_gui_basics.h>
-
+#include "AccountComponent.h"
 #include "ModalOverlayComponent.h"
 #include "SettingsComponent.h"
-#include "AccountComponent.h"
 
 /**
  * @brief Represents a graphical component that contains and displays the top menu bar.
  */
-class TopMenuBarComponent : public juce::Component {
+class TopMenuBarComponent : public Component {
   public:
     /**
      * @brief Initializes a new instance of the TopMenuBarComponent class.
      */
-    explicit TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isMuted = nullptr);
+    explicit TopMenuBarComponent(AudioDeviceManager& deviceManager, bool* isSoundMuted = nullptr);
 
     /**
      * @brief Destroys the instance of the TopMenuBarComponent class.
@@ -26,7 +23,7 @@ class TopMenuBarComponent : public juce::Component {
      * @brief Determines how to display the component.
      * @param g The JUCE graphics context that paints the component.
      */
-    void paint(juce::Graphics &g) override;
+    void paint(Graphics &g) override;
 
     /**
      * @brief Determines what to do when the component is resized.
@@ -37,23 +34,21 @@ class TopMenuBarComponent : public juce::Component {
     /**
      * @brief The flexBox component that contains the menu items.
      */
-    juce::FlexBox flexBox;
+    FlexBox flexBox;
 
-   ModalOverlayComponent* modalOverlay;
+    ModalOverlayComponent* modalOverlay{};
 
-    /**
-     * @brief The image button to open settings.
-     */
-    juce::ImageButton settingsButton;
-    SettingsComponent* settingsComponent;
+    ImageButton accountButton;
+    ImageButton exportButton;
+    ImageButton muteButton;
+    ImageButton settingsButton;
 
-    juce::ImageButton accountButton;
-    AccountComponent* accountComponent;
+    AccountComponent* accountComponent{};
+    SettingsComponent* settingsComponent{};
 
     bool* isSoundMuted = nullptr;
-    juce::ImageButton muteButton;
 
-    void openSettingsPopup(juce::AudioDeviceManager& deviceManager);
+    void openSettingsPopup(AudioDeviceManager& deviceManager);
     void openAccountPopup();
     void toggleMute();
 
