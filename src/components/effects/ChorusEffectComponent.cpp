@@ -1,5 +1,5 @@
-#include "ChorusEffectComponent.h"
-#include <juce_gui_basics/juce_gui_basics.h>
+#include "../../../include/ChorusEffectComponent.h"
+#include <../../../JUCE/modules/juce_gui_basics/juce_gui_basics.h>
 
 ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
     : BasePedalComponent(e), chorusEffect(dynamic_cast<ChorusEffect*>(e))
