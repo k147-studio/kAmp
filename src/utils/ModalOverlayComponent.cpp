@@ -46,9 +46,11 @@ void ModalOverlayComponent::onCloseOverlayButtonClicked()
     if (modalComponent != nullptr)
     {
         removeAllChildren();
+        delete modalComponent;
         auto* mainWindow = getTopLevelComponent();
         if (mainWindow == nullptr)
             return;
         mainWindow->removeChildComponent(this);
+        delete this;
     }
 }
