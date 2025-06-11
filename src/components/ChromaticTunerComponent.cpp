@@ -59,6 +59,11 @@ void ChromaticTunerComponent::tune(const AudioSourceChannelInfo &buffer) {
     dsp::AudioBlock<float> subBlock = audioBlock.getSingleChannelBlock((size_t)0);
     std::optional<float> frequency = tuner->getMainFrequencyFromAudioBlock(subBlock);
     if (frequency.has_value()) {
+        float newFreq = frequency.value();
+        if (smoothedFrequency == 0.0f)
+            smoothedFrequency = newFreq;
+        else
+            smoothedFrequency = smoothingCoeff * newFreq + (1.0f - smoothingCoeff) * smoothedFrequency;
         ChromaticTuningResult result = detectTuning(frequency.value());
         updateTuningDisplay(result);
     } else {
@@ -79,6 +84,7 @@ ChromaticTuningResult ChromaticTunerComponent::detectTuning(float frequency) {
     float exactFrequency = 440.0f * std::pow(2.0f, (midiNote - 69) / 12.0f);
     float deviation = 1200.0f * std::log2(frequency / exactFrequency);
 
+    result.frequency = frequency;
     result.noteName = getNoteName(midiNote);
     result.deviation = deviation;
     result.isInTune = std::abs(deviation) < 5.0f;
@@ -87,16 +93,22 @@ ChromaticTuningResult ChromaticTunerComponent::detectTuning(float frequency) {
 }
 
 std::string ChromaticTunerComponent::getNoteName(int midiNote) {
-    if (midiNote < 0 || midiNote >= static_cast<int>(notesNames.size())) {
+    if (midiNote < 0) {
         return "Unknown";
     }
     return notesNames[midiNote % notesNames.size()];
 }
 
 void ChromaticTunerComponent::updateTuningDisplay(const ChromaticTuningResult& result) {
-    currentNote = result.noteName;
-    currentTuneCents = result.frequency;
-    isInTune = result.isInTune;
+    if (result.frequency < 20.0f) {
+        currentNote = "No Signal";
+        currentTuneCents = 0.0f;
+        isInTune = false;
+    } else {
+        currentNote = result.noteName;
+        currentTuneCents = result.deviation; // Doit être l'écart en cents, pas la fréquence
+        isInTune = result.isInTune;
+    }
     repaint();
 }
 

@@ -31,6 +31,8 @@ private:
     std::string currentNote;
     float currentTuneCents;
     bool isInTune;
+    float smoothedFrequency = 0.0f;
+    float smoothingCoeff = 0.2f; // Ajustez selon la réactivité voulue
 
     ChromaticTuningResult detectTuning(float frequency);
     std::string getNoteName(int midiNote);
