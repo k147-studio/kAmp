@@ -1,61 +1,61 @@
 #pragma once
 
-#include <juce_audio_devices/juce_audio_devices.h>
-#include <juce_gui_basics/juce_gui_basics.h>
-
+#include "AccountComponent.h"
 #include "ModalOverlayComponent.h"
 #include "SettingsComponent.h"
-#include "AccountComponent.h"
 
 /**
  * @brief Represents a graphical component that contains and displays the top menu bar.
  */
-class TopMenuBarComponent : public juce::Component {
-  public:
-    /**
-     * @brief Initializes a new instance of the TopMenuBarComponent class.
-     */
-    explicit TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isMuted = nullptr);
 
-    /**
-     * @brief Destroys the instance of the TopMenuBarComponent class.
-     */
-    ~TopMenuBarComponent() override;
+constexpr int buttonSize = 30;
+constexpr int gap = 16;
 
-    /**
-     * @brief Determines how to display the component.
-     * @param g The JUCE graphics context that paints the component.
-     */
-    void paint(juce::Graphics &g) override;
+class TopMenuBarComponent : public Component {
+public:
+	/**
+	 * @brief Initializes a new instance of the TopMenuBarComponent class.
+	 */
+	explicit TopMenuBarComponent(AudioDeviceManager &deviceManager, bool *isSoundMuted = nullptr);
 
-    /**
-     * @brief Determines what to do when the component is resized.
-     */
-    void resized() override;
+	/**
+	 * @brief Destroys the instance of the TopMenuBarComponent class.
+	 */
+	~TopMenuBarComponent() override;
 
-  private:
-    /**
-     * @brief The flexBox component that contains the menu items.
-     */
-    juce::FlexBox flexBox;
+	/**
+	 * @brief Determines how to display the component.
+	 * @param g The JUCE graphics context that paints the component.
+	 */
+	void paint(Graphics &g) override;
 
-   ModalOverlayComponent* modalOverlay;
+	/**
+	 * @brief Determines what to do when the component is resized.
+	 */
+	void resized() override;
 
-    /**
-     * @brief The image button to open settings.
-     */
-    juce::ImageButton settingsButton;
-    SettingsComponent* settingsComponent;
+private:
+	/**
+	 * @brief The flexBox component that contains the menu items.
+	 */
+	FlexBox flexBox;
 
-    juce::ImageButton accountButton;
-    AccountComponent* accountComponent;
+	ImageButton accountButton;
+	ImageButton exportButton;
+	ImageButton muteButton;
+	ImageButton settingsButton;
 
-    bool* isSoundMuted = nullptr;
-    juce::ImageButton muteButton;
+	std::unique_ptr<SettingsComponent> settingsComponent;
+	std::unique_ptr<AccountComponent> accountComponent;
+	std::unique_ptr<ModalOverlayComponent> modalOverlay;
 
-    void openSettingsPopup(juce::AudioDeviceManager& deviceManager);
-    void openAccountPopup();
-    void toggleMute();
+	bool *isSoundMuted = nullptr;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
+	void openSettingsPopup(AudioDeviceManager &deviceManager);
+
+	void openAccountPopup();
+
+	void toggleMute();
+
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
 };

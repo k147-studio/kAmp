@@ -1,13 +1,6 @@
-# Intellij project files
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/editor.xml
-
 # Compiled sources
-cmake-build-debug/
-build-ios/
-build/
+cmake-build-*/
+build*/
 
 # JUCE dependencies
 JUCE/
@@ -17,4 +10,4 @@ JUCE/
 
 # Windows specific
 Thumbs.db
-/.idea/vcs.xml
+

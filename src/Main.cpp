@@ -22,11 +22,11 @@ public:
     }
 
     void shutdown() override {
-        mainWindow = nullptr; // (deletes our window)
+        mainWindow = nullptr;
     }
 
     void systemRequestedQuit() override {
-        // This is called when the app is being asked to quit: you can ignore this
+        // This is called when the app is being asked to quit: youx can ignore this
         // request and let the app carry on running, or call quit() to allow the app to close.
         quit();
     }
@@ -44,23 +44,22 @@ public:
     */
     class MainWindow final : public DocumentWindow {
     public:
-        explicit MainWindow (String name)
-            : DocumentWindow (name,
-                              Desktop::getInstance().getDefaultLookAndFeel()
-                                                          .findColour (backgroundColourId),
-                              allButtons)
-        {
-            setUsingNativeTitleBar (true);
-            Pedalboard* pedalboard = new Pedalboard();
+        explicit MainWindow(const String &name)
+            : DocumentWindow(name,
+                             Desktop::getInstance().getDefaultLookAndFeel()
+                             .findColour(backgroundColourId),
+                             allButtons) {
+            setUsingNativeTitleBar(true);
+            Pedalboard *pedalboard = new Pedalboard();
             pedalboard->appendAll(EffectsFactory::createAllEffects());
-            Manager* manager = new Manager(pedalboard);
-            setContentOwned (new MainComponent(*manager), true);
+            Manager *manager = new Manager(pedalboard);
+            setContentOwned(new MainComponent(*manager), true);
 
 #if JUCE_IOS || JUCE_ANDROID
-            setFullScreen (true);
+            setFullScreen(true);
 #else
-            setResizable(false, false);
-            centreWithSize(1280, 720);
+            setResizable(true, true);
+            centreWithSize(1280, 900);
 #endif
 
             Component::setVisible(true);
@@ -80,8 +79,8 @@ public:
            subclass also calls the superclass's method.
         */
 
-    // private:
-    //     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainWindow)
+        // private:
+        //     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainWindow)
     };
 
 private:

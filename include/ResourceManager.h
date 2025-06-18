@@ -1,11 +1,11 @@
 #pragma once
 #include <JuceHeader.h>
 
-class ResourceManager
-{
+class ResourceManager {
 public:
     ResourceManager();
+
     ~ResourceManager();
 
-    static Image loadImage(const juce::String& relativePath);
+    static Image loadImage(const String &relativePath);
 };
