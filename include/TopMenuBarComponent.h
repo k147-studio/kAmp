@@ -7,50 +7,55 @@
 /**
  * @brief Represents a graphical component that contains and displays the top menu bar.
  */
+
+constexpr int buttonSize = 30;
+constexpr int gap = 16;
+
 class TopMenuBarComponent : public Component {
-  public:
-    /**
-     * @brief Initializes a new instance of the TopMenuBarComponent class.
-     */
-    explicit TopMenuBarComponent(AudioDeviceManager& deviceManager, bool* isSoundMuted = nullptr);
+public:
+	/**
+	 * @brief Initializes a new instance of the TopMenuBarComponent class.
+	 */
+	explicit TopMenuBarComponent(AudioDeviceManager &deviceManager, bool *isSoundMuted = nullptr);
 
-    /**
-     * @brief Destroys the instance of the TopMenuBarComponent class.
-     */
-    ~TopMenuBarComponent() override;
+	/**
+	 * @brief Destroys the instance of the TopMenuBarComponent class.
+	 */
+	~TopMenuBarComponent() override;
 
-    /**
-     * @brief Determines how to display the component.
-     * @param g The JUCE graphics context that paints the component.
-     */
-    void paint(Graphics &g) override;
+	/**
+	 * @brief Determines how to display the component.
+	 * @param g The JUCE graphics context that paints the component.
+	 */
+	void paint(Graphics &g) override;
 
-    /**
-     * @brief Determines what to do when the component is resized.
-     */
-    void resized() override;
+	/**
+	 * @brief Determines what to do when the component is resized.
+	 */
+	void resized() override;
 
-  private:
-    /**
-     * @brief The flexBox component that contains the menu items.
-     */
-    FlexBox flexBox;
+private:
+	/**
+	 * @brief The flexBox component that contains the menu items.
+	 */
+	FlexBox flexBox;
 
-    ModalOverlayComponent* modalOverlay{};
+	ImageButton accountButton;
+	ImageButton exportButton;
+	ImageButton muteButton;
+	ImageButton settingsButton;
 
-    ImageButton accountButton;
-    ImageButton exportButton;
-    ImageButton muteButton;
-    ImageButton settingsButton;
+	std::unique_ptr<SettingsComponent> settingsComponent;
+	std::unique_ptr<AccountComponent> accountComponent;
+	std::unique_ptr<ModalOverlayComponent> modalOverlay;
 
-    AccountComponent* accountComponent{};
-    SettingsComponent* settingsComponent{};
+	bool *isSoundMuted = nullptr;
 
-    bool* isSoundMuted = nullptr;
+	void openSettingsPopup(AudioDeviceManager &deviceManager);
 
-    void openSettingsPopup(AudioDeviceManager& deviceManager);
-    void openAccountPopup();
-    void toggleMute();
+	void openAccountPopup();
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
+	void toggleMute();
+
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
 };
