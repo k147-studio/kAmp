@@ -19,7 +19,7 @@ void ChromaticTunerComponent::paint(juce::Graphics &g) {
 
     // Drawing the note name.
     g.setColour(isInTune ? juce::Colours::green : juce::Colours::orange);
-    g.setFont(40.0f);
+    g.setFont(60.0f);
     g.drawText(currentNote, 0, getHeight() / 2 - textHeight, area.getWidth(), textHeight, juce::Justification::centred);
 
     // Drawing the tuning bars.

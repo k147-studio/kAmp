@@ -37,7 +37,7 @@ void Pedalboard::remove(const AbstractEffect* effect) {
   effects.erase(std::remove(effects.begin(), effects.end(), effect), effects.end());
 }
 
-std::vector<AbstractEffect*> Pedalboard::getEffects() {
+std::vector<AbstractEffect*>& Pedalboard::getEffects() {
   return effects;
 }
 

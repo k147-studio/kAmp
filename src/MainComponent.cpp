@@ -21,13 +21,18 @@ MainComponent::MainComponent(const Manager &manager):
 		DBG("Error : resources/images/background.png not found.");
 	}
 
-	pedalboardContainer.setViewedComponent(&pedalboardComponent, true);
-	pedalboardContainer.setScrollBarsShown(true, false);
+    pedalboardContainer.setViewedComponent(&pedalboardComponent, true);
+    pedalboardContainer.setScrollBarsShown(true, false);
 
-	addAndMakeVisible(pedalboardContainer);
-	addAndMakeVisible(topMenuBarComponent);
-	addAndMakeVisible(bottomMenuBarComponent);
-	addAndMakeVisible(connectionComponent);
+    addAndMakeVisible(pedalboardContainer);
+    addAndMakeVisible(topMenuBarComponent);
+    addAndMakeVisible(bottomMenuBarComponent);
+    addAndMakeVisible(connectionComponent);
+}
+
+MainComponent::~MainComponent()
+{
+    releaseResources();
 }
 
 //==============================================================================
@@ -55,7 +60,6 @@ void MainComponent::resized() {
 
 void MainComponent::prepareToPlay(int samplesPerBlockExpected,
                                   double sampleRate) {}
-
 void MainComponent::getNextAudioBlock(
 	const AudioSourceChannelInfo& bufferToFill) {
 	if (!this->isSoundMuted) {
@@ -74,6 +78,8 @@ void MainComponent::getNextAudioBlock(
 	}
 }
 
-void MainComponent::releaseResources() {}
+void MainComponent::releaseResources() {
+    shutdownAudio();
+}
 
 

@@ -20,9 +20,14 @@
  * It is responsible for the layout of the components and the audio processing.
  * It contains the pedalboard, the top menu bar, the bottom menu bar and the connection component.
  */
-class MainComponent final : public AudioAppComponent {
+class MainComponent final : public AudioAppComponent, public DragAndDropContainer {
 public:
     explicit MainComponent(const Manager &manager);
+
+    /**
+     * Destructor of the MainComponent.
+     */
+    ~MainComponent() override;
 
     /**
      * Determines how the component is displayed.

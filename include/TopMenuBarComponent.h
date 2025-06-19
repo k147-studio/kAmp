@@ -43,7 +43,7 @@ public:
      */
     juce::FlexBox flexBox;
 
-   ModalOverlayComponent* modalOverlay;
+    std::unique_ptr<ModalOverlayComponent> modalOverlay;
 
     /**
      * @brief The image button to open settings.
@@ -65,6 +65,7 @@ public:
     void openAccountPopup();
     void openTunerPopup();
     void toggleMute();
+    void closePopup();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
 };

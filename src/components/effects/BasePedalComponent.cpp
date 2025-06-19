@@ -1,9 +1,10 @@
 #include "BasePedalComponent.h"
 #include "ResourceManager.h"
 
-BasePedalComponent::BasePedalComponent(AbstractEffect* effect) :
-	EffectComponent(effect) {
-	isEnabled = effect->isEnabled;
+BasePedalComponent::BasePedalComponent(AbstractEffect* effect) : EffectComponent(effect) {
+    isEnabled = effect->isEnabled;
+    setInterceptsMouseClicks(true, false);
+    addMouseListener(this, true);
 }
 
 BasePedalComponent::~BasePedalComponent() = default;
@@ -65,4 +66,25 @@ void BasePedalComponent::initializePedal() {
 		GridItem(*isEnabledIndicator),
 		GridItem(*pedalLabel),
 	};
+}
+
+void BasePedalComponent::mouseDown(const juce::MouseEvent& event)
+{
+    if (dynamic_cast<juce::Label*>(event.eventComponent) || dynamic_cast<PedalPowerIndicatorComponent*>(event.eventComponent))
+    {
+        if (auto* parent = getParentComponent())
+            if (auto* dnd = dynamic_cast<juce::DragAndDropContainer*>(parent))
+                dnd->startDragging("Pedal", this);
+    }
+}
+
+bool BasePedalComponent::isInterestedInDragSource(const juce::DragAndDropTarget::SourceDetails& details)
+{
+    return details.description == "Pedal";
+}
+
+void BasePedalComponent::itemDropped(const juce::DragAndDropTarget::SourceDetails& details)
+{
+    if (auto* parent = dynamic_cast<PedalboardComponent*>(getParentComponent()))
+        parent->onPedalDropped(this, details.sourceComponent.get());
 }

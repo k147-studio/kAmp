@@ -1,7 +1,13 @@
 #include "PedalboardComponent.h"
 #include "EffectComponentFactory.h"
 
-PedalboardComponent::~PedalboardComponent() = default;
+PedalboardComponent::~PedalboardComponent()
+{
+    for (Component* effectComponent : effectsComponents) {
+        removeChildComponent(effectComponent);
+        delete effectComponent;
+    }
+}
 
 PedalboardComponent::PedalboardComponent(AbstractEffect* pedalboard) : EffectComponent(pedalboard) {
     if (Pedalboard* pedalboard = dynamic_cast<Pedalboard*>(this->effect)) {
@@ -65,4 +71,49 @@ int PedalboardComponent::getRequiredHeight(const int boardWidth) const {
     totalHeight += maxHeightInRow;
 
     return totalHeight;
+}
+
+void PedalboardComponent::onPedalDropped(Component* target, Component* dragged)
+{
+    if (target == dragged) return;
+    if (static_cast<EffectComponent*>(target) != nullptr && static_cast<EffectComponent*>(dragged) != nullptr) {
+        onPedalDropped(static_cast<EffectComponent*>(target), static_cast<EffectComponent*>(dragged));
+    }
+}
+
+void PedalboardComponent::onPedalDropped(EffectComponent* target, EffectComponent* dragged) {
+    if (target == dragged) return;
+
+    // Finds the dragged and target components in the effectsComponents vector.
+    auto itDragged = std::find(effectsComponents.begin(), effectsComponents.end(), dragged);
+    auto itTarget = std::find(effectsComponents.begin(), effectsComponents.end(), target);
+    if (itDragged == effectsComponents.end() || itTarget == effectsComponents.end()) return;
+
+    // Reorders the components in the PedalboardComponent.
+    auto draggedPtr = *itDragged;
+    effectsComponents.erase(itDragged);
+    effectsComponents.insert(itTarget, draggedPtr);
+
+    // Reorders the effects in the Pedalboard.
+    if (auto* pedalboard = dynamic_cast<Pedalboard*>(effect)) {
+        auto& effects = pedalboard->getEffects();
+        auto itEffDragged = std::find(effects.begin(), effects.end(), dragged->getEffect());
+        auto itEffTarget = std::find(effects.begin(), effects.end(), target->getEffect());
+        if (itEffDragged != effects.end() && itEffTarget != effects.end()) {
+            auto effPtr = *itEffDragged;
+            effects.erase(itEffDragged);
+            effects.insert(itEffTarget, effPtr);
+        }
+    }
+
+    refreshFlexBox();
+}
+
+void PedalboardComponent::refreshFlexBox() {
+    flexBox.items.clear();
+    for (auto &effectComponent : effectsComponents) {
+        flexBox.items.add(juce::FlexItem(*effectComponent).withWidth(effectComponent->getWidth()).withHeight(effectComponent->getHeight()).withMargin(PEDALS_MARGIN));
+    }
+    resized();
+    repaint();
 }

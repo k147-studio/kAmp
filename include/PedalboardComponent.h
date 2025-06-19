@@ -7,7 +7,7 @@
 /**
  * @brief Represents a graphical component that contains and displays a pedalboard.
  */
-class PedalboardComponent : public EffectComponent {
+class PedalboardComponent : public EffectComponent, public DragAndDropContainer {
   public:
     /**
      * @brief Initializes a new instance of the PedalboardComponent class.
@@ -48,6 +48,21 @@ class PedalboardComponent : public EffectComponent {
      * @return The required height for the pedalboard.
      */
     int getRequiredHeight(const int boardWidth) const;
+
+    /**
+       * @brief Handles the drag and drop of a Component onto the pedalboard.
+       * @param target The target Component where the dragged component is dropped.
+       * @param dragged The Component that is being dragged.
+       */
+    void onPedalDropped(Component* target, Component* dragged);
+
+    /**
+     * @brief Handles the drag and drop of an EffectComponent onto the pedalboard.
+     * @param target The target EffectComponent where the dragged component is dropped.
+     * @param dragged The EffectComponent that is being dragged.
+     */
+    void onPedalDropped(EffectComponent* target, EffectComponent* dragged);
+
   private:
 
     /**
@@ -64,4 +79,14 @@ class PedalboardComponent : public EffectComponent {
      * @brief The flexbox that arranges layout for the effect components in the pedalboard.
      */
     juce::FlexBox flexBox;
+
+    /**
+     * @brief Indicates whether something is being dragged over the pedalboard.
+     */
+    bool somethingIsBeingDraggedOver;
+
+    /**
+     * @brief Refreshes the flexbox layout of the pedalboard.
+     */
+    void refreshFlexBox();
 };
