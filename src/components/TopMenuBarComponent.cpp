@@ -110,8 +110,11 @@ void TopMenuBarComponent::openSettingsPopup(juce::AudioDeviceManager& deviceMana
     if (mainWindow == nullptr)
         return;
 
-    modalOverlay = new ModalOverlayComponent("Audio settings", settingsComponent);
-    mainWindow->addAndMakeVisible(modalOverlay);
+    modalOverlay = std::make_unique<ModalOverlayComponent>("Audio settings", settingsComponent, [this]() {
+        settingsComponent = nullptr;
+        modalOverlay = nullptr;
+    });
+    mainWindow->addAndMakeVisible(modalOverlay.get());
     modalOverlay->setBounds(mainWindow->getLocalBounds());
 }
 
@@ -122,8 +125,11 @@ void TopMenuBarComponent::openAccountPopup()
     if (mainWindow == nullptr)
         return;
 
-    modalOverlay = new ModalOverlayComponent("Account", accountComponent);
-    mainWindow->addAndMakeVisible(modalOverlay);
+    modalOverlay = std::make_unique<ModalOverlayComponent>("Account", accountComponent, [this]() {
+        accountComponent = nullptr;
+        modalOverlay = nullptr;
+    });
+    mainWindow->addAndMakeVisible(modalOverlay.get());
     modalOverlay->setBounds(mainWindow->getLocalBounds());
 }
 
@@ -164,7 +170,10 @@ void TopMenuBarComponent::openTunerPopup()
             tunerComponent->tune(buffer);
     };
 
-    modalOverlay = new ModalOverlayComponent("Chromatic Tuner", tunerComponent);
-    mainWindow->addAndMakeVisible(modalOverlay);
+    modalOverlay = std::make_unique<ModalOverlayComponent>("Chromatic Tuner", tunerComponent, [this]() {;
+        tunerComponent = nullptr;
+        modalOverlay = nullptr; // Clear the tuning function when the tuner is closed
+    });
+    mainWindow->addAndMakeVisible(modalOverlay.get());
     modalOverlay->setBounds(mainWindow->getLocalBounds());
 }

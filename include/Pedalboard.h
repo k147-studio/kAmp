@@ -66,7 +66,7 @@ public:
    * @brief Gets the collection of effects contained in the pedalboard.
    * @return The collection of effects contained in the pedalboard.
    */
-  std::vector<AbstractEffect *> getEffects();
+  std::vector<AbstractEffect *>& getEffects();
 
   /**
    * @brief Gets the type name of the effect for serialization purposes.

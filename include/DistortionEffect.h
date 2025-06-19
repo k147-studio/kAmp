@@ -63,14 +63,7 @@ public:
         }
     }
 
-    bool operator==(const AbstractEffect* other)
-    {
-        return dynamic_cast<const DistortionEffect*>(other) &&
-               level == static_cast<const DistortionEffect*>(other)->level &&
-               tone == static_cast<const DistortionEffect*>(other)->tone &&
-               dist == static_cast<const DistortionEffect*>(other)->dist &&
-               turbo == static_cast<const DistortionEffect*>(other)->turbo;
-    }
+    bool operator==(const AbstractEffect* other);
 
 private:
     float level = 1.0f;

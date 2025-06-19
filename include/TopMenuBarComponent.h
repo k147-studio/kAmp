@@ -40,7 +40,7 @@ class TopMenuBarComponent : public juce::Component {
      */
     juce::FlexBox flexBox;
 
-   ModalOverlayComponent* modalOverlay;
+    std::unique_ptr<ModalOverlayComponent> modalOverlay;
 
     /**
      * @brief The image button to open settings.
@@ -62,6 +62,7 @@ class TopMenuBarComponent : public juce::Component {
     void openAccountPopup();
     void openTunerPopup();
     void toggleMute();
+    void closePopup();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
 };

@@ -15,7 +15,6 @@ DistortionEffect::~DistortionEffect() = default;
 
 void DistortionEffect::prepare(const juce::dsp::ProcessSpec& spec) {
     processorChain.prepare(spec);
-    // High-pass à 120 Hz
     *processorChain.get<0>().coefficients = *juce::dsp::IIR::Coefficients<float>::makeHighPass(spec.sampleRate, 120.0f);
     updateTone();
 }
@@ -28,8 +27,6 @@ void DistortionEffect::apply(const juce::AudioSourceChannelInfo& bufferToFill) {
     if (bufferToFill.buffer == nullptr) return;
     juce::dsp::AudioBlock<float> block(*bufferToFill.buffer, (size_t) bufferToFill.startSample);
     const int numChannels = block.getNumChannels();
-    // auto subBlock = block.getSubBlock(0, (size_t) bufferToFill.numSamples);
-    // juce::dsp::ProcessContextReplacing<float> context(subBlock);
     for (int channel = 0; channel < numChannels; ++channel)
     {
         auto channelBlock = block.getSingleChannelBlock((size_t)channel);
@@ -37,8 +34,6 @@ void DistortionEffect::apply(const juce::AudioSourceChannelInfo& bufferToFill) {
         processorChain.process(context);
     }
 }
-
-// --- Paramètres ---
 
 void DistortionEffect::setLevel(float value) {
     level = juce::jlimit(0.0f, 1.0f, value);
@@ -63,17 +58,12 @@ float DistortionEffect::getTone() const { return tone; }
 float DistortionEffect::getDist() const { return dist; }
 bool DistortionEffect::isTurbo() const { return turbo; }
 
-// --- DSP interne ---
-
 void DistortionEffect::updateTone() {
-    // Tone = low-pass variable, Turbo = plus d'aigus
-    float freq = 2000.0f + tone * (turbo ? 8000.0f : 4000.0f); // 2kHz à 10kHz (Turbo) ou 2kHz à 6kHz
+    float freq = 2000.0f + tone * (turbo ? 8000.0f : 4000.0f);
     *processorChain.get<2>().coefficients = *juce::dsp::IIR::Coefficients<float>::makeLowPass(44100, freq);
 }
 
 float DistortionEffect::waveshaperFunc(float x) {
-    // Utilise les membres statiques pour le drive/turbo
-    // (Attention, non thread-safe, mais simple pour un test)
     extern float gDrive;
     extern bool gTurbo;
     if (gTurbo)
@@ -83,8 +73,12 @@ float DistortionEffect::waveshaperFunc(float x) {
 }
 
 void DistortionEffect::updateWaveshaper() {
-    float drive = 1.0f + dist * (turbo ?  100.0f : 50.0f); // Turbo = plus de gain
+    float drive = 1.0f + dist * (turbo ?  100.0f : 50.0f);
     gDrive = drive;
     gTurbo = turbo;
     processorChain.get<1>().functionToUse = &DistortionEffect::waveshaperFunc;
+}
+
+bool DistortionEffect::operator==(const AbstractEffect* effect) {
+    return this == effect;
 }

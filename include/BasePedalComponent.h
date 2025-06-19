@@ -7,7 +7,7 @@
  * @brief Base class for pedal components.
  * This class provides a common interface and functionality for all pedal components.
  */
-class BasePedalComponent : public EffectComponent
+class BasePedalComponent : public EffectComponent, public DragAndDropTarget
 {
 public:
     /**
@@ -31,6 +31,25 @@ public:
      * @brief Resizes the component.
      */
     void resized() override;
+
+    /**
+     * @brief Handles mouse down events.
+     * @param event The mouse event that occurred.
+     */
+    void mouseDown(const juce::MouseEvent& event) override;
+
+    /**
+     *
+     * @param dragSourceDetails The details of the drag source.
+     * @return A boolean indicating whether the component is interested in the drag source.
+     */
+    bool isInterestedInDragSource(const SourceDetails& dragSourceDetails) override;
+
+    /**
+     * @brief Handles the drop of a component onto this pedal component.
+     * @param dragSourceDetails The details of the drag source.
+     */
+    void itemDropped(const SourceDetails& dragSourceDetails) override;
 
 protected:
     /**

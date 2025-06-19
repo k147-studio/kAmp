@@ -2,8 +2,9 @@
 
 #include "ResourceManager.h"
 
-ModalOverlayComponent::ModalOverlayComponent(std::string viewName, juce::Component* modalContent)
+ModalOverlayComponent::ModalOverlayComponent(std::string viewName, juce::Component* modalContent, std::function<void()> onCloseCallback)
 {
+    this->onCloseCallback = onCloseCallback;
     addAndMakeVisible(modalComponent = modalContent);
     this->setInterceptsMouseClicks(true, false);
 
@@ -51,6 +52,6 @@ void ModalOverlayComponent::onCloseOverlayButtonClicked()
         if (mainWindow == nullptr)
             return;
         mainWindow->removeChildComponent(this);
-        delete this;
+        onCloseCallback();
     }
 }

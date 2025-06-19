@@ -2,9 +2,6 @@
 #include "SettingsComponent.h"
 #include "ResourceManager.h"
 
-
-
-
 MainComponent::MainComponent(const Manager &manager): pedalboardComponent(manager.getPedalboard()),
                                                       topMenuBarComponent(this->deviceManager, &isSoundMuted, &tuningFunction), manager(manager)
 {
@@ -26,6 +23,11 @@ MainComponent::MainComponent(const Manager &manager): pedalboardComponent(manage
     addAndMakeVisible(topMenuBarComponent);
     addAndMakeVisible(bottomMenuBarComponent);
     addAndMakeVisible(connectionComponent);
+}
+
+MainComponent::~MainComponent()
+{
+    releaseResources();
 }
 
 //==============================================================================
@@ -82,6 +84,7 @@ void MainComponent::getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill
 }
 
 void MainComponent::releaseResources() {
+    shutdownAudio();
 }
 
 
