@@ -2,10 +2,9 @@
 
 #include <JuceHeader.h>
 
-class ToggleButtonComponent : public ToggleButton
-{
+class ToggleButtonComponent : public ToggleButton {
 public:
-    ToggleButtonComponent();
-    ~ToggleButtonComponent() override;
-    void paint(juce::Graphics& g) override;
+	ToggleButtonComponent();
+	~ToggleButtonComponent() override;
+	void paint(Graphics& g) override;
 };

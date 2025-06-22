@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BottomMenuBarComponent.h"
-#include "ConnectionComponent.h"
+#include "LoginComponent.h"
 #include "Manager.h"
 #include "PedalboardComponent.h"
 #include "TopMenuBarComponent.h"
