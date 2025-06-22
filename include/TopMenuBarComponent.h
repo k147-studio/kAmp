@@ -1,61 +1,38 @@
 #pragma once
 
-#include <juce_audio_devices/juce_audio_devices.h>
-#include <juce_gui_basics/juce_gui_basics.h>
-
+#include <JuceHeader.h>
+#include "AccountComponent.h"
 #include "ModalOverlayComponent.h"
 #include "SettingsComponent.h"
-#include "AccountComponent.h"
 
-/**
- * @brief Represents a graphical component that contains and displays the top menu bar.
- */
-class TopMenuBarComponent : public juce::Component {
-  public:
-    /**
-     * @brief Initializes a new instance of the TopMenuBarComponent class.
-     */
-    explicit TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isMuted = nullptr);
+class TopMenuBarComponent : public Component {
+public:
+	explicit TopMenuBarComponent(AudioDeviceManager& deviceManager,
+	                             bool* isMuted = nullptr);
+	~TopMenuBarComponent() override;
 
-    /**
-     * @brief Destroys the instance of the TopMenuBarComponent class.
-     */
-    ~TopMenuBarComponent() override;
+	void paint(Graphics& g) override;
+	void resized() override;
 
-    /**
-     * @brief Determines how to display the component.
-     * @param g The JUCE graphics context that paints the component.
-     */
-    void paint(juce::Graphics &g) override;
+private:
+	int buttonSize = 32;
+	float gap = 16;
 
-    /**
-     * @brief Determines what to do when the component is resized.
-     */
-    void resized() override;
+	FlexBox flexBox;
 
-  private:
-    /**
-     * @brief The flexBox component that contains the menu items.
-     */
-    juce::FlexBox flexBox;
+	ImageButton accountButton;
+	ImageButton muteButton;
+	ImageButton settingsButton;
 
-   ModalOverlayComponent* modalOverlay;
+	AccountComponent* accountComponent;
+	ModalOverlayComponent* modalOverlay;
+	SettingsComponent* settingsComponent;
 
-    /**
-     * @brief The image button to open settings.
-     */
-    juce::ImageButton settingsButton;
-    SettingsComponent* settingsComponent;
+	bool* isSoundMuted = nullptr;
 
-    juce::ImageButton accountButton;
-    AccountComponent* accountComponent;
+	void openSettingsPopup(AudioDeviceManager& deviceManager);
+	void openAccountPopup();
+	void toggleMute();
 
-    bool* isSoundMuted = nullptr;
-    juce::ImageButton muteButton;
-
-    void openSettingsPopup(juce::AudioDeviceManager& deviceManager);
-    void openAccountPopup();
-    void toggleMute();
-
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopMenuBarComponent)
 };
