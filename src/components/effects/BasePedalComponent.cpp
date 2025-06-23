@@ -1,4 +1,6 @@
 #include "BasePedalComponent.h"
+
+#include "PedalboardComponent.h"
 #include "ResourceManager.h"
 
 BasePedalComponent::BasePedalComponent(AbstractEffect* effect) : EffectComponent(effect) {

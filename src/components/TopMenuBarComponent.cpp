@@ -123,10 +123,6 @@ void TopMenuBarComponent::openSettingsPopup(AudioDeviceManager& deviceManager) {
 	if (mainWindow == nullptr)
 		return;
 
-	modalOverlay = new ModalOverlayComponent("Audio settings",
-	                                         settingsComponent);
-	mainWindow->addAndMakeVisible(modalOverlay);
-	modalOverlay->setBounds(mainWindow->getLocalBounds());
     modalOverlay = std::make_unique<ModalOverlayComponent>("Audio settings", settingsComponent, [this]() {
         settingsComponent = nullptr;
         modalOverlay = nullptr;
