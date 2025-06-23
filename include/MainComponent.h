@@ -73,7 +73,7 @@ private:
      * Component that contains the pedalboard and that automatically adjust rendering so it becomes
      * scrollable if necessary.
      */
-    juce::Viewport pedalboardContainer;
+    Viewport pedalboardContainer;
 
     /**
      * The component that displays the pedalboard.

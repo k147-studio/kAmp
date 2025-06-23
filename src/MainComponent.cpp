@@ -3,11 +3,10 @@
 
 MainComponent::MainComponent(const Manager& manager):
 	pedalboardComponent(manager.getPedalboard()),
-	topMenuBarComponent(this->deviceManager, &isSoundMuted), manager(manager) {
+	topMenuBarComponent(this->deviceManager, &isSoundMuted, &tuningFunction), manager(manager) {
 	setAudioChannels(2, 2);
 
-	const Image background = ResourceManager::loadImage(
-		"resources/images/background.png");
+	const Image background = ResourceManager::loadImage("resources/images/background.png");
 	if (background.isValid()) {
 		backgroundImage.setImage(background);
 		backgroundImage.setImagePlacement(RectanglePlacement::stretchToFit);
@@ -32,8 +31,8 @@ void MainComponent::resized() {
 	backgroundImage.setBounds(getLocalBounds());
 	connectionComponent.setBounds(getLocalBounds());
 
-	int pedalboardWidth = getWidth();
-	int pedalboardHeight = pedalboardComponent.getRequiredHeight(getWidth());
+	const int pedalboardWidth = getWidth();
+	const int pedalboardHeight = pedalboardComponent.getRequiredHeight(getWidth());
 	pedalboardComponent.setSize(pedalboardWidth, pedalboardHeight);
 
 	using Track = Grid::TrackInfo;

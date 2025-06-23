@@ -5,8 +5,7 @@
 #include "SettingsComponent.h"
 #include "TopMenuBarComponent.h"
 
-
-TopMenuBarComponent::TopMenuBarComponent(juce::AudioDeviceManager& deviceManager, bool* isSoundMuted, std::function<void(const juce::AudioSourceChannelInfo&)>* tuningFunction) {
+TopMenuBarComponent::TopMenuBarComponent(AudioDeviceManager& deviceManager, bool* isSoundMuted, std::function<void(const AudioSourceChannelInfo&)>* tuningFunction) {
     this->isSoundMuted = isSoundMuted;
     this->tuningFunction = tuningFunction;
     Image settingsImage = ResourceManager::loadImage("resources/icons/settings.png");
@@ -56,6 +55,7 @@ TopMenuBarComponent::TopMenuBarComponent(juce::AudioDeviceManager& deviceManager
 #endif
 	accountButton.onClick = [this] { openAccountPopup(); };
 	muteButton.onClick = [this] { toggleMute(); };
+	tunerButton.onClick = [this] { openTunerPopup(); };
 
 	flexBox.justifyContent = FlexBox::JustifyContent::flexEnd;
 	flexBox.alignItems = FlexBox::AlignItems::center;
@@ -152,7 +152,7 @@ void TopMenuBarComponent::toggleMute() {
 			DBG("Erreur : image mute.png introuvable ou invalide.");
 		}
 	}
-	*(this->isSoundMuted) = !(*(this->isSoundMuted));
+	*this->isSoundMuted = !*this->isSoundMuted;
 }
 
 void TopMenuBarComponent::openTunerPopup() {
@@ -161,12 +161,12 @@ void TopMenuBarComponent::openTunerPopup() {
     if (mainWindow == nullptr)
         return;
 
-    *this->tuningFunction = [&](const juce::AudioSourceChannelInfo& buffer) {
+    *this->tuningFunction = [&](const AudioSourceChannelInfo& buffer) {
         if (tunerComponent != nullptr)
             tunerComponent->tune(buffer);
     };
 
     modalOverlay = new ModalOverlayComponent("Chromatic Tuner", tunerComponent);
-    mainWindow->addAndMakeVisible(modalOverlay);
     modalOverlay->setBounds(mainWindow->getLocalBounds());
+	mainWindow->addAndMakeVisible(modalOverlay);
 }
