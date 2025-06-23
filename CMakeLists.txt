@@ -22,10 +22,15 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
 juce_add_binary_data(ResourcesBinary
         SOURCES
         resources/images/background.png
+        resources/images/kamp_logo_with_background.png
         resources/icons/account.png
         resources/icons/export.png
         resources/icons/mute.png
         resources/icons/power.png
+        resources/icons/settings.png
+        resources/icons/sync.png
+        resources/icons/unmute.png
+        resources/icons/xmark.png
 )
 
 target_include_directories(kAmp PRIVATE "${CMAKE_BINARY_DIR}/juce_binarydata_ResourcesBinary/JuceLibraryCode")
@@ -49,7 +54,7 @@ target_compile_definitions(kAmp
         PRIVATE
         JUCE_WEB_BROWSER=0
         JUCE_USE_CURL=0
-        JUCE_IOS=1
+        #JUCE_IOS=1
         JUCE_APPLICATION_NAME_STRING="$<TARGET_PROPERTY:kAmp,JUCE_PRODUCT_NAME>"
         JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:kAmp,JUCE_VERSION>"
 )

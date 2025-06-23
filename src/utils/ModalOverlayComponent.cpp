@@ -15,14 +15,11 @@ ModalOverlayComponent::ModalOverlayComponent(std::string viewName, juce::Compone
     viewNameLabel.setFont(juce::FontOptions(32.0f, juce::Font::bold));
     viewNameLabel.setJustificationType(juce::Justification::centred);
 
-    juce::Image closeImage = ResourceManager::loadImage("resources/icons/xmark.png");
-    if (closeImage.isValid()) {
-        closeOverlayButton.setImages(true, true, true,closeImage, 1.0f, {}, closeImage, 1.0f, {},closeImage, 1.0f, {});
-        closeOverlayButton.setSize(closeImage.getWidth(), closeImage.getHeight());
-        addAndMakeVisible(closeOverlayButton);
-    } else {
-        DBG("Erreur : image xmark.png introuvable ou invalide.");
-    }
+
+	juce::Image closeImage = juce::ImageFileFormat::loadFrom(BinaryData::xmark_png, BinaryData::xmark_pngSize);
+	closeOverlayButton.setImages(true, true, true,closeImage, 1.0f, {}, closeImage, 1.0f, {},closeImage, 1.0f, {});
+	closeOverlayButton.setSize(closeImage.getWidth(), closeImage.getHeight());
+	addAndMakeVisible(closeOverlayButton);
     closeOverlayButton.onClick = [this]() { this->onCloseOverlayButtonClicked(); };
 }
 
