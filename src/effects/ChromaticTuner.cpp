@@ -21,7 +21,7 @@ std::optional<float> ChromaticTuner::getMainFrequencyFromAudioBlock(const dsp::A
         fftBuffer.calloc(fftSize * 2);
     }
 
-    // 1. Copier un bloc mono (moyenne stéréo si besoin)
+    // 1. Copy a mono signal from the audio block.
     for (size_t i = 0; i < fftSize; ++i)
     {
         float sample = 0.0f;
@@ -30,14 +30,14 @@ std::optional<float> ChromaticTuner::getMainFrequencyFromAudioBlock(const dsp::A
         fftBuffer[i] = sample / static_cast<float>(block.getNumChannels());
     }
 
-    // 2. Appliquer fenêtre de Hann
+    // 2. Applies Hann windowing to the signal.
     window.multiplyWithWindowingTable(fftBuffer.get(), fftSize);
 
-    // 3. Appliquer la FFT
+    // 3. Applies FFT to the windowed signal.
     std::fill(fftBuffer.get() + fftSize, fftBuffer.get() + 2 * fftSize, 0.0f); // imag = 0
     fft.performRealOnlyForwardTransform(fftBuffer.get());
 
-    // 4. Trouver le pic de magnitude dans la plage utile
+    // 4. Finds the bin with the maximum magnitude.
     int maxIndex = 1;
     float maxMag = 0.0f;
 

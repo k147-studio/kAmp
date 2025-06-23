@@ -8,6 +8,12 @@ EqualizerEffect::EqualizerEffect() {
     updateFilters();
 }
 
+void EqualizerEffect::prepare(const juce::dsp::ProcessSpec& spec) {
+    for (auto& filter : filters) {
+        filter.prepare(spec);
+    }
+}
+
 void EqualizerEffect::apply(const juce::AudioSourceChannelInfo &bufferToFill) {
     auto* buffer = bufferToFill.buffer;
     const int numChannels = buffer->getNumChannels();
@@ -37,14 +43,13 @@ float EqualizerEffect::getGain(int bandIndex) const {
 }
 
 void EqualizerEffect::updateFilters() {
-    // Fréquences fixes typiques d'un égaliseur 10 bandes
+    // Typical center frequencies for a 10-band equalizer
     const float freqs[10] = {31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000};
-    constexpr float sampleRate = 44100.0f;
 
     for (int i = 0; i < numBands; ++i) {
         filters[i].reset();
         auto coeffs = juce::dsp::IIR::Coefficients<float>::makePeakFilter(
-            sampleRate, freqs[i], 1.0f, juce::Decibels::decibelsToGain(bandGains[i])
+            this->sampleRate, freqs[i], 1.0f, juce::Decibels::decibelsToGain(bandGains[i])
         );
         filters[i].coefficients = coeffs;
     }

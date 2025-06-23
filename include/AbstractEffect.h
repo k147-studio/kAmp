@@ -120,4 +120,10 @@ class AbstractEffect : public IEffect {
      * @brief The version of the effect.
      */
     std::string version;
+
+protected:
+    /**
+     * The sample rate of the audio stream.
+     */
+    double sampleRate = 44100.0f;
 };

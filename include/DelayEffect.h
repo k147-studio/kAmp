@@ -10,39 +10,45 @@
 class DelayEffect : public AbstractEffect {
 public:
 	/**
-	 * @brief Initializes a new instance of the DelayEffect class.
-	 */
+	* @brief Initializes a new instance of the DelayEffect class.
+	*/
 	DelayEffect();
 
 	/**
-	 * @brief Destroys the instance of the DelayEffect class.
-	 */
+	* @brief Destroys the instance of the DelayEffect class.
+	*/
 	~DelayEffect() override;
 
 	/**
-	 * @brief Applies the delay effect to the given audio buffer.
-	 * @param bufferToFill The audio buffer to apply the effect to.
-	 */
-	void apply(const AudioSourceChannelInfo& bufferToFill) override;
+	* @brief Applies the delay effect to the given audio buffer.
+	* @param bufferToFill The audio buffer to apply the effect to.
+	*/
+	void apply(const AudioSourceChannelInfo &bufferToFill) override;
 
 	/**
-	 * @brief Sets the rate of the delay effect.
-	 * @param rate The rate of the delay effect.
-	 */
+	* @brief Prepares the delay effect for processing with the given process specification.
+	* @param spec The process specification containing sample rate, block size, and number of channels.
+	*/
+	void prepare(const juce::dsp::ProcessSpec& spec) override;
+
+	/**
+	* @brief Sets the rate of the delay effect.
+	* @param rate The rate of the delay effect.
+	*/
 	void setRate(float rate);
 
 	/**
-	 * @brief Sets the delay of the effect.
-	 * @param delay The delay of the effect.
-	 */
+	* @brief Sets the delay of the effect.
+	* @param delay The delay of the effect.
+	*/
 	void setDelay(float delay);
 
 	/**
-	 * @brief Compares the effect with another given effect.
-	 * @param effect The effect to compare with.
-	 * @return True if the effect is equal to the given effect, false otherwise.
-	 */
-	bool operator==(const AbstractEffect* effect) override;
+	* @brief Compares the effect with another given effect.
+	* @param effect The effect to compare with.
+	* @return True if the effect is equal to the given effect, false otherwise.
+	*/
+	bool operator==(const AbstractEffect *effect) override;
 
 	/**
 	 * @brief Gets the type name of the effect for serialization purposes.
@@ -79,15 +85,15 @@ public:
 	}
 
 private:
-	/**
-	 * @brief  The rate of the delay.
-	 */
-	float rate;
+  /**
+   * @brief  The rate of the delay.
+   */
+  float rate;
 
-	/**
-	 * @brief The delay of the effect.
-	 */
-	float delay;
+  /**
+   * @brief The delay of the effect.
+   */
+  float delay;
 
 	std::vector<float> circularBuffer;
 	int writePosition = 0;

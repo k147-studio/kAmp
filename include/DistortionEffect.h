@@ -10,7 +10,7 @@ public:
     ~DistortionEffect() override;
 
     void apply(const AudioSourceChannelInfo &bufferToFill) override;
-    void prepare(const juce::dsp::ProcessSpec& spec);
+    void prepare(const juce::dsp::ProcessSpec& spec) override;
     void reset() noexcept;
 
     // Paramètres Boss DS-2

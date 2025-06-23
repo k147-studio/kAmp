@@ -2,9 +2,6 @@
 #include "SettingsComponent.h"
 #include "ResourceManager.h"
 
-
-
-
 MainComponent::MainComponent(const Manager &manager):
     pedalboardComponent(manager.getPedalboard()),
     topMenuBarComponent(this->deviceManager, &isSoundMuted, &tuningFunction),
@@ -59,7 +56,17 @@ void MainComponent::resized() {
 }
 
 void MainComponent::prepareToPlay(int samplesPerBlockExpected,
-                                  double sampleRate) {}
+                                  double sampleRate) {
+	juce::dsp::ProcessSpec spec;
+	spec.sampleRate = sampleRate;
+	spec.maximumBlockSize = (juce::uint32) samplesPerBlockExpected;
+	auto* device = deviceManager.getCurrentAudioDevice();
+	spec.numChannels = static_cast<juce::uint32>(
+		device->getActiveOutputChannels().countNumberOfSetBits()
+	);
+	manager.prepare(spec);
+}
+
 void MainComponent::getNextAudioBlock(
 	const AudioSourceChannelInfo& bufferToFill) {
 	if (!this->isSoundMuted) {

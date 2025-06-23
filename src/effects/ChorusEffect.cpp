@@ -54,13 +54,8 @@ void ChorusEffect::setMix(float newMix) {
     chorus.setMix(mix);
 }
 
-void ChorusEffect::prepare(double sampleRate, int samplesPerBlock, int numChannels)
+void ChorusEffect::prepare(const juce::dsp::ProcessSpec& spec)
 {
-    juce::dsp::ProcessSpec spec;
-    spec.sampleRate = sampleRate;
-    spec.maximumBlockSize = static_cast<juce::uint32>(samplesPerBlock);
-    spec.numChannels = static_cast<juce::uint32>(numChannels);
-
     chorus.prepare(spec);
 }
 
@@ -84,10 +79,10 @@ juce::var ChorusEffect::toJSON() const {
 void ChorusEffect::fromJSON(const juce::var& json) {
     AbstractEffect::fromJSON(json);
     if (const auto* obj = json.getDynamicObject()) {
-        if (obj->hasProperty("rate"))        setRate((float)obj->getProperty("rate"));
-        if (obj->hasProperty("depth"))       setDepth((float)obj->getProperty("depth"));
+        if (obj->hasProperty("rate")) setRate((float)obj->getProperty("rate"));
+        if (obj->hasProperty("depth")) setDepth((float)obj->getProperty("depth"));
         if (obj->hasProperty("centreDelay")) setCentreDelay((float)obj->getProperty("centreDelay"));
-        if (obj->hasProperty("feedback"))    setFeedback((float)obj->getProperty("feedback"));
-        if (obj->hasProperty("mix"))         setMix((float)obj->getProperty("mix"));
+        if (obj->hasProperty("feedback")) setFeedback((float)obj->getProperty("feedback"));
+        if (obj->hasProperty("mix")) setMix((float)obj->getProperty("mix"));
     }
 }

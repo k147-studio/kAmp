@@ -25,6 +25,12 @@ public:
     void apply(const AudioSourceChannelInfo &bufferToFill) override;
 
     /**
+     * @brief Prepares the noise gate effect for processing with the given process specification.
+     * @param spec The process specification containing sample rate, block size, and number of channels.
+     */
+    void prepare(const juce::dsp::ProcessSpec& spec) override;
+
+    /**
      * @brief Sets the threshold of the noise gate effect.
      * @param threshold The threshold of the noise gate effect.
      */

@@ -8,12 +8,15 @@ DelayEffect::DelayEffect() {
 
 DelayEffect::~DelayEffect() = default;
 
+void DelayEffect::prepare(const juce::dsp::ProcessSpec& spec) {
+    this->sampleRate = spec.sampleRate;
+}
+
 void DelayEffect::apply(const AudioSourceChannelInfo &bufferToFill) {
     if (delay > 0 && rate > 0) {
         const int numChannels = bufferToFill.buffer->getNumChannels();
         const int numSamples = bufferToFill.numSamples;
-        constexpr auto sampleRate = 44100.0;
-        const auto delaySamples = static_cast<int>(delay * sampleRate / 1000.0f);
+        const auto delaySamples = static_cast<int>(delay * this->sampleRate / 1000.0f);
 
         if (circularBuffer.size() < delaySamples) {
             circularBuffer.resize(delaySamples, 0.0f);

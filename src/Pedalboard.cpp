@@ -21,6 +21,12 @@ void Pedalboard::apply(const AudioSourceChannelInfo &bufferToFill) {
     }
 }
 
+void Pedalboard::prepare(const juce::dsp::ProcessSpec& spec) {
+  for (AbstractEffect* effect : effects) {
+    effect->prepare(spec);
+  }
+}
+
 void Pedalboard::append(AbstractEffect* effect) {
   effects.push_back(effect);
 }

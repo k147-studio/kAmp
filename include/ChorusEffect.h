@@ -10,6 +10,11 @@ public:
     ~ChorusEffect() override = default;
 
     void apply(const juce::AudioSourceChannelInfo &bufferToFill) override;
+    /**
+     * Prepares the chorus effect for processing with the given process specification.
+     * @param spec The process specification containing sample rate, block size, and number of channels.
+     */
+    void prepare(const juce::dsp::ProcessSpec& spec) override;
     bool operator==(const AbstractEffect* effect) override;
 
     [[nodiscard]] juce::String getEffectType() const override { return "ChorusEffect"; }

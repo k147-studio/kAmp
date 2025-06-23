@@ -7,7 +7,12 @@ void Manager::apply(const AudioSourceChannelInfo &bufferToFill) const {
     if (bufferToFill.buffer == nullptr) {
         return;
     }
+
     pedalboard->apply(bufferToFill);
+}
+
+void Manager::prepare(juce::dsp::ProcessSpec &spec) {
+    pedalboard->prepare(spec);
 }
 
 void Manager::importF() const {

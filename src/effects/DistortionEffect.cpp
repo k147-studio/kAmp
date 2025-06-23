@@ -8,12 +8,12 @@ DistortionEffect::DistortionEffect() {
     effectName = "Distortion";
     updateWaveshaper();
     updateTone();
-    processorChain.get<3>().setGainLinear(level);
 }
 
 DistortionEffect::~DistortionEffect() = default;
 
 void DistortionEffect::prepare(const juce::dsp::ProcessSpec& spec) {
+    this->sampleRate = spec.sampleRate;
     processorChain.prepare(spec);
     *processorChain.get<0>().coefficients = *juce::dsp::IIR::Coefficients<float>::makeHighPass(spec.sampleRate, 120.0f);
     updateTone();
@@ -60,7 +60,7 @@ bool DistortionEffect::isTurbo() const { return turbo; }
 
 void DistortionEffect::updateTone() {
     float freq = 2000.0f + tone * (turbo ? 8000.0f : 4000.0f);
-    *processorChain.get<2>().coefficients = *juce::dsp::IIR::Coefficients<float>::makeLowPass(44100, freq);
+    *processorChain.get<2>().coefficients = *juce::dsp::IIR::Coefficients<float>::makeLowPass(this->sampleRate, freq);
 }
 
 float DistortionEffect::waveshaperFunc(float x) {
@@ -76,6 +76,8 @@ void DistortionEffect::updateWaveshaper() {
     float drive = 1.0f + dist * (turbo ?  100.0f : 50.0f);
     gDrive = drive;
     gTurbo = turbo;
+    float compensation = 1.0f / std::sqrt(drive);
+    processorChain.get<3>().setGainLinear(level * compensation);
     processorChain.get<1>().functionToUse = &DistortionEffect::waveshaperFunc;
 }
 

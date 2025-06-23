@@ -18,6 +18,7 @@ ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
     // Depth
     depthSlider.setSliderStyle(juce::Slider::Rotary);
     depthSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
+    depthSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
     depthSlider.setRange(0.0, 1.0, 0.01);
     depthSlider.setValue(chorusEffect->getDepth());
     depthSlider.onValueChange = [this]() {
@@ -29,6 +30,7 @@ ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
     // Rate
     rateSlider.setSliderStyle(juce::Slider::Rotary);
     rateSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
+    rateSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
     rateSlider.setRange(0.0, 10.0, 0.01);
     rateSlider.setValue(chorusEffect->getRate());
     rateSlider.onValueChange = [this]() {
@@ -40,6 +42,7 @@ ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
     // Mix
     mixSlider.setSliderStyle(juce::Slider::Rotary);
     mixSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
+    mixSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
     mixSlider.setRange(0.0, 1.0, 0.01);
     mixSlider.setValue(chorusEffect->getMix());
     mixSlider.onValueChange = [this]() {
@@ -48,7 +51,7 @@ ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
     mixLabel.setText("Mix", juce::dontSendNotification);
     mixLabel.setJustificationType(juce::Justification::centred);
 
-    // ----- Ajouter au Grid -----
+    // ----- Layout -----
     grid.items.addArray({
         juce::GridItem(depthLabel), juce::GridItem(rateLabel), juce::GridItem(mixLabel),
         juce::GridItem(depthSlider), juce::GridItem(rateSlider), juce::GridItem(mixSlider),
@@ -56,18 +59,6 @@ ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
 
     settingsLayout = new PedalSettingsLayoutComponent(&grid);
 
-    addAndMakeVisible(settingsLayout);  // <<== Ajout crucial pour afficher le layout
-
-    if (chorusEffect != nullptr)
-    {
-        double defaultSampleRate = 44100.0;
-        int defaultBlockSize = 512;
-        int defaultNumChannels = 2;
-
-        chorusEffect->prepare(defaultSampleRate, defaultBlockSize, defaultNumChannels);
-    }
-
-    // Ajout visible
     addAndMakeVisible(depthSlider);
     addAndMakeVisible(depthLabel);
     addAndMakeVisible(rateSlider);
@@ -75,7 +66,6 @@ ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
     addAndMakeVisible(mixSlider);
     addAndMakeVisible(mixLabel);
 
-    // Positionnement manuel (à ajuster en fonction de ta taille)
     auto area = getLocalBounds();
     int sliderWidth = area.getWidth() / 3;
     int sliderHeight = area.getHeight() / 2;

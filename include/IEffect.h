@@ -14,6 +14,12 @@ class IEffect {
     virtual void apply(const AudioSourceChannelInfo &bufferToFill) = 0;
 
     /**
+     * @brief Prepares the effect for processing with the given process specification.
+     * @param spec The process specification containing sample rate, block size, and number of channels.
+     */
+    virtual void prepare(const juce::dsp::ProcessSpec& spec) = 0;
+
+    /**
      * @brief Destroys the current instance of IEffect.
      */
     virtual ~IEffect() = default;

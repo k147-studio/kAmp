@@ -16,6 +16,12 @@ public:
   void apply(const AudioSourceChannelInfo &bufferToFill) const;
 
   /**
+   * @brief Prepares the pedalboard for processing with the given process specification.
+   * @param spec The process specification containing sample rate, block size, and number of channels.
+   */
+  void prepare(juce::dsp::ProcessSpec &spec);
+
+  /**
    * @brief Imports a pedalboard.
    */
   void importF() const;

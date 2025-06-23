@@ -11,6 +11,7 @@ public:
     ~EqualizerEffect() override = default;
 
     void apply(const AudioSourceChannelInfo &bufferToFill) override;
+    void prepare(const juce::dsp::ProcessSpec& spec) override;
     void setGain(int bandIndex, float gain);
     float getGain(int bandIndex) const;
     bool operator==(const AbstractEffect* effect) override;

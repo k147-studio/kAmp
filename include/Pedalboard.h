@@ -31,6 +31,12 @@ public:
   void apply(const AudioSourceChannelInfo &bufferToFill) override;
 
   /**
+   * @brief Prepares the pedalboard for processing with the given process specification.
+   * @param spec The process specification containing sample rate, block size, and number of channels.
+   */
+  void prepare(const juce::dsp::ProcessSpec &spec) override;
+
+  /**
    * @brief Compares the pedalboard with the given effect.
    * @param effect The effect to compare with.
    * @return True if the pedalboard is equal to the given effect, false otherwise.
