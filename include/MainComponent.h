@@ -12,8 +12,6 @@
 // you could `#include <JuceHeader.h>` here instead, to make all your module headers visible.
 #include <juce_audio_basics/juce_audio_basics.h>
 #include <juce_audio_utils/juce_audio_utils.h>
-#include <juce_audio_devices/juce_audio_devices.h>
-
 
 /**
  * @brief The main component of the application that contains all the main UI.
@@ -73,7 +71,7 @@ private:
      * Component that contains the pedalboard and that automatically adjust rendering so it becomes
      * scrollable if necessary.
      */
-    Viewport pedalboardContainer;
+    juce::Viewport pedalboardContainer;
 
     /**
      * The component that displays the pedalboard.
@@ -95,12 +93,12 @@ private:
      */
     Manager manager;
 
+	std::function<void(const AudioSourceChannelInfo&)> tuningFunction;
+
     /**
      * Tells if the sound is muted or not.
      */
     bool isSoundMuted = false;
-
-    std::function<void(const juce::AudioSourceChannelInfo&)> tuningFunction;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };

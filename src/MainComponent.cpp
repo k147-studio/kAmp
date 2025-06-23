@@ -1,5 +1,6 @@
 #include "MainComponent.h"
 #include "ResourceManager.h"
+#include "TopMenuBarComponent.h"
 
 MainComponent::MainComponent(const Manager& manager):
 	pedalboardComponent(manager.getPedalboard()),
