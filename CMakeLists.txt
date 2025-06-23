@@ -31,6 +31,7 @@ juce_add_binary_data(ResourcesBinary
         resources/icons/sync.png
         resources/icons/unmute.png
         resources/icons/xmark.png
+        resources/icons/tuner.png
 )
 
 target_include_directories(kAmp PRIVATE "${CMAKE_BINARY_DIR}/juce_binarydata_ResourcesBinary/JuceLibraryCode")

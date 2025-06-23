@@ -8,8 +8,9 @@
 #include "BinaryData.h"
 
 TopMenuBarComponent::TopMenuBarComponent(AudioDeviceManager& deviceManager,
-                                         bool* isMuted) {
+                                         bool* isMuted, std::function<void(const AudioSourceChannelInfo&)>* tuningFunction) {
 	this->isSoundMuted = isMuted;
+	this->tuningFunction = tuningFunction;
 
 	juce::Image settingsImage = juce::ImageFileFormat::loadFrom(BinaryData::settings_png, BinaryData::settings_pngSize);
 	settingsButton.setImages(true, true, true, settingsImage, 1.0f, {},
@@ -29,15 +30,12 @@ TopMenuBarComponent::TopMenuBarComponent(AudioDeviceManager& deviceManager,
 								 muteImage, 1.0f, {}, muteImage, 1.0f,
 								 {});
 	addAndMakeVisible(muteButton);
+	
 
-	Image tunerImage = ResourceManager::loadImage("resources/icons/tuner.png");
-	if (tunerImage.isValid()) {
-		tunerButton.setImages(true, true, true, tunerImage, 1.0f, {},  tunerImage, 1.0f, {}, tunerImage, 1.0f, {});
-		tunerButton.setSize(tunerImage.getWidth(), tunerImage.getHeight());
-		addAndMakeVisible(tunerButton);
-	} else {
-		DBG("Erreur : image tuner.png introuvable ou invalide.");
-	}
+	juce::Image tunerImage = juce::ImageFileFormat::loadFrom(BinaryData::tuner_png, BinaryData::tuner_pngSize);
+	tunerButton.setImages(true, true, true, tunerImage, 1.0f, {},  tunerImage, 1.0f, {}, tunerImage, 1.0f, {});
+	tunerButton.setSize(tunerImage.getWidth(), tunerImage.getHeight());
+	addAndMakeVisible(tunerButton);
 
 #if !JUCE_IOS
 	settingsButton.onClick = [this, &deviceManager] {
