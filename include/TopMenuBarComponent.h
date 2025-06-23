@@ -28,7 +28,7 @@ private:
 
 	AccountComponent* accountComponent;
 	ChromaticTunerComponent* tunerComponent;
-	ModalOverlayComponent* modalOverlay;
+	std::unique_ptr<ModalOverlayComponent> modalOverlay;
 	SettingsComponent* settingsComponent;
 
 	bool* isSoundMuted = nullptr;
