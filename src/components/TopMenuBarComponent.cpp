@@ -1,6 +1,7 @@
 #include "AccountComponent.h"
 #include "ModalOverlayComponent.h"
 #include "PopupContentComponent.h"
+#include "ResourceManager.h"
 #include "SettingsComponent.h"
 #include "TopMenuBarComponent.h"
 #include "ResourceManager.h"
@@ -29,6 +30,15 @@ TopMenuBarComponent::TopMenuBarComponent(AudioDeviceManager& deviceManager,
 								 {});
 	addAndMakeVisible(muteButton);
 
+	Image tunerImage = ResourceManager::loadImage("resources/icons/tuner.png");
+	if (tunerImage.isValid()) {
+		tunerButton.setImages(true, true, true, tunerImage, 1.0f, {},  tunerImage, 1.0f, {}, tunerImage, 1.0f, {});
+		tunerButton.setSize(tunerImage.getWidth(), tunerImage.getHeight());
+		addAndMakeVisible(tunerButton);
+	} else {
+		DBG("Erreur : image tuner.png introuvable ou invalide.");
+	}
+
 #if !JUCE_IOS
 	settingsButton.onClick = [this, &deviceManager] {
 		openSettingsPopup(deviceManager);
@@ -36,9 +46,13 @@ TopMenuBarComponent::TopMenuBarComponent(AudioDeviceManager& deviceManager,
 #endif
 	accountButton.onClick = [this] { openAccountPopup(); };
 	muteButton.onClick = [this] { toggleMute(); };
+	tunerButton.onClick = [this] { openTunerPopup(); };
 
 	flexBox.justifyContent = FlexBox::JustifyContent::flexEnd;
 	flexBox.alignItems = FlexBox::AlignItems::center;
+	flexBox.items.add(
+			FlexItem(tunerButton).withWidth(buttonSize).withHeight(buttonSize).
+								 withMargin({0, gap, 0, 0}));
 	flexBox.items.add(
 		FlexItem(muteButton).withWidth(buttonSize).withHeight(buttonSize).
 		                     withMargin({0, gap, 0, 0}));
@@ -69,30 +83,34 @@ void TopMenuBarComponent::paint(Graphics& g) {
 
 
 void TopMenuBarComponent::resized() {
-	auto* mainWindow = getTopLevelComponent();
-	if (mainWindow == nullptr)
-		return;
-	if (modalOverlay != nullptr) {
-		modalOverlay->setBounds(mainWindow->getLocalBounds());
-	}
-	if (settingsComponent != nullptr) {
-		settingsComponent->setBounds(mainWindow->getLocalBounds());
-	}
-	if (accountComponent != nullptr) {
-		accountComponent->setBounds(mainWindow->getLocalBounds());
-	}
-	flexBox.performLayout(getLocalBounds());
+    auto* mainWindow = getTopLevelComponent();
+    if (mainWindow == nullptr) return;
+    if (modalOverlay != nullptr) {
+        modalOverlay->setBounds(mainWindow->getLocalBounds());
+    }
+    if (settingsComponent != nullptr) {
+        settingsComponent->setBounds(mainWindow->getLocalBounds());
+    }
+    if (accountComponent != nullptr) {
+        accountComponent->setBounds(mainWindow->getLocalBounds());
+    }
+    if (tunerComponent != nullptr)    {
+        tunerComponent->setBounds(mainWindow->getLocalBounds());
+    }
+    flexBox.performLayout(getLocalBounds());
 }
 
 void TopMenuBarComponent::openSettingsPopup(AudioDeviceManager& deviceManager) {
 	settingsComponent = new SettingsComponent(deviceManager);
 	auto* mainWindow = getTopLevelComponent();
-	if (mainWindow == nullptr)
-		return;
+	if (mainWindow == nullptr) return;
 
-	modalOverlay = new ModalOverlayComponent("Audio settings",
-	                                         settingsComponent);
-	mainWindow->addAndMakeVisible(modalOverlay);
+	modalOverlay = std::make_unique<ModalOverlayComponent>("Audio settings", settingsComponent, [this]() {
+		settingsComponent = nullptr;
+		modalOverlay = nullptr;
+	});
+
+	mainWindow->addAndMakeVisible(modalOverlay.get());
 	modalOverlay->setBounds(mainWindow->getLocalBounds());
 }
 
@@ -102,8 +120,12 @@ void TopMenuBarComponent::openAccountPopup() {
 	if (mainWindow == nullptr)
 		return;
 
-	modalOverlay = new ModalOverlayComponent("Account", accountComponent);
-	mainWindow->addAndMakeVisible(modalOverlay);
+	modalOverlay = std::make_unique<ModalOverlayComponent>("Account", accountComponent, [this]() {
+		accountComponent = nullptr;
+		modalOverlay = nullptr;
+	});
+
+	mainWindow->addAndMakeVisible(modalOverlay.get());
 	modalOverlay->setBounds(mainWindow->getLocalBounds());
 }
 
@@ -121,5 +143,25 @@ void TopMenuBarComponent::toggleMute() {
 									 {});
 		addAndMakeVisible(muteButton);
 	}
-	*(this->isSoundMuted) = !(*(this->isSoundMuted));
+	*this->isSoundMuted = !*this->isSoundMuted;
+}
+
+void TopMenuBarComponent::openTunerPopup() {
+    tunerComponent = new ChromaticTunerComponent(44100, 9); // Sample rate and FFT order can be adjusted as needed
+    auto* mainWindow = getTopLevelComponent();
+    if (mainWindow == nullptr)
+        return;
+
+    *this->tuningFunction = [&](const AudioSourceChannelInfo& buffer) {
+        if (tunerComponent != nullptr)
+            tunerComponent->tune(buffer);
+    };
+
+	modalOverlay = std::make_unique<ModalOverlayComponent>("Tuner", tunerComponent, [this]() {
+		tunerComponent = nullptr;
+		modalOverlay = nullptr;
+	});
+
+    modalOverlay->setBounds(mainWindow->getLocalBounds());
+	mainWindow->addAndMakeVisible(modalOverlay.get());
 }

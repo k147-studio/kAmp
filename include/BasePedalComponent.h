@@ -7,7 +7,7 @@
  * @brief Base class for pedal components.
  * This class provides a common interface and functionality for all pedal components.
  */
-class BasePedalComponent : public EffectComponent {
+class BasePedalComponent : public EffectComponent, public DragAndDropTarget {
 public:
 	/**
 	 * @brief Initializes a new instance of the BasePedalComponent class.
@@ -31,6 +31,25 @@ public:
 	 */
 	void resized() override;
 
+	/**
+	 * @brief Handles mouse down events.
+	 * @param event The mouse event that occurred.
+	 */
+	void mouseDown(const juce::MouseEvent& event) override;
+
+	/**
+	 *
+	 * @param details The details of the drag source.
+	 * @return A boolean indicating whether the component is interested in the drag source.
+	 */
+	bool isInterestedInDragSource(const SourceDetails& details) override;
+
+	/**
+	 * @brief Handles the drop of a component onto this pedal component.
+	 * @param dragSourceDetails The details of the drag source.
+	 */
+	void itemDropped(const SourceDetails& dragSourceDetails) override;
+
 protected:
 	/**
 	 * @brief The default width of the component.
@@ -47,19 +66,9 @@ protected:
 	 */
 	Grid pedalLayout;
 
-	/**
-	 * @brief The primary color of the pedal component. Used as background color.
-	 */
 	Colour primaryColor;
-
-	/**
-	* @brief The secondary color of the pedal component. Used as background color.
-	*/
 	Colour secondaryColor;
 
-	/**
-	 * @brief The layout for the pedal settings.
-	 */
 	PedalSettingsLayoutComponent* settingsLayout;
 
 	/**
@@ -82,13 +91,6 @@ protected:
 	 */
 	bool* isEnabled;
 
-	/**
-	 * @brief Called when the enable button is clicked.
-	 */
 	void onEnableButtonClicked();
-
-	/**
-	 * @brief Initializes the pedal layout to display it.
-	 */
 	void initializePedal();
 };

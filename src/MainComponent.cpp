@@ -1,12 +1,9 @@
 #include "MainComponent.h"
 #include "ResourceManager.h"
-#include "BinaryData.h"
-
-
 
 MainComponent::MainComponent(const Manager& manager):
 	pedalboardComponent(manager.getPedalboard()),
-	topMenuBarComponent(this->deviceManager, &isSoundMuted), manager(manager) {
+	topMenuBarComponent(this->deviceManager, &isSoundMuted, &tuningFunction), manager(manager) {
 	setAudioChannels(2, 2);
 
 
@@ -30,8 +27,8 @@ void MainComponent::resized() {
 	backgroundImage.setBounds(getLocalBounds());
 	connectionComponent.setBounds(getLocalBounds());
 
-	int pedalboardWidth = getWidth();
-	int pedalboardHeight = pedalboardComponent.getRequiredHeight(getWidth());
+	const int pedalboardWidth = getWidth();
+	const int pedalboardHeight = pedalboardComponent.getRequiredHeight(getWidth());
 	pedalboardComponent.setSize(pedalboardWidth, pedalboardHeight);
 
 	using Track = Grid::TrackInfo;
@@ -49,19 +46,22 @@ void MainComponent::resized() {
 void MainComponent::prepareToPlay(int samplesPerBlockExpected,
                                   double sampleRate) {}
 
-void MainComponent::getNextAudioBlock(
-	const AudioSourceChannelInfo& bufferToFill) {
-	if (!this->isSoundMuted) {
-		if (&bufferToFill == nullptr) {
-			return;
-		}
-		if (bufferToFill.buffer == nullptr) {
-			return;
-		}
-		this->manager.apply(bufferToFill);
-	} else {
-		bufferToFill.clearActiveBufferRegion();
-	}
+void MainComponent::getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill) {
+    if (!this->isSoundMuted) {
+        if (&bufferToFill == nullptr) {
+            return;
+        }
+        if (bufferToFill.buffer == nullptr) {
+            return;
+        }
+        this->manager.apply(bufferToFill);
+    }
+    else {
+        bufferToFill.clearActiveBufferRegion();
+    }
+    if (tuningFunction != nullptr) {
+        tuningFunction(bufferToFill);
+    }
 }
 
 void MainComponent::releaseResources() {}

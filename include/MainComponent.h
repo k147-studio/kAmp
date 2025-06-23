@@ -74,7 +74,7 @@ private:
      * Component that contains the pedalboard and that automatically adjust rendering so it becomes
      * scrollable if necessary.
      */
-    juce::Viewport pedalboardContainer;
+    Viewport pedalboardContainer;
 
     /**
      * The component that displays the pedalboard.
@@ -100,6 +100,8 @@ private:
      * Tells if the sound is muted or not.
      */
     bool isSoundMuted = false;
+
+    std::function<void(const juce::AudioSourceChannelInfo&)> tuningFunction;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };
