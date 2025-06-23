@@ -6,7 +6,11 @@
 
 Pedalboard::Pedalboard() { };
 
-Pedalboard::~Pedalboard() = default;
+Pedalboard::~Pedalboard() {
+  for (AbstractEffect* effect : effects) {
+    delete effect;
+  }
+};
 
 void Pedalboard::apply(const AudioSourceChannelInfo &bufferToFill) {
     for (AbstractEffect* effect : effects) {

@@ -51,21 +51,22 @@ void MainComponent::resized() {
 void MainComponent::prepareToPlay(int samplesPerBlockExpected,
                                   double sampleRate) {}
 
-void MainComponent::getNextAudioBlock(
-	const AudioSourceChannelInfo& bufferToFill) {
-	if (!this->isSoundMuted) {
-		if (&bufferToFill == nullptr) {
-			return;
-		}
-		if (bufferToFill.buffer == nullptr) {
-			return;
-		}
-		this->manager.apply(bufferToFill);
-	} else {
-		bufferToFill.clearActiveBufferRegion();
-	}
+void MainComponent::getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill) {
+    if (!this->isSoundMuted) {
+        if (&bufferToFill == nullptr) {
+            return;
+        }
+        if (bufferToFill.buffer == nullptr) {
+            return;
+        }
+        this->manager.apply(bufferToFill);
+    }
+    else {
+        bufferToFill.clearActiveBufferRegion();
+    }
+    if (tuningFunction != nullptr) {
+        tuningFunction(bufferToFill);
+    }
 }
 
 void MainComponent::releaseResources() {}
-
-
