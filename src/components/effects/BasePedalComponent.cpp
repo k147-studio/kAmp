@@ -1,68 +1,68 @@
 #include "BasePedalComponent.h"
 #include "ResourceManager.h"
 
-BasePedalComponent::BasePedalComponent(AbstractEffect* effect) : EffectComponent(effect)
-{
-    isEnabled = effect->isEnabled;
+BasePedalComponent::BasePedalComponent(AbstractEffect* effect) :
+	EffectComponent(effect) {
+	isEnabled = effect->isEnabled;
 }
 
 BasePedalComponent::~BasePedalComponent() = default;
 
-void BasePedalComponent::paint(juce::Graphics &g) {
-    g.setColour(primaryColor);
-    g.fillRoundedRectangle(0, 0, getWidth(), getHeight(), 15);
+void BasePedalComponent::paint(Graphics& g) {
+	g.setColour(primaryColor);
+	g.fillRoundedRectangle(0, 0, getWidth(), getHeight(), 15);
 }
 
 void BasePedalComponent::resized() {
-    pedalLayout.performLayout(getLocalBounds());
+	pedalLayout.performLayout(getLocalBounds());
 }
 
 void BasePedalComponent::onEnableButtonClicked() {
-    *isEnabled = !(*isEnabled);
-    enablePedalButton.setToggleState(*isEnabled, juce::dontSendNotification);
-    isEnabledIndicator->togglePower(*isEnabled);
+	*isEnabled = !(*isEnabled);
+	enablePedalButton.setToggleState(*isEnabled, dontSendNotification);
+	isEnabledIndicator->togglePower(*isEnabled);
 }
 
 void BasePedalComponent::initializePedal() {
-    isEnabledIndicator = new PedalPowerIndicatorComponent(*isEnabled);
-    pedalLabel = new juce::Label();
-    pedalLabel->setText(getEffect()->effectName, juce::dontSendNotification);
-    pedalLabel->setJustificationType(juce::Justification::centred);
-    pedalLabel->setFont(juce::Font(30.0f, juce::Font::bold));
+	isEnabledIndicator = new PedalPowerIndicatorComponent(*isEnabled);
+	pedalLabel = new Label();
+	pedalLabel->setText(getEffect()->effectName, dontSendNotification);
+	pedalLabel->setJustificationType(Justification::centred);
+	pedalLabel->setFont(FontOptions(30.0f, Font::bold));
 
-    juce::Image powerImage = ResourceManager::loadImage("resources/icons/power.png");
-    if (powerImage.isValid()) {
-        enablePedalButton.setImages(true, true, true,
-                                    powerImage, 1.0f, {},
-                                    powerImage, 1.0f, {},
-                                    powerImage, 1.0f, {});
-        enablePedalButton.onClick = [this] {
-            this->onEnableButtonClicked();
-        };
-        addAndMakeVisible(enablePedalButton);
-    } else {
-        DBG("Erreur : image power.png introuvable ou invalide.");
-    }
+	Image powerImage = ResourceManager::loadImage("resources/icons/power.png");
+	if (powerImage.isValid()) {
+		enablePedalButton.setImages(true, true, true,
+		                            powerImage, 1.0f, {},
+		                            powerImage, 1.0f, {},
+		                            powerImage, 1.0f, {});
+		enablePedalButton.onClick = [this] {
+			this->onEnableButtonClicked();
+		};
+		addAndMakeVisible(enablePedalButton);
+	} else {
+		DBG("Erreur : image power.png introuvable ou invalide.");
+	}
 
-    addAndMakeVisible(*pedalLabel);
-    addAndMakeVisible(*isEnabledIndicator);
+	addAndMakeVisible(*pedalLabel);
+	addAndMakeVisible(*isEnabledIndicator);
 
-    using Track = juce::Grid::TrackInfo;
-    using Fr = juce::Grid::Fr;
-    pedalLayout.templateRows = {
-        Track (Fr (2)),
-        Track (Fr (1)),
-        Track (Fr (1)),
-        Track (Fr (1))
-    };
-    pedalLayout.templateColumns = {
-        Track (Fr (1))
-    };
+	using Track = Grid::TrackInfo;
+	using Fr = Grid::Fr;
+	pedalLayout.templateRows = {
+		Track(Fr(2)),
+		Track(Fr(1)),
+		Track(Fr(1)),
+		Track(Fr(1))
+	};
+	pedalLayout.templateColumns = {
+		Track(Fr(1))
+	};
 
-    pedalLayout.items = {
-        juce::GridItem(*settingsLayout),
-        juce::GridItem(enablePedalButton),
-        juce::GridItem(*isEnabledIndicator),
-        juce::GridItem(*pedalLabel),
-    };
+	pedalLayout.items = {
+		GridItem(*settingsLayout),
+		GridItem(enablePedalButton),
+		GridItem(*isEnabledIndicator),
+		GridItem(*pedalLabel),
+	};
 }

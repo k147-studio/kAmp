@@ -2,28 +2,33 @@
 
 #include <JuceHeader.h>
 
-class AccountComponent : public juce::Component
-{
+class AccountComponent : public Component {
 public:
-    AccountComponent();
-    void paint(juce::Graphics&) override;
-    void resized() override;
+	AccountComponent();
+	void paint(Graphics&) override;
+	void resized() override;
 
 private:
-    void apiResponseReceived(const juce::String& content);
-    void saveSettings();
-    void importSettings();
-    void changePassword();
+	void apiResponseReceived(const String& content);
+	void saveSettings();
+	void importSettings();
 
-    juce::Label titleLabel;
-    juce::Label responseLabel;
+	void setupLabels();
+	void setupButtons();
+	void setupGrid();
 
-    juce::Label emailLabel, usernameLabel;
-    juce::Label emailValueLabel, usernameValueLabel;
+	Label titleLabel{"titleLabel", "Mon compte"};
+	Label responseLabel{"responseLabel", "En attente de réponse..."};
 
-    juce::TextButton saveButton, importButton, changePasswordButton;
+	Label emailLabel{"emailLabel", "Adresse mail :"};
+	Label usernameLabel{"usernameLabel", "Nom d'utilisateur :"};
+	Label emailValueLabel{"emailValueLabel", "utilisateur@example.com"};
+	Label usernameValueLabel{"usernameValueLabel", "NomUtilisateur"};
 
-    juce::Grid grid;
+	TextButton saveButton{"Sauvegarder les réglages"};
+	TextButton importButton{"Importer les réglages"};
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AccountComponent)
+	Grid grid;
+
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AccountComponent)
 };
