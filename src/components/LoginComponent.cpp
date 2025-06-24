@@ -26,7 +26,7 @@ void LoginComponent::setupButtons() {
 }
 
 void LoginComponent::paint(Graphics& g) {
-	g.fillAll(Colours::white);
+	g.fillAll(Colour(0,0,0).withAlpha(0.8f));
 }
 
 void LoginComponent::resized() {

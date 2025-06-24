@@ -17,16 +17,15 @@ private:
 	void setupButtons();
 	void setupGrid();
 
-	Label titleLabel{"titleLabel", "Mon compte"};
-	Label responseLabel{"responseLabel", "En attente de réponse..."};
+	Label responseLabel{"responseLabel", "Waiting for response..."};
 
-	Label emailLabel{"emailLabel", "Adresse mail :"};
-	Label usernameLabel{"usernameLabel", "Nom d'utilisateur :"};
-	Label emailValueLabel{"emailValueLabel", "utilisateur@example.com"};
-	Label usernameValueLabel{"usernameValueLabel", "NomUtilisateur"};
+	Label emailLabel{"emailLabel", "Email :"};
+	Label usernameLabel{"usernameLabel", "Username :"};
+	Label emailValueLabel{"emailValueLabel", "user@example.com"};
+	Label usernameValueLabel{"usernameValueLabel", "Username"};
 
-	TextButton saveButton{"Sauvegarder les réglages"};
-	TextButton importButton{"Importer les réglages"};
+	TextButton saveButton{"Save presets" };
+	TextButton importButton{"Sync presets" };
 
 	Grid grid;
 

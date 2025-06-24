@@ -9,6 +9,8 @@
 #include "NoiseGateEffectComponent.h"
 #include "ChorusEffect.h"
 #include "ChorusEffectComponent.h"
+#include "OktaverEffect.h"
+#include "OktaverEffectComponent.h"
 
 EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* effect) {
     if (dynamic_cast<DelayEffect*>(effect) != nullptr) {
@@ -24,9 +26,11 @@ EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* e
     if (dynamic_cast<NoiseGateEffect*>(effect) != nullptr) {
         return new NoiseGateEffectComponent(effect);
     }
-    if (dynamic_cast<ChorusEffect*>(effect) != nullptr)
-    {
+    if (dynamic_cast<ChorusEffect*>(effect) != nullptr) {
         return new ChorusEffectComponent(effect);
     }
+	if (dynamic_cast<OktaverEffect*>(effect) != nullptr) {
+		return new OktaverEffectComponent(effect);
+	}
     return nullptr;
 }

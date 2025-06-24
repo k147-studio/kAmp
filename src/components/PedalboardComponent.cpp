@@ -101,7 +101,7 @@ void PedalboardComponent::onPedalDropped(EffectComponent* target,
 
 	// Reorders the effects in the Pedalboard.
 	if (auto* pedalboard = dynamic_cast<Pedalboard*>(effect)) {
-		std::vector<AbstractEffect*> effects = pedalboard->getEffects();
+		std::vector<AbstractEffect*>& effects = pedalboard->getEffects();
 		const auto itEffDragged = std::find(effects.begin(), effects.end(),
 		                                    dragged->getEffect());
 		auto itEffTarget = std::find(effects.begin(), effects.end(),

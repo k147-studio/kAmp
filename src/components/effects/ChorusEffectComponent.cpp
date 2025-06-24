@@ -18,6 +18,8 @@ ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
     // Depth
     depthSlider.setSliderStyle(juce::Slider::Rotary);
     depthSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
+	depthSlider.setColour(Slider::textBoxOutlineColourId,
+							 Colours::transparentWhite);
     depthSlider.setRange(0.0, 1.0, 0.01);
     depthSlider.setValue(chorusEffect->getDepth());
     depthSlider.onValueChange = [this]() {
@@ -29,6 +31,8 @@ ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
     // Rate
     rateSlider.setSliderStyle(juce::Slider::Rotary);
     rateSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
+	rateSlider.setColour(Slider::textBoxOutlineColourId,
+							 Colours::transparentWhite);
     rateSlider.setRange(0.0, 10.0, 0.01);
     rateSlider.setValue(chorusEffect->getRate());
     rateSlider.onValueChange = [this]() {
@@ -40,6 +44,8 @@ ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
     // Mix
     mixSlider.setSliderStyle(juce::Slider::Rotary);
     mixSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
+	mixSlider.setColour(Slider::textBoxOutlineColourId,
+							 Colours::transparentWhite);
     mixSlider.setRange(0.0, 1.0, 0.01);
     mixSlider.setValue(chorusEffect->getMix());
     mixSlider.onValueChange = [this]() {

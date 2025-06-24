@@ -2,8 +2,7 @@
 #include "ApiClient.h"
 
 namespace {
-constexpr float titleFontSize = 24.0f;
-constexpr float labelFontSize = 16.0f;
+constexpr float labelFontSize = 20.0f;
 constexpr float responseFontSize = 14.0f;
 }
 
@@ -20,10 +19,6 @@ AccountComponent::AccountComponent() {
 }
 
 void AccountComponent::setupLabels() {
-	titleLabel.setFont(FontOptions(titleFontSize, Font::bold));
-	titleLabel.setJustificationType(Justification::centred);
-	addAndMakeVisible(titleLabel);
-
 	for (auto* label : {&emailLabel, &usernameLabel}) {
 		label->setFont(FontOptions(labelFontSize));
 		label->setJustificationType(Justification::centredLeft);
@@ -33,7 +28,7 @@ void AccountComponent::setupLabels() {
 	for (auto* val : {&emailValueLabel, &usernameValueLabel}) {
 		val->setFont(FontOptions(labelFontSize));
 		val->setJustificationType(Justification::centredLeft);
-		val->setColour(Label::textColourId, Colours::black);
+		val->setColour(Label::textColourId, Colours::white);
 		addAndMakeVisible(*val);
 	}
 
@@ -44,17 +39,17 @@ void AccountComponent::setupLabels() {
 }
 
 void AccountComponent::setupButtons() {
+	saveButton.setSize(200, 50);
 	saveButton.onClick = [this] { saveSettings(); };
+	addAndMakeVisible(saveButton);
+	importButton.setSize(200, 50);
 	importButton.onClick = [this] { importSettings(); };
-
-	for (auto* button : {&saveButton, &importButton})
-		addAndMakeVisible(*button);
+	addAndMakeVisible(importButton);
 }
 
 void AccountComponent::setupGrid() {
 	using namespace juce;
 	grid.templateRows = {
-		Grid::TrackInfo(40_px), // Title
 		Grid::TrackInfo(30_px), // Email label
 		Grid::TrackInfo(30_px), // Email value
 		Grid::TrackInfo(30_px), // Username label
@@ -69,7 +64,6 @@ void AccountComponent::setupGrid() {
 	grid.templateColumns = {Grid::TrackInfo(1_fr)};
 
 	grid.items = {
-		GridItem(titleLabel),
 		GridItem(emailLabel),
 		GridItem(emailValueLabel),
 		GridItem(usernameLabel),
@@ -81,24 +75,22 @@ void AccountComponent::setupGrid() {
 	};
 }
 
-void AccountComponent::paint(Graphics& g) {
-	g.fillAll(Colours::lightgrey);
-}
+void AccountComponent::paint(Graphics& g) {}
 
 void AccountComponent::resized() {
 	grid.performLayout(getLocalBounds().reduced(40));
 }
 
 void AccountComponent::apiResponseReceived(const String& content) {
-	responseLabel.setText("Réponse API : " + content, dontSendNotification);
+	responseLabel.setText("API Response " + content, dontSendNotification);
 }
 
 void AccountComponent::saveSettings() {
-	responseLabel.setText("✅ Réglages sauvegardés !", dontSendNotification);
+	responseLabel.setText("✅ Presets saved !", dontSendNotification);
 }
 
 void AccountComponent::importSettings() {
 	emailValueLabel.setText("import@example.com", dontSendNotification);
-	usernameValueLabel.setText("UtilisateurImporté", dontSendNotification);
-	responseLabel.setText("📥 Réglages importés", dontSendNotification);
+	usernameValueLabel.setText("Imported User", dontSendNotification);
+	responseLabel.setText("📥 Imported presets", dontSendNotification);
 }

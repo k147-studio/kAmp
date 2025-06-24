@@ -4,6 +4,7 @@
 #include "EqualizerEffect.h"
 #include "NoiseGateEffect.h"
 #include "ChorusEffect.h"
+#include "OktaverEffect.h"
 
 std::vector<AbstractEffect*> EffectsFactory::createAllEffects() {
     std::vector<AbstractEffect*> effects;
@@ -12,5 +13,6 @@ std::vector<AbstractEffect*> EffectsFactory::createAllEffects() {
     effects.push_back(new EqualizerEffect());
     effects.push_back(new NoiseGateEffect());
     effects.push_back(new ChorusEffect());
+	//effects.push_back(new OktaverEffect());
     return effects;
 }
