@@ -6,18 +6,14 @@ MainComponent::MainComponent(const Manager& manager):
 	topMenuBarComponent(this->deviceManager, &isSoundMuted, &tuningFunction), manager(manager) {
 	setAudioChannels(2, 2);
 
-	const Image background = ResourceManager::loadImage("resources/images/background.png");
-	if (background.isValid()) {
-		backgroundImage.setImage(background);
-		backgroundImage.setImagePlacement(RectanglePlacement::stretchToFit);
-		addAndMakeVisible(backgroundImage);
-	} else {
-		DBG("Error : resources/images/background.png not found.");
-	}
+
+	juce::Image img = juce::ImageFileFormat::loadFrom(BinaryData::background_png, BinaryData::background_pngSize);
+	backgroundImage.setImage(img);
 
 	pedalboardContainer.setViewedComponent(&pedalboardComponent, true);
 	pedalboardContainer.setScrollBarsShown(true, false);
 
+	addAndMakeVisible(backgroundImage);
 	addAndMakeVisible(pedalboardContainer);
 	addAndMakeVisible(topMenuBarComponent);
 	addAndMakeVisible(bottomMenuBarComponent);
@@ -69,3 +65,5 @@ void MainComponent::getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill
 }
 
 void MainComponent::releaseResources() {}
+
+

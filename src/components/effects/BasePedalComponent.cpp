@@ -34,19 +34,14 @@ void BasePedalComponent::initializePedal() {
 	pedalLabel->setJustificationType(Justification::centred);
 	pedalLabel->setFont(FontOptions(30.0f, Font::bold));
 
-	Image powerImage = ResourceManager::loadImage("resources/icons/power.png");
-	if (powerImage.isValid()) {
-		enablePedalButton.setImages(true, true, true,
-		                            powerImage, 1.0f, {},
-		                            powerImage, 1.0f, {},
-		                            powerImage, 1.0f, {});
-		enablePedalButton.onClick = [this] {
-			this->onEnableButtonClicked();
-		};
-		addAndMakeVisible(enablePedalButton);
-	} else {
-		DBG("Erreur : image power.png introuvable ou invalide.");
-	}
+	juce::Image powerImage = juce::ImageFileFormat::loadFrom(BinaryData::power_png, BinaryData::power_pngSize);
+	enablePedalButton.setImages(true, true, true, powerImage, 1.0f, {},
+								 powerImage, 1.0f, {}, powerImage, 1.0f,
+								 {});
+	enablePedalButton.onClick = [this] {
+		this->onEnableButtonClicked();
+	};
+	addAndMakeVisible(enablePedalButton);
 
 	addAndMakeVisible(*pedalLabel);
 	addAndMakeVisible(*isEnabledIndicator);

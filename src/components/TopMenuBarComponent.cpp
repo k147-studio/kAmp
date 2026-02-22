@@ -4,49 +4,38 @@
 #include "ResourceManager.h"
 #include "SettingsComponent.h"
 #include "TopMenuBarComponent.h"
+#include "ResourceManager.h"
+#include "BinaryData.h"
 
-TopMenuBarComponent::TopMenuBarComponent(AudioDeviceManager& deviceManager, bool* isSoundMuted, std::function<void(const AudioSourceChannelInfo&)>* tuningFunction) {
-    this->isSoundMuted = isSoundMuted;
-    this->tuningFunction = tuningFunction;
-    Image settingsImage = ResourceManager::loadImage("resources/icons/settings.png");
-    if (settingsImage.isValid()) {
-        settingsButton.setImages(true, true, true, settingsImage, 1.0f, {}, settingsImage, 1.0f, {},settingsImage, 1.0f, {});
-        settingsButton.setSize(settingsImage.getWidth(), settingsImage.getHeight());
-        addAndMakeVisible(settingsButton);
-    } else {
-        DBG("Erreur : image settings.png introuvable ou invalide.");
-    }
+TopMenuBarComponent::TopMenuBarComponent(AudioDeviceManager& deviceManager,
+                                         bool* isMuted, std::function<void(const AudioSourceChannelInfo&)>* tuningFunction) {
+	this->isSoundMuted = isMuted;
+	this->tuningFunction = tuningFunction;
 
-	Image accountImage = ResourceManager::loadImage(
-		"resources/icons/account.png");
-	if (accountImage.isValid()) {
-		accountButton.setImages(true, true, true, accountImage, 1.0f, {},
-		                        accountImage, 1.0f, {}, accountImage, 1.0f, {});
-		accountButton.setSize(accountImage.getWidth(),
-		                      accountImage.getHeight());
-		addAndMakeVisible(accountButton);
-	} else {
-		DBG("Erreur : image account.png introuvable ou invalide.");
-	}
+	juce::Image settingsImage = juce::ImageFileFormat::loadFrom(BinaryData::settings_png, BinaryData::settings_pngSize);
+	settingsButton.setImages(true, true, true, settingsImage, 1.0f, {},
+								 settingsImage, 1.0f, {}, settingsImage, 1.0f,
+								 {});
+	addAndMakeVisible(settingsButton);
 
-	Image muteImage = ResourceManager::loadImage("resources/icons/unmute.png");
-	if (muteImage.isValid()) {
-		muteButton.setImages(true, true, true, muteImage, 1.0f, {}, muteImage,
-		                     1.0f, {}, muteImage, 1.0f, {});
-		muteButton.setSize(muteImage.getWidth(), muteImage.getHeight());
-		addAndMakeVisible(muteButton);
-	} else {
-		DBG("Erreur : image mute.png introuvable ou invalide.");
-	}
 
-	Image tunerImage = ResourceManager::loadImage("resources/icons/tuner.png");
-	if (tunerImage.isValid()) {
-		tunerButton.setImages(true, true, true, tunerImage, 1.0f, {},  tunerImage, 1.0f, {}, tunerImage, 1.0f, {});
-		tunerButton.setSize(tunerImage.getWidth(), tunerImage.getHeight());
-		addAndMakeVisible(tunerButton);
-	} else {
-		DBG("Erreur : image tuner.png introuvable ou invalide.");
-	}
+	juce::Image accountImage = juce::ImageFileFormat::loadFrom(BinaryData::account_png, BinaryData::account_pngSize);
+	accountButton.setImages(true, true, true, accountImage, 1.0f, {},
+								 accountImage, 1.0f, {}, accountImage, 1.0f,
+								 {});
+	addAndMakeVisible(accountButton);
+
+	juce::Image muteImage = juce::ImageFileFormat::loadFrom(BinaryData::mute_png, BinaryData::mute_pngSize);
+	muteButton.setImages(true, true, true, muteImage, 1.0f, {},
+								 muteImage, 1.0f, {}, muteImage, 1.0f,
+								 {});
+	addAndMakeVisible(muteButton);
+	
+
+	juce::Image tunerImage = juce::ImageFileFormat::loadFrom(BinaryData::tuner_png, BinaryData::tuner_pngSize);
+	tunerButton.setImages(true, true, true, tunerImage, 1.0f, {},  tunerImage, 1.0f, {}, tunerImage, 1.0f, {});
+	tunerButton.setSize(tunerImage.getWidth(), tunerImage.getHeight());
+	addAndMakeVisible(tunerButton);
 
 #if !JUCE_IOS
 	settingsButton.onClick = [this, &deviceManager] {
@@ -89,6 +78,7 @@ void TopMenuBarComponent::paint(Graphics& g) {
 
 	g.drawText("kAmp", gap, topMargin, 80, 24, Justification::left);
 }
+
 
 void TopMenuBarComponent::resized() {
     auto* mainWindow = getTopLevelComponent();
@@ -139,25 +129,17 @@ void TopMenuBarComponent::openAccountPopup() {
 
 void TopMenuBarComponent::toggleMute() {
 	if (*this->isSoundMuted) {
-		Image muteImage = ResourceManager::loadImage(
-			"resources/icons/unmute.png");
-		if (muteImage.isValid()) {
-			muteButton.setImages(false, true, true, muteImage, 1.0f, {},
-			                     muteImage, 1.0f, {}, muteImage, 1.0f, {});
-			addAndMakeVisible(muteButton);
-		} else {
-			DBG("Erreur : image mute.png introuvable ou invalide.");
-		}
+		juce::Image muteImage = juce::ImageFileFormat::loadFrom(BinaryData::unmute_png, BinaryData::unmute_pngSize);
+		muteButton.setImages(false, true, true, muteImage, 1.0f, {},
+									 muteImage, 1.0f, {}, muteImage, 1.0f,
+									 {});
+		addAndMakeVisible(muteButton);
 	} else {
-		Image muteImage =
-			ResourceManager::loadImage("resources/icons/mute.png");
-		if (muteImage.isValid()) {
-			muteButton.setImages(false, true, true, muteImage, 1.0f, {},
-			                     muteImage, 1.0f, {}, muteImage, 1.0f, {});
-			addAndMakeVisible(muteButton);
-		} else {
-			DBG("Erreur : image mute.png introuvable ou invalide.");
-		}
+		juce::Image muteImage = juce::ImageFileFormat::loadFrom(BinaryData::mute_png, BinaryData::mute_pngSize);
+		muteButton.setImages(false, true, true, muteImage, 1.0f, {},
+									 muteImage, 1.0f, {}, muteImage, 1.0f,
+									 {});
+		addAndMakeVisible(muteButton);
 	}
 	*this->isSoundMuted = !*this->isSoundMuted;
 }
