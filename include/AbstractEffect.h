@@ -1,6 +1,8 @@
 #pragma once
 #include <JuceHeader.h>
 #include "IEffect.h"
+#include <juce_dsp/juce_dsp.h>
+#include <atomic>
 #include <string>
 
 /**
@@ -16,9 +18,9 @@ class AbstractEffect : public IEffect {
     std::string effectName;
 
     /**
-    * Tells if the effect is enabled or not.
-    */
-    bool* isEnabled = new bool(true);
+     * @brief Whether the effect is enabled (safe to read/write across UI and audio threads).
+     */
+    std::atomic<bool> isEnabled { true };
 
     /**
      * @brief Initializes a new instance of the AbstractEffect class.
@@ -29,6 +31,31 @@ class AbstractEffect : public IEffect {
      * @brief Destroys the instance of the AbstractEffect class.
      */
     ~AbstractEffect() override = default;
+
+    AbstractEffect(const AbstractEffect&) = delete;
+    AbstractEffect& operator=(const AbstractEffect&) = delete;
+
+    [[nodiscard]] bool getEnabled() const noexcept {
+        return isEnabled.load(std::memory_order_relaxed);
+    }
+
+    void setEnabled(bool enabled) noexcept {
+        isEnabled.store(enabled, std::memory_order_relaxed);
+    }
+
+    /**
+     * @brief Prepares the effect for playback with the given processing spec.
+     * Called when the audio device sample rate or block size changes.
+     * @param spec Sample rate, max block size, and channel count.
+     */
+    virtual void prepare(const juce::dsp::ProcessSpec& spec) {
+        juce::ignoreUnused(spec);
+    }
+
+    /**
+     * @brief Resets internal DSP state (filters, delays, etc.).
+     */
+    virtual void reset() {}
 
     /**
      * @brief Gets the id of the effect.
