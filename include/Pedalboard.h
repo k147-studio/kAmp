@@ -2,98 +2,45 @@
 
 #include "AbstractEffect.h"
 
+#include <memory>
+#include <vector>
+
 /**
- * @brief Represents a pedalboard that contains all the effects and apply them on the audio stream.
- * It inherits from the AbstractEffect class so we can include a pedalboard in another.
+ * @brief Ordered effect chain that also behaves as a composite AbstractEffect.
  */
-class Pedalboard : public AbstractEffect {
+class Pedalboard : public AbstractEffect
+{
 public:
-  /**
-   * @brief Initializes a new instance of the Pedalboard class.
-   */
-  Pedalboard();
+    Pedalboard();
+    ~Pedalboard() override;
 
-  /**
-   * @brief Initializes a new instance of the Pedalboard class with the given effects.
-   * @param effects The effects collection to initialize the pedalboard with.
-   */
-  explicit Pedalboard(const std::vector<AbstractEffect *> &effects);
+    Pedalboard(const Pedalboard&) = delete;
+    Pedalboard& operator=(const Pedalboard&) = delete;
 
-  /**
-   * @brief Destroys the instance of the Pedalboard class.
-   */
-  ~Pedalboard() override;
+    void apply(const AudioSourceChannelInfo& bufferToFill) override;
+    void prepare(const juce::dsp::ProcessSpec& spec) override;
+    void reset() override;
 
-  /**
-   * @brief Applies all the effects in the pedalboard to the given audio buffer.
-   * @param bufferToFill The audio buffer to apply the effects to.
-   */
-  void apply(const AudioSourceChannelInfo &bufferToFill) override;
+    bool operator==(const AbstractEffect* effect) override;
 
-  /**
-   * @brief Compares the pedalboard with the given effect.
-   * @param effect The effect to compare with.
-   * @return True if the pedalboard is equal to the given effect, false otherwise.
-   */
-  bool operator==(const AbstractEffect *effect) override;
+    void append(std::unique_ptr<AbstractEffect> effect);
+    void appendAll(std::vector<std::unique_ptr<AbstractEffect>> newEffects);
+    void insert(std::unique_ptr<AbstractEffect> effect, int index);
+    void remove(const AbstractEffect* effect);
 
-  /**
-   * @brief Adds an effect at the end of the pedalboard.
-   * @param effect The effect to add to the pedalboard.
-   */
-  void append(AbstractEffect *effect);
+    /** Moves @p dragged so it sits where @p target currently is. */
+    void move(const AbstractEffect* dragged, const AbstractEffect* target);
 
-  /**
-   * @brief Adds all the effects from the given vector to the pedalboard.
-   * @param effects The vector of effects to add to the pedalboard.
-   */
-  void appendAll(std::vector<AbstractEffect*> effects);
+    void clear();
 
-  /**
-   * @brief Inserts an effect at the given index in the pedalboard.
-   * @param effect The effect to insert into the pedalboard.
-   * @param index The index where to insert the effect.
-   */
-  void insert(AbstractEffect *effect, int index);
+    [[nodiscard]] const std::vector<std::unique_ptr<AbstractEffect>>& getEffects() const noexcept;
+    [[nodiscard]] std::vector<AbstractEffect*> getEffectPointers() const;
 
-  /**
-   * @brief Removes the given effect from the pedalboard.
-   * @param effect The effect to remove from the pedalboard.
-   */
-  void remove(const AbstractEffect *effect);
+    [[nodiscard]] String getEffectType() const override { return "Pedalboard"; }
 
-  /**
-   * @brief Gets the collection of effects contained in the pedalboard.
-   * @return The collection of effects contained in the pedalboard.
-   */
-  std::vector<AbstractEffect *> getEffects();
-
-  /**
-   * @brief Gets the type name of the effect for serialization purposes.
-   * @return A string representing the effect type.
-   */
-  [[nodiscard]] String getEffectType() const override { return "DelayEffect"; }
-
-  /**
-   * @brief Serializes the delay effect to a JSON object.
-   * @return JSON object containing serialized effect data.
-   */
-  [[nodiscard]] var toJSON() const override {
-    auto obj = AbstractEffect::toJSON();
-    return obj;
-  }
-
-  /**
-   * @brief Deserializes the delay effect from a JSON object.
-   * @param json JSON object containing serialized effect data.
-   */
-  void fromJSON(const var &json) override {
-    AbstractEffect::fromJSON(json);
-  }
+    [[nodiscard]] var toJSON() const override;
+    void fromJSON(const var& json) override;
 
 private:
-  /**
-   * @brief The collection of effects contained in the pedalboard.
-   */
-  std::vector<AbstractEffect *> effects;
+    std::vector<std::unique_ptr<AbstractEffect>> effects;
 };

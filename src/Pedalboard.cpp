@@ -1,50 +1,132 @@
-#include "DelayEffect.h"
-#include "DistortionEffect.h"
 #include "Pedalboard.h"
-#include "EqualizerEffect.h"
-#include "NoiseGateEffect.h"
 
-Pedalboard::Pedalboard() { };
+#include <algorithm>
 
-Pedalboard::~Pedalboard() {
-  for (AbstractEffect* effect : effects) {
-    delete effect;
-  }
-};
+Pedalboard::Pedalboard() = default;
 
-void Pedalboard::apply(const AudioSourceChannelInfo &bufferToFill) {
-    for (AbstractEffect* effect : effects) {
-      if (*(effect->isEnabled))
-      {
-        effect->apply(bufferToFill);
-      }
+Pedalboard::~Pedalboard() = default;
+
+void Pedalboard::apply(const AudioSourceChannelInfo& bufferToFill)
+{
+    for (auto& effect : effects)
+    {
+        if (effect->getEnabled())
+            effect->apply(bufferToFill);
     }
 }
 
-void Pedalboard::append(AbstractEffect* effect) {
-  effects.push_back(effect);
+void Pedalboard::prepare(const juce::dsp::ProcessSpec& spec)
+{
+    for (auto& effect : effects)
+        effect->prepare(spec);
 }
 
-void Pedalboard::appendAll(std::vector<AbstractEffect*> effects) {
-  this->effects.insert(this->effects.end(), effects.begin(), effects.end());
+void Pedalboard::reset()
+{
+    for (auto& effect : effects)
+        effect->reset();
 }
 
-void Pedalboard::insert(AbstractEffect* effect, int index) {
-  effects.insert(effects.begin() + index, effect);
+bool Pedalboard::operator==(const AbstractEffect* effect)
+{
+    return this == effect;
 }
 
-void Pedalboard::remove(const AbstractEffect* effect) {
-  effects.erase(std::remove(effects.begin(), effects.end(), effect), effects.end());
+void Pedalboard::append(std::unique_ptr<AbstractEffect> effect)
+{
+    if (effect != nullptr)
+        effects.push_back(std::move(effect));
 }
 
-std::vector<AbstractEffect*> Pedalboard::getEffects() {
-  return effects;
+void Pedalboard::appendAll(std::vector<std::unique_ptr<AbstractEffect>> newEffects)
+{
+    for (auto& effect : newEffects)
+        append(std::move(effect));
 }
 
-Pedalboard::Pedalboard(const std::vector<AbstractEffect*> &effects) {
-  this->effects = effects;
+void Pedalboard::insert(std::unique_ptr<AbstractEffect> effect, int index)
+{
+    if (effect == nullptr)
+        return;
+
+    const auto clamped = static_cast<size_t>(juce::jlimit(0, static_cast<int>(effects.size()), index));
+    effects.insert(effects.begin() + static_cast<std::ptrdiff_t>(clamped), std::move(effect));
 }
 
-bool Pedalboard::operator==(const AbstractEffect* effect) {
-  return true;
+void Pedalboard::remove(const AbstractEffect* effect)
+{
+    effects.erase(std::remove_if(effects.begin(), effects.end(),
+                                 [effect](const std::unique_ptr<AbstractEffect>& owned)
+                                 {
+                                     return owned.get() == effect;
+                                 }),
+                  effects.end());
+}
+
+void Pedalboard::move(const AbstractEffect* dragged, const AbstractEffect* target)
+{
+    if (dragged == nullptr || target == nullptr || dragged == target)
+        return;
+
+    const auto fromIt = std::find_if(effects.begin(), effects.end(),
+                                     [dragged](const std::unique_ptr<AbstractEffect>& owned)
+                                     {
+                                         return owned.get() == dragged;
+                                     });
+    if (fromIt == effects.end())
+        return;
+
+    auto owned = std::move(*fromIt);
+    effects.erase(fromIt);
+
+    const auto toIt = std::find_if(effects.begin(), effects.end(),
+                                   [target](const std::unique_ptr<AbstractEffect>& candidate)
+                                   {
+                                       return candidate.get() == target;
+                                   });
+    if (toIt == effects.end())
+    {
+        effects.push_back(std::move(owned));
+        return;
+    }
+
+    effects.insert(toIt, std::move(owned));
+}
+
+void Pedalboard::clear()
+{
+    effects.clear();
+}
+
+const std::vector<std::unique_ptr<AbstractEffect>>& Pedalboard::getEffects() const noexcept
+{
+    return effects;
+}
+
+std::vector<AbstractEffect*> Pedalboard::getEffectPointers() const
+{
+    std::vector<AbstractEffect*> pointers;
+    pointers.reserve(effects.size());
+    for (const auto& effect : effects)
+        pointers.push_back(effect.get());
+    return pointers;
+}
+
+var Pedalboard::toJSON() const
+{
+    auto root = AbstractEffect::toJSON();
+    if (auto* obj = root.getDynamicObject())
+    {
+        Array<var> children;
+        for (const auto& effect : effects)
+            children.add(effect->toJSON());
+        obj->setProperty("effects", children);
+    }
+    return root;
+}
+
+void Pedalboard::fromJSON(const var& json)
+{
+    AbstractEffect::fromJSON(json);
+    // Child recreation is handled by EffectRegistry / Manager::importFromFile.
 }
