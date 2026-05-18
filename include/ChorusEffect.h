@@ -3,6 +3,7 @@
 #include <JuceHeader.h>
 #include "AbstractEffect.h"
 #include <juce_dsp/juce_dsp.h>
+#include <atomic>
 
 class ChorusEffect : public AbstractEffect {
 public:
@@ -26,17 +27,17 @@ public:
     void setCentreDelay(float newCentreDelay);
     void setFeedback(float newFeedback);
     void setMix(float newMix);
-    void prepare(double sampleRate, int samplesPerBlock, int numChannels);
-
+    void prepare(const juce::dsp::ProcessSpec& spec) override;
+    void reset() override;
 
 private:
+    void syncParameters();
+
     juce::dsp::Chorus<float> chorus;
 
-    float rate = 1.5f;
-    float depth = 0.5f;
-    float centreDelay = 7.0f;
-    float feedback = 0.2f;
-    float mix = 0.5f;
-
-    void updateParameters();
+    std::atomic<float> rate { 1.5f };
+    std::atomic<float> depth { 0.5f };
+    std::atomic<float> centreDelay { 7.0f };
+    std::atomic<float> feedback { 0.2f };
+    std::atomic<float> mix { 0.5f };
 };

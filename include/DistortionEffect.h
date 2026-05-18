@@ -3,6 +3,8 @@
 #include <JuceHeader.h>
 #include <juce_dsp/juce_dsp.h>
 #include "AbstractEffect.h"
+#include <atomic>
+#include <cmath>
 
 class DistortionEffect : public AbstractEffect {
 public:
@@ -10,8 +12,8 @@ public:
     ~DistortionEffect() override;
 
     void apply(const AudioSourceChannelInfo &bufferToFill) override;
-    void prepare(const juce::dsp::ProcessSpec& spec);
-    void reset() noexcept;
+    void prepare(const juce::dsp::ProcessSpec& spec) override;
+    void reset() noexcept override;
 
     // Paramètres Boss DS-2
     void setLevel(float value); // 0.0 à 1.0
@@ -24,71 +26,71 @@ public:
     float getDist() const;
     bool isTurbo() const;
 
-    // (Sérialisation, etc.)
-    /**
-  * @brief Gets the type name of the effect for serialization purposes.
-  * @return A string representing the effect type.
-  */
     [[nodiscard]] String getEffectType() const override { return "DistortionEffect"; }
 
-    /**
-     * @brief Serializes the delay effect to a JSON object.
-     * @return JSON object containing serialized effect data.
-     */
     [[nodiscard]] var toJSON() const override {
         auto obj = AbstractEffect::toJSON();
         if (auto *dynamicObj = obj.getDynamicObject()) {
-            dynamicObj->setProperty("level", level);
-            dynamicObj->setProperty("tone", tone);
-            dynamicObj->setProperty("dist", dist);
-            dynamicObj->setProperty("turbo", turbo);
+            dynamicObj->setProperty("level", getLevel());
+            dynamicObj->setProperty("tone", getTone());
+            dynamicObj->setProperty("dist", getDist());
+            dynamicObj->setProperty("turbo", isTurbo());
         }
         return obj;
     }
 
-    /**
-     * @brief Deserializes the delay effect from a JSON object.
-     * @param json JSON object containing serialized effect data.
-     */
     void fromJSON(const var &json) override {
         AbstractEffect::fromJSON(json);
         if (const auto *obj = json.getDynamicObject()) {
-            if (obj->hasProperty("level")) level = static_cast<float>(obj->getProperty("level"));
-            if (obj->hasProperty("tone"))  tone  = static_cast<float>(obj->getProperty("tone"));
-            if (obj->hasProperty("dist"))  dist  = static_cast<float>(obj->getProperty("dist"));
-            if (obj->hasProperty("turbo")) turbo = static_cast<bool>(obj->getProperty("turbo"));
-            updateWaveshaper();
-            updateTone();
-            processorChain.get<3>().setGainLinear(level);
+            if (obj->hasProperty("level")) setLevel(static_cast<float>(obj->getProperty("level")));
+            if (obj->hasProperty("tone"))  setTone(static_cast<float>(obj->getProperty("tone")));
+            if (obj->hasProperty("dist"))  setDist(static_cast<float>(obj->getProperty("dist")));
+            if (obj->hasProperty("turbo")) setTurbo(static_cast<bool>(obj->getProperty("turbo")));
         }
     }
 
-    bool operator==(const AbstractEffect* other)
+    bool operator==(const AbstractEffect* other) override
     {
-        return dynamic_cast<const DistortionEffect*>(other) &&
-               level == static_cast<const DistortionEffect*>(other)->level &&
-               tone == static_cast<const DistortionEffect*>(other)->tone &&
-               dist == static_cast<const DistortionEffect*>(other)->dist &&
-               turbo == static_cast<const DistortionEffect*>(other)->turbo;
+        const auto* o = dynamic_cast<const DistortionEffect*>(other);
+        return o != nullptr &&
+               juce::approximatelyEqual(getLevel(), o->getLevel()) &&
+               juce::approximatelyEqual(getTone(), o->getTone()) &&
+               juce::approximatelyEqual(getDist(), o->getDist()) &&
+               isTurbo() == o->isTurbo();
     }
 
 private:
-    float level = 1.0f;
-    float tone = 0.5f;
-    float dist = 0.5f;
-    bool turbo = false;
-    float currentDrive = 1.0f;
-    bool currentTurbo = false;
+    struct DriveShaper
+    {
+        float* drive = nullptr;
+        bool* turbo = nullptr;
+
+        float operator()(float x) const noexcept
+        {
+            const float shaped = std::tanh((*drive) * x);
+            return *turbo ? shaped * 1.2f : shaped;
+        }
+    };
+
+    void syncParameters();
+    void updateTone(float toneValue, bool turboEnabled);
+
+    std::atomic<float> level { 1.0f };
+    std::atomic<float> tone { 0.5f };
+    std::atomic<float> dist { 0.5f };
+    std::atomic<bool> turbo { false };
+
+    // Audio-thread-only cached DSP state (written in syncParameters / apply)
+    float audioDrive = 1.0f;
+    bool audioTurbo = false;
+    float audioLevel = 1.0f;
+    float audioTone = 0.5f;
+    double sampleRate = 44100.0;
 
     juce::dsp::ProcessorChain<
-        juce::dsp::IIR::Filter<float>, // High-pass
-        juce::dsp::WaveShaper<float>,  // Distorsion
-        juce::dsp::IIR::Filter<float>, // Tone (low-pass)
-        juce::dsp::Gain<float>         // Level
+        juce::dsp::IIR::Filter<float>,              // High-pass
+        juce::dsp::WaveShaper<float, DriveShaper>,  // Distortion
+        juce::dsp::IIR::Filter<float>,              // Tone (low-pass)
+        juce::dsp::Gain<float>                      // Level
     > processorChain;
-
-    void updateTone();
-
-    static float waveshaperFunc(float x);
-    void updateWaveshaper();
 };

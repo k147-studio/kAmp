@@ -5,7 +5,7 @@
 class ChromaticTuner
 {
 public:
-    ChromaticTuner(int fftOrder, double sampleRate);
+    ChromaticTuner(int fftOrder, double initialSampleRate);
     ~ChromaticTuner();
     std::optional<float> getMainFrequencyFromAudioBlock(const dsp::AudioBlock<float>& block);
     int getFFTSize() const;

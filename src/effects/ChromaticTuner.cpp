@@ -1,11 +1,12 @@
 #include "ChromaticTuner.h"
 
-ChromaticTuner::ChromaticTuner(int fftOrder, double sampleRate) : fft(fftOrder),
-          fftSize(1 << fftOrder),
-          window(fftSize, juce::dsp::WindowingFunction<float>::hann),
-          sampleRate(sampleRate)
+ChromaticTuner::ChromaticTuner(int fftOrder, double initialSampleRate)
+    : fft(fftOrder),
+      fftSize(1 << fftOrder),
+      sampleRate(initialSampleRate),
+      window(static_cast<size_t>(fftSize), juce::dsp::WindowingFunction<float>::hann)
 {
-    fftBuffer.calloc(fftSize * 2);
+    fftBuffer.calloc(static_cast<size_t>(fftSize) * 2);
 }
 
 ChromaticTuner::~ChromaticTuner() = default;
@@ -15,23 +16,24 @@ std::optional<float> ChromaticTuner::getMainFrequencyFromAudioBlock(const dsp::A
     if (block.getNumChannels() == 0)
         return std::nullopt;
 
-    if (block.getNumSamples() != fftSize)
+    const auto numSamples = block.getNumSamples();
+    if (numSamples != static_cast<size_t>(fftSize))
     {
-        fftSize = block.getNumSamples();
-        fftBuffer.calloc(fftSize * 2);
+        fftSize = static_cast<int>(numSamples);
+        fftBuffer.calloc(static_cast<size_t>(fftSize) * 2);
     }
 
     // 1. Copier un bloc mono (moyenne stéréo si besoin)
-    for (size_t i = 0; i < fftSize; ++i)
+    for (int i = 0; i < fftSize; ++i)
     {
         float sample = 0.0f;
         for (size_t ch = 0; ch < block.getNumChannels(); ++ch)
-            sample += block.getSample(ch, i);
+            sample += block.getSample(static_cast<int>(ch), i);
         fftBuffer[i] = sample / static_cast<float>(block.getNumChannels());
     }
 
     // 2. Appliquer fenêtre de Hann
-    window.multiplyWithWindowingTable(fftBuffer.get(), fftSize);
+    window.multiplyWithWindowingTable(fftBuffer.get(), static_cast<size_t>(fftSize));
 
     // 3. Appliquer la FFT
     std::fill(fftBuffer.get() + fftSize, fftBuffer.get() + 2 * fftSize, 0.0f); // imag = 0
@@ -64,7 +66,7 @@ std::optional<float> ChromaticTuner::getMainFrequencyFromAudioBlock(const dsp::A
     float interpolatedBin = static_cast<float>(maxIndex) + binShift;
 
     // 6. Convertir en fréquence
-    float frequency = (interpolatedBin * sampleRate) / fftSize;
+    float frequency = static_cast<float>((interpolatedBin * sampleRate) / fftSize);
     return frequency;
 }
 

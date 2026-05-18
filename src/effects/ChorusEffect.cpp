@@ -2,7 +2,14 @@
 
 ChorusEffect::ChorusEffect() {
     effectName = "Chorus";
-    updateParameters();
+}
+
+void ChorusEffect::syncParameters() {
+    chorus.setRate(rate.load(std::memory_order_relaxed));
+    chorus.setDepth(depth.load(std::memory_order_relaxed));
+    chorus.setCentreDelay(centreDelay.load(std::memory_order_relaxed));
+    chorus.setFeedback(feedback.load(std::memory_order_relaxed));
+    chorus.setMix(mix.load(std::memory_order_relaxed));
 }
 
 void ChorusEffect::apply(const juce::AudioSourceChannelInfo& bufferToFill) {
@@ -10,60 +17,47 @@ void ChorusEffect::apply(const juce::AudioSourceChannelInfo& bufferToFill) {
     if (buffer == nullptr || buffer->getNumSamples() == 0 || buffer->getNumChannels() == 0)
         return;
 
+    syncParameters();
+
     juce::dsp::AudioBlock<float> block(*buffer);
     juce::dsp::ProcessContextReplacing<float> context(block);
-
     chorus.process(context);
 }
 
-
-void ChorusEffect::updateParameters() {
-    chorus.setRate(rate);
-    chorus.setDepth(depth);
-    chorus.setCentreDelay(centreDelay);
-    chorus.setFeedback(feedback);
-    chorus.setMix(mix);
-}
-
-float ChorusEffect::getDepth() const { return depth; }
-float ChorusEffect::getRate() const { return rate; }
-float ChorusEffect::getMix() const { return mix; }
+float ChorusEffect::getDepth() const { return depth.load(std::memory_order_relaxed); }
+float ChorusEffect::getRate() const { return rate.load(std::memory_order_relaxed); }
+float ChorusEffect::getMix() const { return mix.load(std::memory_order_relaxed); }
 
 void ChorusEffect::setRate(float newRate) {
-    rate = newRate;
-    chorus.setRate(rate);
+    rate.store(newRate, std::memory_order_relaxed);
 }
 
 void ChorusEffect::setDepth(float newDepth) {
-    depth = newDepth;
-    chorus.setDepth(depth);
+    depth.store(newDepth, std::memory_order_relaxed);
 }
 
 void ChorusEffect::setCentreDelay(float newCentreDelay) {
-    centreDelay = newCentreDelay;
-    chorus.setCentreDelay(centreDelay);
+    centreDelay.store(newCentreDelay, std::memory_order_relaxed);
 }
 
 void ChorusEffect::setFeedback(float newFeedback) {
-    feedback = newFeedback;
-    chorus.setFeedback(feedback);
+    feedback.store(newFeedback, std::memory_order_relaxed);
 }
 
 void ChorusEffect::setMix(float newMix) {
-    mix = newMix;
-    chorus.setMix(mix);
+    mix.store(newMix, std::memory_order_relaxed);
 }
 
-void ChorusEffect::prepare(double sampleRate, int samplesPerBlock, int numChannels)
+void ChorusEffect::prepare(const juce::dsp::ProcessSpec& spec)
 {
-    juce::dsp::ProcessSpec spec;
-    spec.sampleRate = sampleRate;
-    spec.maximumBlockSize = static_cast<juce::uint32>(samplesPerBlock);
-    spec.numChannels = static_cast<juce::uint32>(numChannels);
-
     chorus.prepare(spec);
+    syncParameters();
 }
 
+void ChorusEffect::reset()
+{
+    chorus.reset();
+}
 
 bool ChorusEffect::operator==(const AbstractEffect* effect) {
     return this == effect;
@@ -72,11 +66,11 @@ bool ChorusEffect::operator==(const AbstractEffect* effect) {
 juce::var ChorusEffect::toJSON() const {
     auto obj = AbstractEffect::toJSON();
     if (auto* dynamicObj = obj.getDynamicObject()) {
-        dynamicObj->setProperty("rate", rate);
-        dynamicObj->setProperty("depth", depth);
-        dynamicObj->setProperty("centreDelay", centreDelay);
-        dynamicObj->setProperty("feedback", feedback);
-        dynamicObj->setProperty("mix", mix);
+        dynamicObj->setProperty("rate", getRate());
+        dynamicObj->setProperty("depth", getDepth());
+        dynamicObj->setProperty("centreDelay", centreDelay.load(std::memory_order_relaxed));
+        dynamicObj->setProperty("feedback", feedback.load(std::memory_order_relaxed));
+        dynamicObj->setProperty("mix", getMix());
     }
     return obj;
 }

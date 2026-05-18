@@ -1,13 +1,14 @@
 #include "NoiseGateEffect.h"
 
 NoiseGateEffect::NoiseGateEffect() {
-    threshold = 0.5f;
-    attack = 0.01f;
-    release = 0.1f;
     effectName = "Noise Gate";
 }
 
 NoiseGateEffect::~NoiseGateEffect() = default;
+
+void NoiseGateEffect::prepare(const juce::dsp::ProcessSpec& spec) {
+    sampleRate = spec.sampleRate > 0.0 ? spec.sampleRate : 44100.0;
+}
 
 void NoiseGateEffect::apply(const AudioSourceChannelInfo &bufferToFill) {
     auto *leftBuffer = bufferToFill.buffer->getWritePointer(0, bufferToFill.startSample);
@@ -16,11 +17,17 @@ void NoiseGateEffect::apply(const AudioSourceChannelInfo &bufferToFill) {
                         : nullptr;
     int numSamples = bufferToFill.numSamples;
 
+    const float thresholdValue = threshold.load(std::memory_order_relaxed);
+    const float attackValue = attack.load(std::memory_order_relaxed);
+    const float releaseValue = release.load(std::memory_order_relaxed);
+
     float envelopeLeft = 0.0f;
     float envelopeRight = 0.0f;
 
-    float attackCoeff = std::exp(-1.0f / (attack * numSamples));
-    float releaseCoeff = std::exp(-1.0f / (release * numSamples));
+    const float attackSamples = juce::jmax(1.0f, attackValue * static_cast<float>(sampleRate));
+    const float releaseSamples = juce::jmax(1.0f, releaseValue * static_cast<float>(sampleRate));
+    const float attackCoeff = std::exp(-1.0f / attackSamples);
+    const float releaseCoeff = std::exp(-1.0f / releaseSamples);
 
     for (int i = 0; i < numSamples; ++i) {
         float inputSampleLeft = leftBuffer[i];
@@ -30,8 +37,8 @@ void NoiseGateEffect::apply(const AudioSourceChannelInfo &bufferToFill) {
         if (rightBuffer)
             envelopeRight = std::max(std::abs(inputSampleRight), envelopeRight * (inputSampleRight > envelopeRight ? attackCoeff : releaseCoeff));
 
-        float gainLeft = envelopeLeft < threshold ? 0.0f : 1.0f;
-        float gainRight = rightBuffer ? (envelopeRight < threshold ? 0.0f : 1.0f) : 1.0f;
+        float gainLeft = envelopeLeft < thresholdValue ? 0.0f : 1.0f;
+        float gainRight = rightBuffer ? (envelopeRight < thresholdValue ? 0.0f : 1.0f) : 1.0f;
 
         leftBuffer[i] = inputSampleLeft * gainLeft;
         if (rightBuffer) {
@@ -40,16 +47,28 @@ void NoiseGateEffect::apply(const AudioSourceChannelInfo &bufferToFill) {
     }
 }
 
-void NoiseGateEffect::setThreshold(float threshold) {
-    this->threshold = threshold;
+void NoiseGateEffect::setThreshold(float newThreshold) {
+    threshold.store(newThreshold, std::memory_order_relaxed);
 }
 
-void NoiseGateEffect::setAttack(float attack) {
-    this->attack = attack;
+void NoiseGateEffect::setAttack(float newAttack) {
+    attack.store(newAttack, std::memory_order_relaxed);
 }
 
-void NoiseGateEffect::setRelease(float release) {
-    this->release = release;
+void NoiseGateEffect::setRelease(float newRelease) {
+    release.store(newRelease, std::memory_order_relaxed);
+}
+
+float NoiseGateEffect::getThreshold() const noexcept {
+    return threshold.load(std::memory_order_relaxed);
+}
+
+float NoiseGateEffect::getAttack() const noexcept {
+    return attack.load(std::memory_order_relaxed);
+}
+
+float NoiseGateEffect::getRelease() const noexcept {
+    return release.load(std::memory_order_relaxed);
 }
 
 bool NoiseGateEffect::operator==(const AbstractEffect* effect) {
