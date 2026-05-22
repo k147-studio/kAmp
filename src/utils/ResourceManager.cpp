@@ -1,28 +1,37 @@
 #include "ResourceManager.h"
 
-ResourceManager::ResourceManager() = default;
-ResourceManager::~ResourceManager() = default;
+#include "BinaryData.h"
 
-Image ResourceManager::loadImage(const String& relativePath)
+std::unique_ptr<Drawable> ResourceManager::powerIcon;
+std::unique_ptr<Drawable> ResourceManager::closeIcon;
+
+std::unique_ptr<Drawable> ResourceManager::loadSvg(const char* data, int dataSize)
 {
-    File imageFile;
+    return Drawable::createFromImageData(data, static_cast<size_t>(dataSize));
+}
 
-#if JUCE_MAC
-    imageFile = File::getSpecialLocation(File::currentApplicationFile)
-                .getParentDirectory()
-                .getParentDirectory()
-                .getParentDirectory()
-                .getChildFile(relativePath);
-#else
-    imageFile = juce::File::getCurrentWorkingDirectory().getChildFile(relativePath);
-#endif
+void ResourceManager::configureIconButton(DrawableButton& button, const Drawable& icon)
+{
+    button.setImages(&icon);
+    button.setColour(DrawableButton::backgroundColourId, Colours::transparentBlack);
+    button.setColour(DrawableButton::backgroundOnColourId, Colours::transparentBlack);
+    button.setEdgeIndent(2);
+}
 
-    Image image = ImageFileFormat::loadFrom(imageFile);
+const Drawable& ResourceManager::getPowerIcon()
+{
+    if (powerIcon == nullptr)
+        powerIcon = loadSvg(BinaryData::power_svg, BinaryData::power_svgSize);
 
-    if (image.isNull())
-    {
-        DBG("Erreur : impossible de charger l'image à partir de " + imageFile.getFullPathName());
-    }
+    jassert(powerIcon != nullptr);
+    return *powerIcon;
+}
 
-    return image; // retourne un objet juce::Image valide ou invalide (mais jamais nullptr)
+const Drawable& ResourceManager::getCloseIcon()
+{
+    if (closeIcon == nullptr)
+        closeIcon = loadSvg(BinaryData::xmark_svg, BinaryData::xmark_svgSize);
+
+    jassert(closeIcon != nullptr);
+    return *closeIcon;
 }

@@ -21,17 +21,20 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
 
 juce_add_binary_data(ResourcesBinary
         SOURCES
-        resources/images/background.png
+        resources/fonts/Inter-Regular.ttf
+        resources/fonts/Inter-Bold.ttf
+        resources/fonts/Inter-Italic.ttf
+        resources/fonts/Inter-BoldItalic.ttf
         resources/images/kamp_logo_with_background.png
-        resources/icons/account.png
-        resources/icons/export.png
-        resources/icons/mute.png
-        resources/icons/power.png
-        resources/icons/settings.png
-        resources/icons/sync.png
-        resources/icons/unmute.png
-        resources/icons/xmark.png
-        resources/icons/tuner.png
+        resources/icons/user.svg
+        resources/icons/export.svg
+        resources/icons/mute.svg
+        resources/icons/power.svg
+        resources/icons/settings.svg
+        resources/icons/sync.svg
+        resources/icons/unmute.svg
+        resources/icons/xmark.svg
+        resources/icons/tuner.svg
 )
 
 target_include_directories(kAmp PRIVATE "${CMAKE_BINARY_DIR}/juce_binarydata_ResourcesBinary/JuceLibraryCode")

@@ -1,11 +1,16 @@
 #pragma once
 #include <JuceHeader.h>
+#include <memory>
 
 class ResourceManager
 {
 public:
-    ResourceManager();
-    ~ResourceManager();
+    static std::unique_ptr<Drawable> loadSvg(const char* data, int dataSize);
+    static void configureIconButton(DrawableButton& button, const Drawable& icon);
+    static const Drawable& getPowerIcon();
+    static const Drawable& getCloseIcon();
 
-    static Image loadImage(const juce::String& relativePath);
+private:
+    static std::unique_ptr<Drawable> powerIcon;
+    static std::unique_ptr<Drawable> closeIcon;
 };
