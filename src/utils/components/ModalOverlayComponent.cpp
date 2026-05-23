@@ -1,57 +1,61 @@
 #include "ModalOverlayComponent.h"
 
+#include "AppFonts.h"
 #include "ResourceManager.h"
 
-ModalOverlayComponent::ModalOverlayComponent(std::string viewName, juce::Component* modalContent, std::function<void()> onCloseCallback)
+ModalOverlayComponent::ModalOverlayComponent(std::string viewName,
+                                             juce::Component* modalContent,
+                                             std::function<void()> closeCallback)
+	: modalComponent(modalContent),
+	  onCloseCallback(std::move(closeCallback))
 {
-	this->onCloseCallback = onCloseCallback;
-	addAndMakeVisible(modalComponent = modalContent);
-	this->setInterceptsMouseClicks(true, false);
+	setInterceptsMouseClicks(true, true);
 
-	modalComponent->setInterceptsMouseClicks(true, true);
-	modalComponent->setCentreRelative(0.5f, 0.5f);
+	if (modalComponent != nullptr)
+	{
+		modalComponent->setInterceptsMouseClicks(true, true);
+		addAndMakeVisible(modalComponent);
+	}
 
 	addAndMakeVisible(viewNameLabel);
 	viewNameLabel.setText(viewName, juce::dontSendNotification);
-	viewNameLabel.setFont(juce::FontOptions(32.0f, juce::Font::bold));
+	viewNameLabel.setFont(AppFonts::bold(32.0f));
 	viewNameLabel.setJustificationType(juce::Justification::centred);
+	viewNameLabel.setColour(juce::Label::textColourId, juce::Colours::white);
 
-	juce::Image closeImage = ResourceManager::loadImage("resources/icons/xmark.png");
-	if (closeImage.isValid()) {
-		closeOverlayButton.setImages(true, true, true,closeImage, 1.0f, {}, closeImage, 1.0f, {},closeImage, 1.0f, {});
-		closeOverlayButton.setSize(closeImage.getWidth(), closeImage.getHeight());
-		addAndMakeVisible(closeOverlayButton);
-	} else {
-		DBG("Erreur : image xmark.png introuvable ou invalide.");
-	}
-	closeOverlayButton.onClick = [this]() { this->onCloseOverlayButtonClicked(); };
+	ResourceManager::configureIconButton(closeOverlayButton, ResourceManager::getCloseIcon());
+	closeOverlayButton.onClick = [this] { requestClose(); };
+	addAndMakeVisible(closeOverlayButton);
 }
 
 void ModalOverlayComponent::resized()
 {
-    viewNameLabel.setBounds(0, 0, getWidth(), 50);
-    closeOverlayButton.setBounds(getWidth() - 100, 10, 100, 50);
-    if (modalComponent != nullptr)
-    {
-        modalComponent->setBounds(getLocalBounds());
-    }
+	constexpr int headerHeight = 50;
+	constexpr int closeButtonSize = 32;
+
+	viewNameLabel.setBounds(0, 0, getWidth(), headerHeight);
+	closeOverlayButton.setBounds(getWidth() - closeButtonSize - 16, (headerHeight - closeButtonSize) / 2,
+	                             closeButtonSize, closeButtonSize);
+
+	if (modalComponent != nullptr)
+		modalComponent->setBounds(getLocalBounds().withTrimmedTop(headerHeight));
+
+	// Keep chrome above content so the close button stays clickable.
+	viewNameLabel.toFront(false);
+	closeOverlayButton.toFront(false);
 }
 
 void ModalOverlayComponent::paint(juce::Graphics& g)
 {
-    g.fillAll(juce::Colours::black.withAlpha(0.8f));
+	g.fillAll(juce::Colours::black.withAlpha(0.8f));
 }
 
-void ModalOverlayComponent::onCloseOverlayButtonClicked()
+void ModalOverlayComponent::requestClose()
 {
-	if (modalComponent != nullptr)
-	{
-		removeAllChildren();
-		delete modalComponent;
-		auto* mainWindow = getTopLevelComponent();
-		if (mainWindow == nullptr)
-			return;
-		mainWindow->removeChildComponent(this);
-		onCloseCallback();
-	}
+	// Defer so we are not destroyed mid-click while still on the call stack.
+	auto callback = std::move(onCloseCallback);
+	juce::MessageManager::callAsync([cb = std::move(callback)] {
+		if (cb != nullptr)
+			cb();
+	});
 }
