@@ -1,40 +1,33 @@
 #pragma once
 
+#include "TuningState.h"
+
 #include <JuceHeader.h>
+#include <string>
+#include <vector>
 
-#include "ChromaticTuner.h"
-
-struct ChromaticTuningResult
-{
-    std::string noteName;
-    float frequency;
-    float deviation;
-    bool isInTune;
-};
-
-class ChromaticTunerComponent : public juce::Component
+/**
+ * @brief UI-only tuner view. Reads TuningState published by AudioEngine.
+ */
+class ChromaticTunerComponent : public juce::Component,
+                                private juce::Timer
 {
 public:
-    explicit  ChromaticTunerComponent(int sampleRate = 44100, int fftOrder = 10);
+    explicit ChromaticTunerComponent(TuningState& tuningState);
     ~ChromaticTunerComponent() override;
 
-    void paint(juce::Graphics &g) override;
+    void paint(juce::Graphics& g) override;
     void resized() override;
-    void prepareToPlay(int samplesPerBlockExpected, double sampleRate);
-    void tune(const AudioSourceChannelInfo &bufferToFill);
-    bool isTuning();
-private:
-    ChromaticTuner* tuner;
-    bool isTunerActive = false;
-    const std::vector<std::string> notesNames;
-    float baseFrequency;
-    std::string currentNote;
-    float currentTuneCents;
-    bool isInTune;
-    float smoothedFrequency = 0.0f;
-    float smoothingCoeff = 0.2f; // Ajustez selon la réactivité voulue
 
-    ChromaticTuningResult detectTuning(float frequency);
-    std::string getNoteName(int midiNote);
-    void updateTuningDisplay(const ChromaticTuningResult& result);
+private:
+    void timerCallback() override;
+    static std::string noteNameForMidi(int midiNote);
+
+    TuningState& tuningState;
+
+    std::string currentNote { "No Signal" };
+    float currentTuneCents = 0.0f;
+    bool isInTune = false;
+
+    static const std::vector<std::string> notesNames;
 };
