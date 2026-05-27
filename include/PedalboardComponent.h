@@ -1,84 +1,47 @@
 #pragma once
 
-#include <juce_gui_basics/juce_gui_basics.h>
 #include "EffectComponent.h"
+#include "Manager.h"
+
+#include <juce_gui_basics/juce_gui_basics.h>
+#include <vector>
 
 /**
- * @brief Represents a graphical component that contains and displays a pedalboard.
+ * @brief Displays the pedalboard and keeps UI order in sync with Manager mutations.
  */
-class PedalboardComponent : public EffectComponent, public DragAndDropContainer {
-  public:
-    /**
-     * @brief Initializes a new instance of the PedalboardComponent class.
-     * @param pedalboard The pedalboard to initialize the component with.
-     */
-    PedalboardComponent(AbstractEffect* pedalboard);
-
-    /**
-     * @brief Destroys the instance of the PedalboardComponent class.
-     */
+class PedalboardComponent : public EffectComponent,
+                            public DragAndDropContainer,
+                            private ChangeListener
+{
+public:
+    explicit PedalboardComponent(Manager& manager);
     ~PedalboardComponent() override;
 
-    /**
-     * @brief Adds an EffectComponent to the pedalboard.
-     * @param effect The EffectComponent to add to the pedalboard.
-     */
-    void addEffect(EffectComponent* effect);
-
-    /**
-     * @brief Determines what to do when the component is resized.
-     */
+    void addEffect(EffectComponent* effectComponent);
     void resized() override;
+    void paint(Graphics& g) override;
 
-    /**
-     * @brief Determines how the component is displayed.
-     * @param g The JUCE graphics context that paints the component.
-     */
-    void paint(Graphics &g) override;
-
-    /**
-     * @brief Gets the required width for the pedalboard based on its effects.
-     * @return The required width for the pedalboard.
-     */
     int getRequiredWidth() const;
-
-    /**
-     * @brief Gets the required height for the pedalboard based on its effects.
-     * @return The required height for the pedalboard.
-     */
     int getRequiredHeight(int boardWidth) const;
 
-	/**
-	   * @brief Handles the drag and drop of a Component onto the pedalboard.
-	   * @param target The target Component where the dragged component is dropped.
-	   * @param dragged The Component that is being dragged.
-	   */
-	void onPedalDropped(Component* target, Component* dragged);
+    void onPedalDropped(Component* target, Component* dragged);
+    void onPedalDropped(EffectComponent* target, EffectComponent* dragged);
 
-	/**
-	 * @brief Handles the drag and drop of an EffectComponent onto the pedalboard.
-	 * @param target The target EffectComponent where the dragged component is dropped.
-	 * @param dragged The EffectComponent that is being dragged.
-	 */
-	void onPedalDropped(EffectComponent* target, EffectComponent* dragged);
-  private:
+private:
+    struct PreferredSize
+    {
+        int width = 0;
+        int height = 0;
+    };
 
-    /**
-     * @brief The default margin between pedals.
-     */
+    void changeListenerCallback(ChangeBroadcaster* source) override;
+    void rebuildFromPedalboard();
+    void refreshFlexBox();
+    void clearEffectComponents();
+
+    Manager& manager;
     const int PEDALS_MARGIN = 20;
-
-    /**
-     * @brief The collection of the effect components in the pedalboard.
-     */
     std::vector<Component*> effectsComponents;
-
-    /**
-     * @brief The flexbox that arranges layout for the effect components in the pedalboard.
-     */
+    std::vector<PreferredSize> preferredSizes;
     FlexBox flexBox;
-
-	bool somethingIsBeingDraggedOver;
-
-	void refreshFlexBox();
 };
