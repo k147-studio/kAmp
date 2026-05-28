@@ -1,13 +1,10 @@
 #include "DistortionEffect.h"
 #include "DistortionEffectComponent.h"
 
-DistortionEffectComponent::DistortionEffectComponent()
-    : BasePedalComponent(new DistortionEffect()) {}
-
-DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
-    : BasePedalComponent(effect)
+DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* e)
+    : BasePedalComponent(e)
 {
-    if (auto* distEffect = dynamic_cast<DistortionEffect*>(effect)) {
+    if (auto* distEffect = dynamic_cast<DistortionEffect*>(e)) {
         primaryColor = juce::Colours::darkviolet;
 
         // Level
@@ -88,7 +85,7 @@ DistortionEffectComponent::DistortionEffectComponent(AbstractEffect* effect)
 
         this->initializePedal();
 
-        setSize(400, DEFAULT_HEIGHT);
+        setSize(400, static_cast<int>(DEFAULT_HEIGHT));
     }
 }
 

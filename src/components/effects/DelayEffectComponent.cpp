@@ -1,11 +1,8 @@
 #include "DelayEffectComponent.h"
 
-DelayEffectComponent::DelayEffectComponent() : BasePedalComponent(
-	new DelayEffect()) {}
-
-DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) :
-	BasePedalComponent(effect) {
-	if (auto delayEffect = dynamic_cast<DelayEffect*>(effect)) {
+DelayEffectComponent::DelayEffectComponent(AbstractEffect* e) :
+	BasePedalComponent(e) {
+	if (auto delayEffect = dynamic_cast<DelayEffect*>(e)) {
 		primaryColor = Colours::mediumblue;
 		using Track = Grid::TrackInfo;
 		using Fr = Grid::Fr;
@@ -26,7 +23,7 @@ DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) :
 		rateSlider.setRange(0.0, 100.0, 1);
 		rateSlider.setValue(50.0);
 		rateSlider.onValueChange = [this, delayEffect] {
-			delayEffect->setRate(rateSlider.getValue());
+			delayEffect->setRate(static_cast<float>(rateSlider.getValue()));
 		};
 
 		rateLabel.setText("Rate", dontSendNotification);
@@ -34,7 +31,7 @@ DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) :
 		rateLabel.attachToComponent(&rateSlider, false);
 
 		delaySlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
-		delaySlider.setTextValueSuffix("ms");
+		delaySlider.setTextValueSuffix(" ms");
 		delaySlider.setTitle("Delay");
 		delaySlider.setTextBoxStyle(Slider::TextBoxBelow, false, 100, 20);
 		delaySlider.setColour(Slider::textBoxOutlineColourId,
@@ -42,7 +39,7 @@ DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) :
 		delaySlider.setRange(0.0, 3000.0, 10);
 		delaySlider.setValue(500.0);
 		delaySlider.onValueChange = [this, delayEffect] {
-			delayEffect->setDelay(delaySlider.getValue());
+			delayEffect->setDelay(static_cast<float>(delaySlider.getValue()));
 		};
 
 		delayLabel.setText("Delay", dontSendNotification);
@@ -64,7 +61,7 @@ DelayEffectComponent::DelayEffectComponent(AbstractEffect* effect) :
 		addAndMakeVisible(delayLabel);
 
 		this->initializePedal();
-		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		setSize(static_cast<int>(DEFAULT_WIDTH), static_cast<int>(DEFAULT_HEIGHT));
 	}
 }
 

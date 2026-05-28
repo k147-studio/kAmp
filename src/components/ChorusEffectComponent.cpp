@@ -14,83 +14,53 @@ ChorusEffectComponent::ChorusEffectComponent(AbstractEffect* e)
     grid.templateRows = { Track(Fr(1)), Track(Fr(2)) };
     grid.templateColumns = { Track(Fr(1)), Track(Fr(1)), Track(Fr(1)) };
 
-    // ----- Sliders -----
-    // Depth
     depthSlider.setSliderStyle(juce::Slider::Rotary);
     depthSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
     depthSlider.setRange(0.0, 1.0, 0.01);
-    depthSlider.setValue(chorusEffect->getDepth());
+    depthSlider.setValue(chorusEffect != nullptr ? chorusEffect->getDepth() : 0.5);
     depthSlider.onValueChange = [this]() {
-        chorusEffect->setDepth(depthSlider.getValue());
+        if (chorusEffect != nullptr)
+            chorusEffect->setDepth(static_cast<float>(depthSlider.getValue()));
     };
     depthLabel.setText("Depth", juce::dontSendNotification);
     depthLabel.setJustificationType(juce::Justification::centred);
 
-    // Rate
     rateSlider.setSliderStyle(juce::Slider::Rotary);
     rateSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
     rateSlider.setRange(0.0, 10.0, 0.01);
-    rateSlider.setValue(chorusEffect->getRate());
+    rateSlider.setValue(chorusEffect != nullptr ? chorusEffect->getRate() : 1.5);
     rateSlider.onValueChange = [this]() {
-        chorusEffect->setRate(rateSlider.getValue());
+        if (chorusEffect != nullptr)
+            chorusEffect->setRate(static_cast<float>(rateSlider.getValue()));
     };
     rateLabel.setText("Rate", juce::dontSendNotification);
     rateLabel.setJustificationType(juce::Justification::centred);
 
-    // Mix
     mixSlider.setSliderStyle(juce::Slider::Rotary);
     mixSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
     mixSlider.setRange(0.0, 1.0, 0.01);
-    mixSlider.setValue(chorusEffect->getMix());
+    mixSlider.setValue(chorusEffect != nullptr ? chorusEffect->getMix() : 0.5);
     mixSlider.onValueChange = [this]() {
-        chorusEffect->setMix(mixSlider.getValue());
+        if (chorusEffect != nullptr)
+            chorusEffect->setMix(static_cast<float>(mixSlider.getValue()));
     };
     mixLabel.setText("Mix", juce::dontSendNotification);
     mixLabel.setJustificationType(juce::Justification::centred);
 
-    // ----- Ajouter au Grid -----
     grid.items.addArray({
         juce::GridItem(depthLabel), juce::GridItem(rateLabel), juce::GridItem(mixLabel),
         juce::GridItem(depthSlider), juce::GridItem(rateSlider), juce::GridItem(mixSlider),
     });
 
     settingsLayout = new PedalSettingsLayoutComponent(&grid);
+    settingsLayout->addAndMakeVisible(depthSlider);
+    settingsLayout->addAndMakeVisible(depthLabel);
+    settingsLayout->addAndMakeVisible(rateSlider);
+    settingsLayout->addAndMakeVisible(rateLabel);
+    settingsLayout->addAndMakeVisible(mixSlider);
+    settingsLayout->addAndMakeVisible(mixLabel);
 
-    addAndMakeVisible(settingsLayout);  // <<== Ajout crucial pour afficher le layout
-
-    if (chorusEffect != nullptr)
-    {
-        double defaultSampleRate = 44100.0;
-        int defaultBlockSize = 512;
-        int defaultNumChannels = 2;
-
-        chorusEffect->prepare(defaultSampleRate, defaultBlockSize, defaultNumChannels);
-    }
-
-    // Ajout visible
-    addAndMakeVisible(depthSlider);
-    addAndMakeVisible(depthLabel);
-    addAndMakeVisible(rateSlider);
-    addAndMakeVisible(rateLabel);
-    addAndMakeVisible(mixSlider);
-    addAndMakeVisible(mixLabel);
-
-    // Positionnement manuel (à ajuster en fonction de ta taille)
-    auto area = getLocalBounds();
-    int sliderWidth = area.getWidth() / 3;
-    int sliderHeight = area.getHeight() / 2;
-
-    depthSlider.setBounds(0, sliderHeight, sliderWidth, sliderHeight);
-    depthLabel.setBounds(0, 0, sliderWidth, sliderHeight / 2);
-
-    rateSlider.setBounds(sliderWidth, sliderHeight, sliderWidth, sliderHeight);
-    rateLabel.setBounds(sliderWidth, 0, sliderWidth, sliderHeight / 2);
-
-    mixSlider.setBounds(sliderWidth * 2, sliderHeight, sliderWidth, sliderHeight);
-    mixLabel.setBounds(sliderWidth * 2, 0, sliderWidth, sliderHeight / 2);
-
-
-    this->initializePedal();
+    initializePedal();
     setSize(300, 300);
 }
 

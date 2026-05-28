@@ -6,7 +6,7 @@
 
 class EqualizerEffectComponent : public BasePedalComponent {
 public:
-    explicit EqualizerEffectComponent(AbstractEffect* effect);
+    explicit EqualizerEffectComponent(AbstractEffect* e);
     ~EqualizerEffectComponent() override = default;
 
 private:

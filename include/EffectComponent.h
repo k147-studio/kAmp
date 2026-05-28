@@ -20,7 +20,7 @@ class EffectComponent : public juce::Component
          * @brief Initializes a new instance of the EffectComponent class.
          * @param effect The effect to initialize the component with.
          */
-        explicit EffectComponent(AbstractEffect* effect);
+        explicit EffectComponent(AbstractEffect* e);
 
         /**
          * @brief Destroys the instance of the EffectComponent class.

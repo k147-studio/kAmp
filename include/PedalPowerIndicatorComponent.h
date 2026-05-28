@@ -12,7 +12,7 @@ public:
      * @brief Initializes a new instance of the PedalPowerIndicatorComponent class.
      * @param isEnabled Indicates whether the pedal is enabled or not.
      */
-    explicit PedalPowerIndicatorComponent(bool isEnabled = true);
+    explicit PedalPowerIndicatorComponent(bool enabled = true);
 
     /**
      * @brief Destroys the instance of the PedalPowerIndicatorComponent class.
@@ -29,7 +29,7 @@ public:
      * @brief Toggles the power status of the pedal.
      * @param isEnabled Indicates whether the pedal is enabled or not.
      */
-    void togglePower(bool isEnabled);
+    void togglePower(bool enabled);
 private:
     /**
      * @brief Indicates whether the pedal is enabled or not.

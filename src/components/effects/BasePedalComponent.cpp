@@ -1,11 +1,11 @@
 #include "BasePedalComponent.h"
 
+#include "AppFonts.h"
 #include "PedalboardComponent.h"
 #include "ResourceManager.h"
 
-BasePedalComponent::BasePedalComponent(AbstractEffect* effect) :
-	EffectComponent(effect) {
-	isEnabled = effect->isEnabled;
+BasePedalComponent::BasePedalComponent(AbstractEffect* e) :
+	EffectComponent(e) {
 	setInterceptsMouseClicks(true, false);
 	addMouseListener(this, true);
 }
@@ -22,27 +22,28 @@ void BasePedalComponent::resized() {
 }
 
 void BasePedalComponent::onEnableButtonClicked() {
-	*isEnabled = !(*isEnabled);
-	enablePedalButton.setToggleState(*isEnabled, dontSendNotification);
-	isEnabledIndicator->togglePower(*isEnabled);
+	const bool enabled = !getEffect()->getEnabled();
+	getEffect()->setEnabled(enabled);
+	enablePedalButton.setToggleState(enabled, dontSendNotification);
+	isEnabledIndicator->togglePower(enabled);
 }
 
 void BasePedalComponent::initializePedal() {
-	isEnabledIndicator = new PedalPowerIndicatorComponent(*isEnabled);
+	jassert(settingsLayout != nullptr);
+
+	isEnabledIndicator = new PedalPowerIndicatorComponent(getEffect()->getEnabled());
 	pedalLabel = new Label();
 	pedalLabel->setText(getEffect()->effectName, dontSendNotification);
 	pedalLabel->setJustificationType(Justification::centred);
-	pedalLabel->setFont(FontOptions(30.0f, Font::bold));
+	pedalLabel->setFont(AppFonts::bold(30.0f));
 
-	juce::Image powerImage = juce::ImageFileFormat::loadFrom(BinaryData::power_png, BinaryData::power_pngSize);
-	enablePedalButton.setImages(true, true, true, powerImage, 1.0f, {},
-								 powerImage, 1.0f, {}, powerImage, 1.0f,
-								 {});
+	ResourceManager::configureIconButton(enablePedalButton, ResourceManager::getPowerIcon());
 	enablePedalButton.onClick = [this] {
 		this->onEnableButtonClicked();
 	};
 	addAndMakeVisible(enablePedalButton);
 
+	addAndMakeVisible(*settingsLayout);
 	addAndMakeVisible(*pedalLabel);
 	addAndMakeVisible(*isEnabledIndicator);
 

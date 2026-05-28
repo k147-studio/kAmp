@@ -4,8 +4,8 @@
 #include "EqualizerEffectComponent.h"
 
 
-EqualizerEffectComponent::EqualizerEffectComponent(AbstractEffect* effect)
-    : BasePedalComponent(effect), eqEffect(dynamic_cast<EqualizerEffect*>(effect)) {
+EqualizerEffectComponent::EqualizerEffectComponent(AbstractEffect* e)
+    : BasePedalComponent(e), eqEffect(dynamic_cast<EqualizerEffect*>(e)) {
 
     jassert(eqEffect != nullptr);
 
@@ -29,9 +29,7 @@ EqualizerEffectComponent::EqualizerEffectComponent(AbstractEffect* effect)
         sliders[i].setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
         sliders[i].onValueChange = [this, i]
         {
-            if (static_cast<float>(sliders[i].getValue())) {
-                eqEffect->setGain(i, static_cast<float>(sliders[i].getValue()));
-            }
+            eqEffect->setGain(i, static_cast<float>(sliders[i].getValue()));
         };
         sliders[i].setTitle(freqLabels[i]);
         sliders[i].setBounds(i * (getWidth() / 10), 0, getWidth() / 10, (getHeight() / 5) * 4);
@@ -65,7 +63,7 @@ EqualizerEffectComponent::EqualizerEffectComponent(AbstractEffect* effect)
 void EqualizerEffectComponent::sliderValueChanged(juce::Slider* slider) {
     for (int i = 0; i < 10; ++i) {
         if (slider == &sliders[i]) {
-            eqEffect->setGain(i, slider->getValue());
+            eqEffect->setGain(i, static_cast<float>(slider->getValue()));
             break;
         }
     }

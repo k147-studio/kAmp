@@ -1,8 +1,8 @@
 #include "PedalPowerIndicatorComponent.h"
 
-PedalPowerIndicatorComponent::PedalPowerIndicatorComponent(bool isEnabled)
+PedalPowerIndicatorComponent::PedalPowerIndicatorComponent(bool enabled)
+    : isEnabled(enabled)
 {
-    this->isEnabled = isEnabled;
 }
 
 PedalPowerIndicatorComponent::~PedalPowerIndicatorComponent() = default;
@@ -13,8 +13,8 @@ void PedalPowerIndicatorComponent::paint(juce::Graphics &g)
     g.fillEllipse(juce::Rectangle<float>((getWidth() / 2) - 10,(getHeight() / 2) - 10,20,20));
 }
 
-void PedalPowerIndicatorComponent::togglePower(bool isEnabled)
+void PedalPowerIndicatorComponent::togglePower(bool enabled)
 {
-    this->isEnabled = isEnabled;
+    isEnabled = enabled;
     repaint();
 }

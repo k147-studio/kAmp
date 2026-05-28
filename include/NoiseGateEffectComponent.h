@@ -13,7 +13,7 @@ public:
     /**
      * @brief Initializes a new instance of the NoiseGateEffectComponent class.
      */
-    explicit NoiseGateEffectComponent(AbstractEffect* effect);
+    explicit NoiseGateEffectComponent(AbstractEffect* e);
 
     /**
      * @brief Destroys the instance of the NoiseGateEffectComponent class.
@@ -59,17 +59,17 @@ private:
      * @brief The function that is called when the threshold value changes.
      * @param value The new value of the threshold slider.
      */
-    void onThreholdValueChanged(NoiseGateEffect* effect, double value);
+    void onThreholdValueChanged(NoiseGateEffect* gateEffect, double value);
 
     /**
      * @brief The function that is called when the release value changes.
      * @param value The new value of the release slider.
      */
-    void onAttackValueChanged(NoiseGateEffect* effect, double value);
+    void onAttackValueChanged(NoiseGateEffect* gateEffect, double value);
 
     /**
      * @brief The function that is called when the release value changes.
      * @param value The new value of the release slider.
      */
-    void onReleaseValueChanged(NoiseGateEffect* effect, double value);
+    void onReleaseValueChanged(NoiseGateEffect* gateEffect, double value);
 };

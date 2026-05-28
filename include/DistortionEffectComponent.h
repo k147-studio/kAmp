@@ -6,8 +6,7 @@
 
 class DistortionEffectComponent : public BasePedalComponent {
 public:
-    DistortionEffectComponent();
-    explicit DistortionEffectComponent(AbstractEffect* effect);
+    explicit DistortionEffectComponent(AbstractEffect* e);
     ~DistortionEffectComponent() override;
 
 private:

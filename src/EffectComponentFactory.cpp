@@ -1,32 +1,29 @@
 #include "AbstractEffect.h"
+#include "ChorusEffectComponent.h"
 #include "DelayEffectComponent.h"
-#include "DistortionEffect.h"
 #include "DistortionEffectComponent.h"
 #include "EffectComponentFactory.h"
-#include "EqualizerEffect.h"
 #include "EqualizerEffectComponent.h"
-#include "NoiseGateEffect.h"
 #include "NoiseGateEffectComponent.h"
-#include "ChorusEffect.h"
-#include "ChorusEffectComponent.h"
 
-EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* effect) {
-    if (dynamic_cast<DelayEffect*>(effect) != nullptr) {
+EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* effect)
+{
+    if (effect == nullptr)
+        return nullptr;
+
+    // Prefer type string (same source of truth as EffectRegistry) over dynamic_cast.
+    const String type = effect->getEffectType();
+
+    if (type == "DelayEffect")
         return new DelayEffectComponent(effect);
-    }
-    if (dynamic_cast<DistortionEffect*>(effect) != nullptr) {
+    if (type == "DistortionEffect")
         return new DistortionEffectComponent(effect);
-    }
-    if (dynamic_cast<EqualizerEffect*>(effect) != nullptr)
-    {
+    if (type == "EqualizerEffect")
         return new EqualizerEffectComponent(effect);
-    }
-    if (dynamic_cast<NoiseGateEffect*>(effect) != nullptr) {
+    if (type == "NoiseGateEffect")
         return new NoiseGateEffectComponent(effect);
-    }
-    if (dynamic_cast<ChorusEffect*>(effect) != nullptr)
-    {
+    if (type == "ChorusEffect")
         return new ChorusEffectComponent(effect);
-    }
+
     return nullptr;
 }

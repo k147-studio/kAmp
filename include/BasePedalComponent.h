@@ -13,7 +13,7 @@ public:
 	 * @brief Initializes a new instance of the BasePedalComponent class.
 	 * @param effect The effect associated with this pedal component.
 	 */
-	BasePedalComponent(AbstractEffect* effect);
+	BasePedalComponent(AbstractEffect* e);
 
 	/**
 	 * @brief Destroys the instance of the BasePedalComponent class.
@@ -69,27 +69,22 @@ protected:
 	Colour primaryColor;
 	Colour secondaryColor;
 
-	PedalSettingsLayoutComponent* settingsLayout;
+	PedalSettingsLayoutComponent* settingsLayout = nullptr;
 
 	/**
 	 * @brief The label for the pedal name.
 	 */
-	Label* pedalLabel;
+	Label* pedalLabel = nullptr;
 
 	/**
 	 * @brief The button to enable/disable the pedal.
 	 */
-	ImageButton enablePedalButton;
+	DrawableButton enablePedalButton { "power", DrawableButton::ImageFitted };
 
 	/**
 	 * @brief The indicator for the pedal power status.
 	 */
-	PedalPowerIndicatorComponent* isEnabledIndicator;
-
-	/**
-	 * @brief Tells if the pedal is enabled or not.
-	 */
-	bool* isEnabled;
+	PedalPowerIndicatorComponent* isEnabledIndicator = nullptr;
 
 	void onEnableButtonClicked();
 	void initializePedal();

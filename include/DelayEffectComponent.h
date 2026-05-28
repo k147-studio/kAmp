@@ -11,15 +11,10 @@
 class DelayEffectComponent : public BasePedalComponent {
   public:
     /**
-     * @brief Initializes a new instance of the DelayComponent class.
-     */
-    DelayEffectComponent();
-
-    /**
      * @brief Initializes a new instance of the DelayComponent class with the given AbstractEffect.
      * @param effect The effect to initialize the component with.
      */
-    explicit DelayEffectComponent(AbstractEffect* effect);
+    explicit DelayEffectComponent(AbstractEffect* e);
 
     /**
      * @brief Destroys the instance of the DelayComponent class.
