@@ -2,9 +2,13 @@
 
 #include <JuceHeader.h>
 
+#include <atomic>
+#include <memory>
+
 class AccountComponent : public Component {
 public:
 	AccountComponent();
+	~AccountComponent() override;
 	void paint(Graphics&) override;
 	void resized() override;
 
@@ -29,6 +33,8 @@ private:
 	TextButton importButton{"Importer les réglages"};
 
 	Grid grid;
+
+	std::shared_ptr<std::atomic<bool>> apiAlive;
 
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AccountComponent)
 };

@@ -1,5 +1,6 @@
 #include "AccountComponent.h"
 #include "ApiClient.h"
+#include "AppFonts.h"
 
 namespace {
 constexpr float titleFontSize = 24.0f;
@@ -12,32 +13,39 @@ AccountComponent::AccountComponent() {
 	setupButtons();
 	setupGrid();
 
-	// Dummy API call
+	apiAlive = std::make_shared<std::atomic<bool>>(true);
+
 	auto replyFunc = [this](const String& content) {
 		apiResponseReceived(content);
 	};
-	ApiClient::runHTTP({"https://dummyjson.com/test"}, replyFunc);
+	ApiClient::runHTTP({"https://dummyjson.com/test"}, replyFunc, apiAlive);
+}
+
+AccountComponent::~AccountComponent() {
+	if (apiAlive != nullptr) {
+		apiAlive->store(false);
+	}
 }
 
 void AccountComponent::setupLabels() {
-	titleLabel.setFont(FontOptions(titleFontSize, Font::bold));
+	titleLabel.setFont(AppFonts::bold(titleFontSize));
 	titleLabel.setJustificationType(Justification::centred);
 	addAndMakeVisible(titleLabel);
 
 	for (auto* label : {&emailLabel, &usernameLabel}) {
-		label->setFont(FontOptions(labelFontSize));
+		label->setFont(AppFonts::regular(labelFontSize));
 		label->setJustificationType(Justification::centredLeft);
 		addAndMakeVisible(*label);
 	}
 
 	for (auto* val : {&emailValueLabel, &usernameValueLabel}) {
-		val->setFont(FontOptions(labelFontSize));
+		val->setFont(AppFonts::regular(labelFontSize));
 		val->setJustificationType(Justification::centredLeft);
 		val->setColour(Label::textColourId, Colours::black);
 		addAndMakeVisible(*val);
 	}
 
-	responseLabel.setFont(FontOptions(responseFontSize));
+	responseLabel.setFont(AppFonts::regular(responseFontSize));
 	responseLabel.setJustificationType(Justification::centred);
 	responseLabel.setColour(Label::textColourId, Colours::darkgrey);
 	addAndMakeVisible(responseLabel);
