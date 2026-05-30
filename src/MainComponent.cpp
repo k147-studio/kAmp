@@ -1,69 +1,72 @@
 #include "MainComponent.h"
-#include "ResourceManager.h"
 
-MainComponent::MainComponent(const Manager& manager):
-	pedalboardComponent(manager.getPedalboard()),
-	topMenuBarComponent(this->deviceManager, &isSoundMuted, &tuningFunction), manager(manager) {
-	setAudioChannels(2, 2);
+MainComponent::MainComponent(std::unique_ptr<Pedalboard> pedalboard)
+    : audioEngine(std::move(pedalboard)),
+      manager(audioEngine.getPedalboard()),
+      pedalboardComponent(manager),
+      topMenuBarComponent(deviceManager,
+                          &audioEngine.getMuteFlag(),
+                          &audioEngine.getTuningState())
+{
+    setAudioChannels(2, 2);
 
+    // Member component — do not let Viewport take ownership.
+    pedalboardContainer.setViewedComponent(&pedalboardComponent, false);
+    pedalboardContainer.setScrollBarsShown(true, false);
 
-	juce::Image img = juce::ImageFileFormat::loadFrom(BinaryData::background_png, BinaryData::background_pngSize);
-	backgroundImage.setImage(img);
-
-	pedalboardContainer.setViewedComponent(&pedalboardComponent, true);
-	pedalboardContainer.setScrollBarsShown(true, false);
-
-	addAndMakeVisible(backgroundImage);
-	addAndMakeVisible(pedalboardContainer);
-	addAndMakeVisible(topMenuBarComponent);
-	addAndMakeVisible(bottomMenuBarComponent);
-	addAndMakeVisible(connectionComponent);
+    addAndMakeVisible(pedalboardContainer);
+    addAndMakeVisible(topMenuBarComponent);
+    addAndMakeVisible(bottomMenuBarComponent);
 }
 
-//==============================================================================
-void MainComponent::paint(Graphics& g) {}
-
-void MainComponent::resized() {
-	backgroundImage.setBounds(getLocalBounds());
-	connectionComponent.setBounds(getLocalBounds());
-
-	const int pedalboardWidth = getWidth();
-	const int pedalboardHeight = pedalboardComponent.getRequiredHeight(getWidth());
-	pedalboardComponent.setSize(pedalboardWidth, pedalboardHeight);
-
-	using Track = Grid::TrackInfo;
-	using Px = Grid::Px;
-	using Fr = Grid::Fr;
-	grid.templateRows = {Track(Px(50)), Track(Fr(1))};
-	grid.templateColumns = {Track(Fr(1))};
-	grid.items = {
-		GridItem(topMenuBarComponent),
-		GridItem(pedalboardContainer)
-	};
-	grid.performLayout(getLocalBounds());
+MainComponent::~MainComponent()
+{
+    audioEngine.getTuningState().enabled.store(false, std::memory_order_release);
+    topMenuBarComponent.closeAllModals();
+    shutdownAudio();
 }
 
-void MainComponent::prepareToPlay(int samplesPerBlockExpected,
-                                  double sampleRate) {}
-
-void MainComponent::getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill) {
-    if (!this->isSoundMuted) {
-        if (&bufferToFill == nullptr) {
-            return;
-        }
-        if (bufferToFill.buffer == nullptr) {
-            return;
-        }
-        this->manager.apply(bufferToFill);
-    }
-    else {
-        bufferToFill.clearActiveBufferRegion();
-    }
-    if (tuningFunction != nullptr) {
-        tuningFunction(bufferToFill);
-    }
+void MainComponent::paint(Graphics& g)
+{
+    const ColourGradient gradient(Colour(0xff7c6c61), 0.0f, 0.0f,
+                                  Colour(0xff1a191e), static_cast<float>(getWidth()),
+                                  static_cast<float>(getHeight()), true);
+    g.setGradientFill(gradient);
+    g.fillAll();
 }
 
-void MainComponent::releaseResources() {}
+void MainComponent::resized()
+{
+    constexpr int topBarHeight = 50;
+    auto contentBounds = getLocalBounds();
+    contentBounds.removeFromTop(topBarHeight);
 
+    const int pedalboardWidth = contentBounds.getWidth();
+    const int pedalboardHeight = pedalboardComponent.getRequiredHeight(pedalboardWidth);
+    pedalboardComponent.setSize(pedalboardWidth, pedalboardHeight);
 
+    pedalboardContainer.setBounds(contentBounds);
+    topMenuBarComponent.setBounds(0, 0, getWidth(), topBarHeight);
+    topMenuBarComponent.toFront(false);
+}
+
+void MainComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate)
+{
+    juce::dsp::ProcessSpec spec;
+    spec.sampleRate = sampleRate;
+    spec.maximumBlockSize = static_cast<juce::uint32>(samplesPerBlockExpected);
+    spec.numChannels = 2;
+    audioEngine.prepare(spec);
+}
+
+void MainComponent::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill)
+{
+    audioEngine.process(bufferToFill);
+}
+
+void MainComponent::releaseResources()
+{
+    audioEngine.getTuningState().enabled.store(false, std::memory_order_release);
+    topMenuBarComponent.closeAllModals();
+    audioEngine.reset();
+}

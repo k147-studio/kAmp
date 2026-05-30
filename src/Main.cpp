@@ -1,81 +1,84 @@
 #include <JuceHeader.h>
-#include "EffectsFactory.h"
+
+#include "AppFonts.h"
+#include "EffectRegistry.h"
 #include "MainComponent.h"
+#include "Pedalboard.h"
 
-class GuiAppApplication final : public JUCEApplication {
+class GuiAppApplication final : public JUCEApplication
+{
 public:
-	GuiAppApplication() = default;
+    GuiAppApplication() = default;
 
-	const String getApplicationName() override {
-		return JUCE_APPLICATION_NAME_STRING;
-	}
+    const String getApplicationName() override
+    {
+        return JUCE_APPLICATION_NAME_STRING;
+    }
 
-	const String getApplicationVersion() override {
-		return JUCE_APPLICATION_VERSION_STRING;
-	}
+    const String getApplicationVersion() override
+    {
+        return JUCE_APPLICATION_VERSION_STRING;
+    }
 
-	bool moreThanOneInstanceAllowed() override { return false; }
+    bool moreThanOneInstanceAllowed() override { return false; }
 
-	void initialise(const String& commandLine) override {
-		// This method is where you should put your application's initialisation code..
-		ignoreUnused(commandLine);
+    void initialise(const String& commandLine) override
+    {
+        ignoreUnused(commandLine);
+        AppFonts::initialise();
+        mainWindow = std::make_unique<MainWindow>(getApplicationName());
+    }
 
-		mainWindow = std::make_unique<MainWindow>(getApplicationName());
-	}
+    void shutdown() override
+    {
+        mainWindow = nullptr;
+    }
 
-	void shutdown() override {
-		mainWindow = nullptr; // (deletes our window)
-	}
+    void systemRequestedQuit() override
+    {
+        quit();
+    }
 
-	void systemRequestedQuit() override {
-		// This is called when the app is being asked to quit: you can ignore this
-		// request and let the app carry on running, or call quit() to allow the app to close.
-		quit();
-	}
+    void anotherInstanceStarted(const String& commandLine) override
+    {
+        ignoreUnused(commandLine);
+    }
 
-	void anotherInstanceStarted(const String& commandLine) override {
-		// When another instance of the app is launched while this one is running,
-		// this method is invoked, and the commandLine parameter tells you what
-		// the other instance's command-line arguments were.
-		ignoreUnused(commandLine);
-	}
+    class MainWindow final : public DocumentWindow
+    {
+    public:
+        explicit MainWindow(const String& name)
+            : DocumentWindow(name,
+                             Desktop::getInstance().getDefaultLookAndFeel().findColour(backgroundColourId),
+                             allButtons)
+        {
+            setUsingNativeTitleBar(true);
 
-	class MainWindow final : public DocumentWindow {
-	public:
-		explicit MainWindow(const String& name) :
-			DocumentWindow(
-				name, Desktop::getInstance().getDefaultLookAndFeel().findColour(
-					backgroundColourId), allButtons) {
-			setUsingNativeTitleBar(true);
-			Pedalboard* pedalboard = new Pedalboard();
-			pedalboard->appendAll(EffectsFactory::createAllEffects());
-			Manager* manager = new Manager(pedalboard);
-			setContentOwned(new MainComponent(*manager), true);
+            auto pedalboard = std::make_unique<Pedalboard>();
+            pedalboard->appendAll(EffectRegistry::createDefaultEffects());
+            setContentOwned(new MainComponent(std::move(pedalboard)), true);
 
 #if JUCE_IOS || JUCE_ANDROID
-            setFullScreen (true);
+            setFullScreen(true);
 #else
-			setResizable(true, true);
-			setSize(1280, 854);
-			centreWithSize(1280, 854);
+            setResizable(true, true);
+            setSize(1280, 854);
+            centreWithSize(1280, 854);
 #endif
-			Component::setVisible(true);
-		}
+            Component::setVisible(true);
+        }
 
-		void closeButtonPressed() override {
-			// This is called when the user tries to close this window. Here, we'll just
-			// ask the app to quit when this happens, but you can change this to do
-			// whatever you need.
-			getInstance()->systemRequestedQuit();
-		}
+        void closeButtonPressed() override
+        {
+            getInstance()->systemRequestedQuit();
+        }
 
-	private:
-		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainWindow)
-	};
+    private:
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainWindow)
+    };
 
 private:
-	std::unique_ptr<MainWindow> mainWindow;
+    std::unique_ptr<MainWindow> mainWindow;
 };
 
-// This macro generates the main() routine that launches the app.
 START_JUCE_APPLICATION(GuiAppApplication)
