@@ -1,0 +1,1820 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		08BF2528A711998C445AA3E8 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 93D847FD793446D3BEABA1AA /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				B4AEC5D3E93EE86CEA0D2368 /* Generate CMakeFiles/ZERO_CHECK */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		D22BD1769D7224D4DA091CEC /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 68A4C763A1F24EC693839E80 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				93426DA6A4AC2C2AC9CE883C /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				5EC3FE1FD4C343E2A2563162 /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+		E1ECB115353F5A357FDD1324 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D2700989F5BB4D9895546E98 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				329763219C4072A82D5A6FF8 /* Generate CMakeFiles/ALL_BUILD */,
+			);
+			dependencies = (
+				929C52F22E6B411ABDBC4521 /* PBXTargetDependency */,
+				F8CB74408C65430ABB350EC7 /* PBXTargetDependency */,
+				B171BD6C57A94D479644267D /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0350BF313D8940F8AE161270 /* /Users/ema/kAmp/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib */ = {isa = PBXBuildFile; fileRef = 2B6FEDFBAA5143D198EA73A3 /* /Users/ema/kAmp/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib */; };
+		063C431A4D5B4BA6B87B1F62 /* /Users/ema/kAmp/JUCE/modules/juce_gui_extra/juce_gui_extra.mm */ = {isa = PBXBuildFile; fileRef = F667EE5399DE47C585DC8599 /* /Users/ema/kAmp/JUCE/modules/juce_gui_extra/juce_gui_extra.mm */; };
+		070959932FD94971BC2D6B77 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors/juce_audio_processors.mm */ = {isa = PBXBuildFile; fileRef = 6F56B06ADEE742D1ABA89541 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors/juce_audio_processors.mm */; };
+		08E6EA6EE2214580979310C6 /* /Users/ema/kAmp/src/utils/ModalOverlayComponent.cpp */ = {isa = PBXBuildFile; fileRef = C9FBB4D1ECD14531B58968F9 /* /Users/ema/kAmp/src/utils/ModalOverlayComponent.cpp */; };
+		0AC32E5390454EC39D588DE5 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp.rule */ = {isa = PBXBuildFile; fileRef = B62D11C35A584FDEB442445C /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp.rule */; };
+		0B8AB81AE9B94F24B7C18E07 /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core.mm */ = {isa = PBXBuildFile; fileRef = 691722B758CA4A418ECA115B /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core.mm */; };
+		0E2CF8E0655643509412F0A1 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libpng.c */ = {isa = PBXBuildFile; fileRef = 7249145C961C4D7FA2665E1F /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libpng.c */; };
+		0E531715DF8441B2928B47F3 /* /Users/ema/kAmp/src/utils/EffectSerializer.cpp */ = {isa = PBXBuildFile; fileRef = 52BE2B7914444B55AA287947 /* /Users/ema/kAmp/src/utils/EffectSerializer.cpp */; };
+		159278891BFA44C6AB13DE49 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData.h */ = {isa = PBXBuildFile; fileRef = 0C286865EDD34513ADB64BE4 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData.h */; };
+		173C3F39E8C04C90B6DEB6D0 /* /Users/ema/kAmp/src/utils/components/ToggleButtonComponent.cpp */ = {isa = PBXBuildFile; fileRef = 3EFA6555E8E8411B8452425B /* /Users/ema/kAmp/src/utils/components/ToggleButtonComponent.cpp */; };
+		1AD21C3FBDDB43828EE15DDD /* /Users/ema/kAmp/src/components/PedalSettingsLayoutComponent.cpp */ = {isa = PBXBuildFile; fileRef = F255AAE9328D4E0D8EE30CBF /* /Users/ema/kAmp/src/components/PedalSettingsLayoutComponent.cpp */; };
+		1DFA0672DBAA4FF08D718F75 /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats.mm */ = {isa = PBXBuildFile; fileRef = 1959226DEED24E6ABA61B2D5 /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats.mm */; };
+		1E08B5B469E54EEB9947FB8B /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData6.cpp */ = {isa = PBXBuildFile; fileRef = 39E37B71D2594751B3A4195D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData6.cpp */; };
+		1E3CDB73BB664BAD9AF8D5FE /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData13.cpp */ = {isa = PBXBuildFile; fileRef = 0452F5FFA8174B739FB83AC6 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData13.cpp */; };
+		2199FBF330DA4DCAACF41065 /* /Users/ema/kAmp/src/components/LoginComponent.cpp */ = {isa = PBXBuildFile; fileRef = AE8565F57220426AAB77F6EA /* /Users/ema/kAmp/src/components/LoginComponent.cpp */; };
+		2405AFE63295429EB53240C7 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData14.cpp */ = {isa = PBXBuildFile; fileRef = 1C10B0D07CF74E3E89109A9E /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData14.cpp */; };
+		24CEF2D165774CD896D0C66A /* /Users/ema/kAmp/src/components/effects/EqualizerEffectComponent.cpp */ = {isa = PBXBuildFile; fileRef = 8E85C71074C14D40AC863448 /* /Users/ema/kAmp/src/components/effects/EqualizerEffectComponent.cpp */; };
+		2640182D7FE64A04B96C01C6 /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats_flac_1.c */ = {isa = PBXBuildFile; fileRef = 6A97035BBD2A42A7B4CFD91E /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats_flac_1.c */; };
+		26CF95C25D944119B49AD819 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_lunasvg.c */ = {isa = PBXBuildFile; fileRef = A99F68CC73C640A4BE5F1A91 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_lunasvg.c */; };
+		28C207A528434E1295500D9F /* /Users/ema/kAmp/JUCE/modules/juce_dsp/juce_dsp.mm */ = {isa = PBXBuildFile; fileRef = CF5C513D70364B219754AD00 /* /Users/ema/kAmp/JUCE/modules/juce_dsp/juce_dsp.mm */; };
+		2F6E500FE6934131921510C5 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData11.cpp */ = {isa = PBXBuildFile; fileRef = A7E5634FD0F54389BE8E208A /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData11.cpp */; };
+		2FE470DD84704E4DAF571D63 /* /Users/ema/kAmp/src/components/EffectComponent.cpp */ = {isa = PBXBuildFile; fileRef = 1FFDCA53940A441DB20C4C66 /* /Users/ema/kAmp/src/components/EffectComponent.cpp */; };
+		32F1CA0DC1E547CAB84B1F70 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData16.cpp */ = {isa = PBXBuildFile; fileRef = 87BEE492A91A4E9982E0349F /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData16.cpp */; };
+		33F70715614042EF8CD9A834 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData5.cpp */ = {isa = PBXBuildFile; fileRef = FD015ABF66D043B4A99DA7DD /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData5.cpp */; };
+		358C4A23C66D483492665226 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData15.cpp */ = {isa = PBXBuildFile; fileRef = 602B3DD2405646A39FB6E4AB /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData15.cpp */; };
+		3972051DB47C45F3B21C9F16 /* /Users/ema/kAmp/src/components/TopMenuBarComponent.cpp */ = {isa = PBXBuildFile; fileRef = BDDB9846020345089A8E8499 /* /Users/ema/kAmp/src/components/TopMenuBarComponent.cpp */; };
+		3B0723E1714247B185B4B9C4 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_1.c */ = {isa = PBXBuildFile; fileRef = EB659A3A650D4B39A49D2151 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_1.c */; };
+		4181A7472CDD4DBDB42E3A0D /* /Users/ema/kAmp/src/Main.cpp */ = {isa = PBXBuildFile; fileRef = 16DA5FDAD2B44A728BBE373F /* /Users/ema/kAmp/src/Main.cpp */; };
+		4351E1676FC0424EB672DC46 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_3.c */ = {isa = PBXBuildFile; fileRef = 99FDF7A768DB442E8F6127A5 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_3.c */; };
+		44A7AE2D6725430388DA66D1 /* /Users/ema/kAmp/src/effects/DelayEffect.cpp */ = {isa = PBXBuildFile; fileRef = 1FE5F190D24541F7A1E26CF1 /* /Users/ema/kAmp/src/effects/DelayEffect.cpp */; };
+		4698F5531CD54681A377A3FB /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_3.cpp */ = {isa = PBXBuildFile; fileRef = 23AD73CDA9924E62A46B6B75 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_3.cpp */; };
+		49619AA9D4984902A601CABD /* /Users/ema/kAmp/src/Pedalboard.cpp */ = {isa = PBXBuildFile; fileRef = 5E661F4B78B34A74B0D49573 /* /Users/ema/kAmp/src/Pedalboard.cpp */; };
+		4BDB089FDFE242479EC016FA /* /Users/ema/kAmp/src/effects/DistortionEffect.cpp */ = {isa = PBXBuildFile; fileRef = 74C8386B2260460CB44E309D /* /Users/ema/kAmp/src/effects/DistortionEffect.cpp */; };
+		53B96B8B64C9479587640D04 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_ara.cpp */ = {isa = PBXBuildFile; fileRef = DE5F73CD9A05460CA34F8E89 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_ara.cpp */; };
+		56C53B61E053435BA9ADFAE3 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics.mm */ = {isa = PBXBuildFile; fileRef = 8A5AA73A1FE740ED996656D9 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics.mm */; };
+		57509532C41A4289AFF60BFE /* /Users/ema/kAmp/src/MainComponent.cpp */ = {isa = PBXBuildFile; fileRef = 07D3B950DB744ADDA2906321 /* /Users/ema/kAmp/src/MainComponent.cpp */; };
+		58719DF4531A48D48BF80012 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_2.c */ = {isa = PBXBuildFile; fileRef = 484BA943A2854A6EB27C3D89 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_2.c */; };
+		58F48EBB79754666AC63D5D6 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData12.cpp */ = {isa = PBXBuildFile; fileRef = 3509A34FF82D45F1AA04414F /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData12.cpp */; };
+		5A3D026F69EF4092B3D3585E /* /Users/ema/kAmp/src/components/effects/DelayEffectComponent.cpp */ = {isa = PBXBuildFile; fileRef = BC613F6A8E514096AB331EE4 /* /Users/ema/kAmp/src/components/effects/DelayEffectComponent.cpp */; };
+		5AF45A92D47E45809F2AA415 /* /Users/ema/kAmp/CMakeFiles/kAmp.dir/Info.plist */ = {isa = PBXBuildFile; fileRef = 89469F18F06640C9A5C5F523 /* /Users/ema/kAmp/CMakeFiles/kAmp.dir/Info.plist */; };
+		5C3308F31D5344BE85417BB2 /* /Users/ema/kAmp/src/effects/EqualizerEffect.cpp */ = {isa = PBXBuildFile; fileRef = 3CC113E23C284A27A865E730 /* /Users/ema/kAmp/src/effects/EqualizerEffect.cpp */; };
+		5C9339863EB6461FB769046C /* /Users/ema/kAmp/src/components/AccountComponent.cpp */ = {isa = PBXBuildFile; fileRef = 97DC421BE9304839A47643F7 /* /Users/ema/kAmp/src/components/AccountComponent.cpp */; };
+		60AF8EEC2FEF47458922E199 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData10.cpp */ = {isa = PBXBuildFile; fileRef = 357893DC163349689A167906 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData10.cpp */; };
+		6244B2418836401A947C5659 /* /Users/ema/kAmp/src/components/BottomMenuBarComponent.cpp */ = {isa = PBXBuildFile; fileRef = F6CA0D442D004620BF313995 /* /Users/ema/kAmp/src/components/BottomMenuBarComponent.cpp */; };
+		6539499BFBBE4F5B91539CDB /* /Users/ema/kAmp/src/effects/ChorusEffect.cpp */ = {isa = PBXBuildFile; fileRef = FE62F610B890483CB90A935F /* /Users/ema/kAmp/src/effects/ChorusEffect.cpp */; };
+		659578D781A840DC85CD1122 /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core_CompilationTime.cpp */ = {isa = PBXBuildFile; fileRef = F3727A9F93A74F2EA90D134A /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core_CompilationTime.cpp */; };
+		6BBDDF2F5BCE454683D9D7F3 /* /Users/ema/kAmp/src/components/ChromaticTunerComponent.cpp */ = {isa = PBXBuildFile; fileRef = 39B24103777441E1B48D2E58 /* /Users/ema/kAmp/src/components/ChromaticTunerComponent.cpp */; };
+		6FF51B6AC8064FE8B60CDEF8 /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core_zlib.c */ = {isa = PBXBuildFile; fileRef = DB0488785212444DA62B8948 /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core_zlib.c */; };
+		72115BDCF7FF4E84A6294B45 /* /Users/ema/kAmp/src/effects/ChromaticTuner.cpp */ = {isa = PBXBuildFile; fileRef = 599AAA9238BA4E75A737863E /* /Users/ema/kAmp/src/effects/ChromaticTuner.cpp */; };
+		748096C60D2542E296061892 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless.mm */ = {isa = PBXBuildFile; fileRef = 9D5FC33101594EE38E65017D /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless.mm */; };
+		74A74137FA5544559D1DB5E8 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h.rule */ = {isa = PBXBuildFile; fileRef = 587C37B3B26446508FBE1742 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h.rule */; };
+		752C3AD306854E28B8746FAC /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c */ = {isa = PBXBuildFile; fileRef = 9D924B3F830A42F08687DF3C /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c */; };
+		7822EF9F050240348CD4926F /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp */ = {isa = PBXBuildFile; fileRef = 07CFC733D3E045CDA5AFCCD0 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp */; };
+		7D6669E4A4C84864B9EEB853 /* /Users/ema/kAmp/JUCE/modules/juce_data_structures/juce_data_structures.mm */ = {isa = PBXBuildFile; fileRef = C8DB6603AC114CA088F52FB9 /* /Users/ema/kAmp/JUCE/modules/juce_data_structures/juce_data_structures.mm */; };
+		83C590348EDF44E5AF3FF895 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo.rule */ = {isa = PBXBuildFile; fileRef = 35DF4EA58C564AD09027A2DE /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo.rule */; };
+		86FDE77C39234C86BDD96441 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_lv2_libs.cpp */ = {isa = PBXBuildFile; fileRef = 8FD739664FEA437D92373CB0 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_lv2_libs.cpp */; };
+		8A8B66F3DF254E4C86E2A406 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/AppIcon.icns */ = {isa = PBXBuildFile; fileRef = 8D60F7881EFC4B0B90534EDD /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/AppIcon.icns */; };
+		8CD91B960CC945EC8A0227E9 /* /Users/ema/kAmp/src/components/effects/DistortionEffectComponent.cpp */ = {isa = PBXBuildFile; fileRef = 8F9565209F06425886CE193B /* /Users/ema/kAmp/src/components/effects/DistortionEffectComponent.cpp */; };
+		97730C2C8FBE4C4689BB9CE7 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics.mm */ = {isa = PBXBuildFile; fileRef = E804F2285D8041F98AA97D2A /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics.mm */; };
+		995C7CED1668436995A83B44 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData8.cpp */ = {isa = PBXBuildFile; fileRef = 3D6376F449DE41068B256028 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData8.cpp */; };
+		9AEF3A6D400947DEA753213C /* /Users/ema/kAmp/src/EffectComponentFactory.cpp */ = {isa = PBXBuildFile; fileRef = BF5F03C042DF462EB467FE5B /* /Users/ema/kAmp/src/EffectComponentFactory.cpp */; };
+		9B228CB6A9A24C8487BD3981 /* /Users/ema/kAmp/JUCE/modules/juce_audio_utils/juce_audio_utils.mm */ = {isa = PBXBuildFile; fileRef = E7B8FCF826804CF89B7ABFBF /* /Users/ema/kAmp/JUCE/modules/juce_audio_utils/juce_audio_utils.mm */; };
+		9B81113C4452406BA4A079F7 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_4.cpp */ = {isa = PBXBuildFile; fileRef = F5450298A654467BA81F4DD2 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_4.cpp */; };
+		9DBB07974563415A85183CB2 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData2.cpp */ = {isa = PBXBuildFile; fileRef = 7BCF922B395A4198AAAF8027 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData2.cpp */; };
+		A02B1275D60144D3B09E5988 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData3.cpp */ = {isa = PBXBuildFile; fileRef = E54F469D2CEF42979B9D1C6A /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData3.cpp */; };
+		A725532548E042D4AE8E4351 /* /Users/ema/kAmp/JUCE/modules/juce_audio_basics/juce_audio_basics.mm */ = {isa = PBXBuildFile; fileRef = 650411DB5F1E41FAAFC8061D /* /Users/ema/kAmp/JUCE/modules/juce_audio_basics/juce_audio_basics.mm */; };
+		ABF44D0070C74C9EA10AB9FF /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData9.cpp */ = {isa = PBXBuildFile; fileRef = 8CE6AEADB77B41BCBBDC035B /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData9.cpp */; };
+		ADFF963EEDFD49FB8014A1C4 /* /Users/ema/kAmp/src/components/SettingsComponent.cpp */ = {isa = PBXBuildFile; fileRef = 64E590788DBA4F9ABB43F188 /* /Users/ema/kAmp/src/components/SettingsComponent.cpp */; };
+		B3776DF87EBC4798A47F258D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData7.cpp */ = {isa = PBXBuildFile; fileRef = 90CD3F5AABE044B79FEF4C2D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData7.cpp */; };
+		B9D003D76EBA4BBC8D545972 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_2.cpp */ = {isa = PBXBuildFile; fileRef = 37A1A803E4B748D0B2923FE6 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_2.cpp */; };
+		BBFCB244ECC34AE8A34A6ECC /* /Users/ema/kAmp/JUCE/modules/juce_events/juce_events.mm */ = {isa = PBXBuildFile; fileRef = 81F2B0A625F844EC8B0510F8 /* /Users/ema/kAmp/JUCE/modules/juce_events/juce_events.mm */; };
+		C63ABC3F582B4C889F6F2358 /* /Users/ema/kAmp/JUCE/modules/juce_audio_devices/juce_audio_devices.mm */ = {isa = PBXBuildFile; fileRef = B80B583B5DF14BE9921D7E66 /* /Users/ema/kAmp/JUCE/modules/juce_audio_devices/juce_audio_devices.mm */; };
+		CAA9707A934146DDBD6E4DAF /* /Users/ema/kAmp/src/components/effects/BasePedalComponent.cpp */ = {isa = PBXBuildFile; fileRef = 834C15198547425FAC3C91A2 /* /Users/ema/kAmp/src/components/effects/BasePedalComponent.cpp */; };
+		CCE2E8A11E0347DB8EF53CF8 /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats_flac_2.c */ = {isa = PBXBuildFile; fileRef = EB4045FB409745F19590961D /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats_flac_2.c */; };
+		CD3BC934F4B84E3A932EE545 /* /Users/ema/kAmp/src/components/ChorusEffectComponent.cpp */ = {isa = PBXBuildFile; fileRef = 21549E1B78784CDB9492BD98 /* /Users/ema/kAmp/src/components/ChorusEffectComponent.cpp */; };
+		D20F96AB0B304E4CBD281CD2 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_5.cpp */ = {isa = PBXBuildFile; fileRef = D4C6E9497852487DA4244FED /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_5.cpp */; };
+		D31EA324E0CF46DC9FEF98C6 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h */ = {isa = PBXBuildFile; fileRef = F25E8B81AC434471B5A6ADC1 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h */; };
+		D4F9D1FE45884D7F90E574F3 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp */ = {isa = PBXBuildFile; fileRef = 7F41167976CA4646A2490F63 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp */; };
+		D6C5964D4CAC4494BF500B41 /* /Users/ema/kAmp/src/ApiClient.cpp */ = {isa = PBXBuildFile; fileRef = 27804753CCBF4D04ADE6464A /* /Users/ema/kAmp/src/ApiClient.cpp */; };
+		D76648AA486A432CB0C68407 /* /Users/ema/kAmp/src/effects/EffectsFactory.cpp */ = {isa = PBXBuildFile; fileRef = 05D698E88FC9430DAC577E9A /* /Users/ema/kAmp/src/effects/EffectsFactory.cpp */; };
+		D8749E4018E9478798B31CBC /* /Users/ema/kAmp/src/AudioBuffer.cpp */ = {isa = PBXBuildFile; fileRef = EE3ED0A57EEB4ABB9DCF8DB9 /* /Users/ema/kAmp/src/AudioBuffer.cpp */; };
+		DD5F406E7297471FBBF02E93 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo */ = {isa = PBXBuildFile; fileRef = BDE2E4F8CA084E32803E5ED3 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo */; };
+		E21E81960FCF40F1827D9A7E /* /Users/ema/kAmp/src/utils/components/ModalOverlayComponent.cpp */ = {isa = PBXBuildFile; fileRef = 0B066691A3D14E138A4031EC /* /Users/ema/kAmp/src/utils/components/ModalOverlayComponent.cpp */; };
+		E5F0D2587DAA4B65AF222E4B /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData4.cpp */ = {isa = PBXBuildFile; fileRef = 106AB8323CF34DA3B451C83D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData4.cpp */; };
+		E7C8CE8463304AEAB72FD2EE /* /Users/ema/kAmp/src/components/PedalPowerIndicatorComponent.cpp */ = {isa = PBXBuildFile; fileRef = 3682D3266BFE46B786FC7578 /* /Users/ema/kAmp/src/components/PedalPowerIndicatorComponent.cpp */; };
+		EB7DA3DBC8BF4FD584488325 /* /Users/ema/kAmp/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 341A8C21759B484EA3BEB096 /* /Users/ema/kAmp/CMakeLists.txt */; };
+		EC13B14E67904230959F1D04 /* /Users/ema/kAmp/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = C1A562A1886A4D6383332E48 /* /Users/ema/kAmp/CMakeLists.txt */; };
+		ED782F6F2DFC46E0846A0F14 /* /Users/ema/kAmp/src/effects/NoiseGateEffect.cpp */ = {isa = PBXBuildFile; fileRef = 4CB4085D061643EDBCFAA1A6 /* /Users/ema/kAmp/src/effects/NoiseGateEffect.cpp */; };
+		F95D85DCE8AC4AF5B699CCD0 /* /Users/ema/kAmp/src/Manager.cpp */ = {isa = PBXBuildFile; fileRef = 71ED1DC0D4F640C4A4F0BF1C /* /Users/ema/kAmp/src/Manager.cpp */; };
+		FA3B7D88757E4AC38AFE8B8B /* /Users/ema/kAmp/src/utils/ResourceManager.cpp */ = {isa = PBXBuildFile; fileRef = E68F017DF4D34BE5AEF63D7D /* /Users/ema/kAmp/src/utils/ResourceManager.cpp */; };
+		FA87B1DC7918433A9BCD96C5 /* /Users/ema/kAmp/src/components/PedalboardComponent.cpp */ = {isa = PBXBuildFile; fileRef = 78109D605B764ABD8A42859E /* /Users/ema/kAmp/src/components/PedalboardComponent.cpp */; };
+		FCE2800910F54215914A6EDF /* /Users/ema/kAmp/src/components/effects/NoiseGateEffectComponent.cpp */ = {isa = PBXBuildFile; fileRef = D2F5562CA33541C9A648BC5D /* /Users/ema/kAmp/src/components/effects/NoiseGateEffectComponent.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		11D06CE2E0EE4DC5A891D705 /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+		450741CF74F7479A80166AE2 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		764BBA3059E142E19E6EE806 /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+		B8F4483707C64709AF5FD877 /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		2C8FA5267EA1402EA031AE9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DBD786E6DC04E0A97A9E2F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DA552FF59DDC752CCB48B81;
+			remoteInfo = ResourcesBinary;
+		};
+		3631784434054BE7BD3CF881 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DBD786E6DC04E0A97A9E2F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08BF2528A711998C445AA3E8;
+			remoteInfo = ZERO_CHECK;
+		};
+		4EEF79EFFC3D4F66BFFEAD12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DBD786E6DC04E0A97A9E2F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08BF2528A711998C445AA3E8;
+			remoteInfo = ZERO_CHECK;
+		};
+		57AE29E1992B4732BDF06CD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DBD786E6DC04E0A97A9E2F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DA552FF59DDC752CCB48B81;
+			remoteInfo = ResourcesBinary;
+		};
+		8A8636CE49A64C6AAB1E8CDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DBD786E6DC04E0A97A9E2F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E1ECB115353F5A357FDD1324;
+			remoteInfo = ALL_BUILD;
+		};
+		8E2F074278CB4108B2664AF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DBD786E6DC04E0A97A9E2F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08BF2528A711998C445AA3E8;
+			remoteInfo = ZERO_CHECK;
+		};
+		F3AE7A4B58BB404294CDD339 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DBD786E6DC04E0A97A9E2F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E75F3170FDD45DC179FFA442;
+			remoteInfo = kAmp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0452F5FFA8174B739FB83AC6 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData13.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData13.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData13.cpp; sourceTree = SOURCE_ROOT; };
+		05D698E88FC9430DAC577E9A /* /Users/ema/kAmp/src/effects/EffectsFactory.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EffectsFactory.cpp; path = src/effects/EffectsFactory.cpp; sourceTree = SOURCE_ROOT; };
+		07CFC733D3E045CDA5AFCCD0 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = juce_graphics_Harfbuzz.cpp; path = JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp; sourceTree = SOURCE_ROOT; };
+		07D3B950DB744ADDA2906321 /* /Users/ema/kAmp/src/MainComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = MainComponent.cpp; path = src/MainComponent.cpp; sourceTree = SOURCE_ROOT; };
+		0B066691A3D14E138A4031EC /* /Users/ema/kAmp/src/utils/components/ModalOverlayComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ModalOverlayComponent.cpp; path = src/utils/components/ModalOverlayComponent.cpp; sourceTree = SOURCE_ROOT; };
+		0C286865EDD34513ADB64BE4 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = BinaryData.h; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData.h; sourceTree = SOURCE_ROOT; };
+		106AB8323CF34DA3B451C83D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData4.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData4.cpp; sourceTree = SOURCE_ROOT; };
+		16DA5FDAD2B44A728BBE373F /* /Users/ema/kAmp/src/Main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Main.cpp; path = src/Main.cpp; sourceTree = SOURCE_ROOT; };
+		1959226DEED24E6ABA61B2D5 /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_audio_formats.mm; path = JUCE/modules/juce_audio_formats/juce_audio_formats.mm; sourceTree = SOURCE_ROOT; };
+		1C10B0D07CF74E3E89109A9E /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData14.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData14.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData14.cpp; sourceTree = SOURCE_ROOT; };
+		1FE5F190D24541F7A1E26CF1 /* /Users/ema/kAmp/src/effects/DelayEffect.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = DelayEffect.cpp; path = src/effects/DelayEffect.cpp; sourceTree = SOURCE_ROOT; };
+		1FFDCA53940A441DB20C4C66 /* /Users/ema/kAmp/src/components/EffectComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EffectComponent.cpp; path = src/components/EffectComponent.cpp; sourceTree = SOURCE_ROOT; };
+		21549E1B78784CDB9492BD98 /* /Users/ema/kAmp/src/components/ChorusEffectComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ChorusEffectComponent.cpp; path = src/components/ChorusEffectComponent.cpp; sourceTree = SOURCE_ROOT; };
+		23AD73CDA9924E62A46B6B75 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = juce_gui_basics_3.cpp; path = JUCE/modules/juce_gui_basics/juce_gui_basics_3.cpp; sourceTree = SOURCE_ROOT; };
+		27804753CCBF4D04ADE6464A /* /Users/ema/kAmp/src/ApiClient.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ApiClient.cpp; path = src/ApiClient.cpp; sourceTree = SOURCE_ROOT; };
+		2B6FEDFBAA5143D198EA73A3 /* /Users/ema/kAmp/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib */ = {isa = PBXFileReference; explicitFileType = default; fileEncoding = 4; name = RecentFilesMenuTemplate.nib; path = JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib; sourceTree = SOURCE_ROOT; };
+		341A8C21759B484EA3BEB096 /* /Users/ema/kAmp/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		3509A34FF82D45F1AA04414F /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData12.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData12.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData12.cpp; sourceTree = SOURCE_ROOT; };
+		357893DC163349689A167906 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData10.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData10.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData10.cpp; sourceTree = SOURCE_ROOT; };
+		35DF4EA58C564AD09027A2DE /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo.rule */ = {isa = PBXFileReference; explicitFileType = default; fileEncoding = 4; name = PkgInfo.rule; path = kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo.rule; sourceTree = SOURCE_ROOT; };
+		3682D3266BFE46B786FC7578 /* /Users/ema/kAmp/src/components/PedalPowerIndicatorComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PedalPowerIndicatorComponent.cpp; path = src/components/PedalPowerIndicatorComponent.cpp; sourceTree = SOURCE_ROOT; };
+		37A1A803E4B748D0B2923FE6 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = juce_gui_basics_2.cpp; path = JUCE/modules/juce_gui_basics/juce_gui_basics_2.cpp; sourceTree = SOURCE_ROOT; };
+		39B24103777441E1B48D2E58 /* /Users/ema/kAmp/src/components/ChromaticTunerComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ChromaticTunerComponent.cpp; path = src/components/ChromaticTunerComponent.cpp; sourceTree = SOURCE_ROOT; };
+		39E37B71D2594751B3A4195D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData6.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData6.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData6.cpp; sourceTree = SOURCE_ROOT; };
+		3CC113E23C284A27A865E730 /* /Users/ema/kAmp/src/effects/EqualizerEffect.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EqualizerEffect.cpp; path = src/effects/EqualizerEffect.cpp; sourceTree = SOURCE_ROOT; };
+		3D6376F449DE41068B256028 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData8.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData8.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData8.cpp; sourceTree = SOURCE_ROOT; };
+		3EFA6555E8E8411B8452425B /* /Users/ema/kAmp/src/utils/components/ToggleButtonComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ToggleButtonComponent.cpp; path = src/utils/components/ToggleButtonComponent.cpp; sourceTree = SOURCE_ROOT; };
+		484BA943A2854A6EB27C3D89 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_2.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = juce_graphics_libjpg_2.c; path = JUCE/modules/juce_graphics/juce_graphics_libjpg_2.c; sourceTree = SOURCE_ROOT; };
+		4CB4085D061643EDBCFAA1A6 /* /Users/ema/kAmp/src/effects/NoiseGateEffect.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = NoiseGateEffect.cpp; path = src/effects/NoiseGateEffect.cpp; sourceTree = SOURCE_ROOT; };
+		52BE2B7914444B55AA287947 /* /Users/ema/kAmp/src/utils/EffectSerializer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EffectSerializer.cpp; path = src/utils/EffectSerializer.cpp; sourceTree = SOURCE_ROOT; };
+		587C37B3B26446508FBE1742 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h.rule */ = {isa = PBXFileReference; explicitFileType = default; fileEncoding = 4; name = JuceHeader.h.rule; path = kAmp_artefacts/JuceLibraryCode/JuceHeader.h.rule; sourceTree = SOURCE_ROOT; };
+		599AAA9238BA4E75A737863E /* /Users/ema/kAmp/src/effects/ChromaticTuner.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ChromaticTuner.cpp; path = src/effects/ChromaticTuner.cpp; sourceTree = SOURCE_ROOT; };
+		5E661F4B78B34A74B0D49573 /* /Users/ema/kAmp/src/Pedalboard.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Pedalboard.cpp; path = src/Pedalboard.cpp; sourceTree = SOURCE_ROOT; };
+		602B3DD2405646A39FB6E4AB /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData15.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData15.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData15.cpp; sourceTree = SOURCE_ROOT; };
+		64E590788DBA4F9ABB43F188 /* /Users/ema/kAmp/src/components/SettingsComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SettingsComponent.cpp; path = src/components/SettingsComponent.cpp; sourceTree = SOURCE_ROOT; };
+		650411DB5F1E41FAAFC8061D /* /Users/ema/kAmp/JUCE/modules/juce_audio_basics/juce_audio_basics.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_audio_basics.mm; path = JUCE/modules/juce_audio_basics/juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
+		691722B758CA4A418ECA115B /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_core.mm; path = JUCE/modules/juce_core/juce_core.mm; sourceTree = SOURCE_ROOT; };
+		6A97035BBD2A42A7B4CFD91E /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats_flac_1.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = juce_audio_formats_flac_1.c; path = JUCE/modules/juce_audio_formats/juce_audio_formats_flac_1.c; sourceTree = SOURCE_ROOT; };
+		6F56B06ADEE742D1ABA89541 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors/juce_audio_processors.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_audio_processors.mm; path = JUCE/modules/juce_audio_processors/juce_audio_processors.mm; sourceTree = SOURCE_ROOT; };
+		71ED1DC0D4F640C4A4F0BF1C /* /Users/ema/kAmp/src/Manager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Manager.cpp; path = src/Manager.cpp; sourceTree = SOURCE_ROOT; };
+		7249145C961C4D7FA2665E1F /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libpng.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = juce_graphics_libpng.c; path = JUCE/modules/juce_graphics/juce_graphics_libpng.c; sourceTree = SOURCE_ROOT; };
+		74C8386B2260460CB44E309D /* /Users/ema/kAmp/src/effects/DistortionEffect.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = DistortionEffect.cpp; path = src/effects/DistortionEffect.cpp; sourceTree = SOURCE_ROOT; };
+		78109D605B764ABD8A42859E /* /Users/ema/kAmp/src/components/PedalboardComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PedalboardComponent.cpp; path = src/components/PedalboardComponent.cpp; sourceTree = SOURCE_ROOT; };
+		7B6E0D5A74E840FA92CBD232 /* kAmp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = kAmp; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BCF922B395A4198AAAF8027 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData2.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData2.cpp; sourceTree = SOURCE_ROOT; };
+		7F41167976CA4646A2490F63 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData1.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp; sourceTree = SOURCE_ROOT; };
+		808A315BE46A481C878C0946 /* /Users/ema/kAmp/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		81F2B0A625F844EC8B0510F8 /* /Users/ema/kAmp/JUCE/modules/juce_events/juce_events.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_events.mm; path = JUCE/modules/juce_events/juce_events.mm; sourceTree = SOURCE_ROOT; };
+		834C15198547425FAC3C91A2 /* /Users/ema/kAmp/src/components/effects/BasePedalComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BasePedalComponent.cpp; path = src/components/effects/BasePedalComponent.cpp; sourceTree = SOURCE_ROOT; };
+		87BEE492A91A4E9982E0349F /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData16.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData16.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData16.cpp; sourceTree = SOURCE_ROOT; };
+		89469F18F06640C9A5C5F523 /* /Users/ema/kAmp/CMakeFiles/kAmp.dir/Info.plist */ = {isa = PBXFileReference; explicitFileType = sourcecode.text.plist; fileEncoding = 4; name = Info.plist; path = CMakeFiles/kAmp.dir/Info.plist; sourceTree = SOURCE_ROOT; };
+		8A5AA73A1FE740ED996656D9 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_graphics.mm; path = JUCE/modules/juce_graphics/juce_graphics.mm; sourceTree = SOURCE_ROOT; };
+		8CE6AEADB77B41BCBBDC035B /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData9.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData9.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData9.cpp; sourceTree = SOURCE_ROOT; };
+		8D60F7881EFC4B0B90534EDD /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/AppIcon.icns */ = {isa = PBXFileReference; explicitFileType = default; fileEncoding = 4; name = AppIcon.icns; path = kAmp_artefacts/JuceLibraryCode/AppIcon.icns; sourceTree = SOURCE_ROOT; };
+		8E85C71074C14D40AC863448 /* /Users/ema/kAmp/src/components/effects/EqualizerEffectComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EqualizerEffectComponent.cpp; path = src/components/effects/EqualizerEffectComponent.cpp; sourceTree = SOURCE_ROOT; };
+		8F9565209F06425886CE193B /* /Users/ema/kAmp/src/components/effects/DistortionEffectComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = DistortionEffectComponent.cpp; path = src/components/effects/DistortionEffectComponent.cpp; sourceTree = SOURCE_ROOT; };
+		8FD739664FEA437D92373CB0 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_lv2_libs.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = juce_audio_processors_headless_lv2_libs.cpp; path = JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_lv2_libs.cpp; sourceTree = SOURCE_ROOT; };
+		90CD3F5AABE044B79FEF4C2D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData7.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData7.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData7.cpp; sourceTree = SOURCE_ROOT; };
+		97DC421BE9304839A47643F7 /* /Users/ema/kAmp/src/components/AccountComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = AccountComponent.cpp; path = src/components/AccountComponent.cpp; sourceTree = SOURCE_ROOT; };
+		99FDF7A768DB442E8F6127A5 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_3.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = juce_graphics_libjpg_3.c; path = JUCE/modules/juce_graphics/juce_graphics_libjpg_3.c; sourceTree = SOURCE_ROOT; };
+		9D5FC33101594EE38E65017D /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_audio_processors_headless.mm; path = JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless.mm; sourceTree = SOURCE_ROOT; };
+		9D924B3F830A42F08687DF3C /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = juce_graphics_Sheenbidi.c; path = JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c; sourceTree = SOURCE_ROOT; };
+		A7E5634FD0F54389BE8E208A /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData11.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData11.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData11.cpp; sourceTree = SOURCE_ROOT; };
+		A99F68CC73C640A4BE5F1A91 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_lunasvg.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = juce_graphics_lunasvg.c; path = JUCE/modules/juce_graphics/juce_graphics_lunasvg.c; sourceTree = SOURCE_ROOT; };
+		AE8565F57220426AAB77F6EA /* /Users/ema/kAmp/src/components/LoginComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = LoginComponent.cpp; path = src/components/LoginComponent.cpp; sourceTree = SOURCE_ROOT; };
+		B62D11C35A584FDEB442445C /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp.rule */ = {isa = PBXFileReference; explicitFileType = default; fileEncoding = 4; name = BinaryData1.cpp.rule; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp.rule; sourceTree = SOURCE_ROOT; };
+		B80B583B5DF14BE9921D7E66 /* /Users/ema/kAmp/JUCE/modules/juce_audio_devices/juce_audio_devices.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_audio_devices.mm; path = JUCE/modules/juce_audio_devices/juce_audio_devices.mm; sourceTree = SOURCE_ROOT; };
+		BC613F6A8E514096AB331EE4 /* /Users/ema/kAmp/src/components/effects/DelayEffectComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = DelayEffectComponent.cpp; path = src/components/effects/DelayEffectComponent.cpp; sourceTree = SOURCE_ROOT; };
+		BDDB9846020345089A8E8499 /* /Users/ema/kAmp/src/components/TopMenuBarComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = TopMenuBarComponent.cpp; path = src/components/TopMenuBarComponent.cpp; sourceTree = SOURCE_ROOT; };
+		BDE2E4F8CA084E32803E5ED3 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo */ = {isa = PBXFileReference; explicitFileType = default; fileEncoding = 4; name = PkgInfo; path = kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo; sourceTree = SOURCE_ROOT; };
+		BF5F03C042DF462EB467FE5B /* /Users/ema/kAmp/src/EffectComponentFactory.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = EffectComponentFactory.cpp; path = src/EffectComponentFactory.cpp; sourceTree = SOURCE_ROOT; };
+		C1A562A1886A4D6383332E48 /* /Users/ema/kAmp/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		C8DB6603AC114CA088F52FB9 /* /Users/ema/kAmp/JUCE/modules/juce_data_structures/juce_data_structures.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_data_structures.mm; path = JUCE/modules/juce_data_structures/juce_data_structures.mm; sourceTree = SOURCE_ROOT; };
+		C9FBB4D1ECD14531B58968F9 /* /Users/ema/kAmp/src/utils/ModalOverlayComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ModalOverlayComponent.cpp; path = src/utils/ModalOverlayComponent.cpp; sourceTree = SOURCE_ROOT; };
+		CF5C513D70364B219754AD00 /* /Users/ema/kAmp/JUCE/modules/juce_dsp/juce_dsp.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_dsp.mm; path = JUCE/modules/juce_dsp/juce_dsp.mm; sourceTree = SOURCE_ROOT; };
+		D15CF41EF2BD40709F91EAEA /* ResourcesBinary */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libResourcesBinary.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2F5562CA33541C9A648BC5D /* /Users/ema/kAmp/src/components/effects/NoiseGateEffectComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = NoiseGateEffectComponent.cpp; path = src/components/effects/NoiseGateEffectComponent.cpp; sourceTree = SOURCE_ROOT; };
+		D4C6E9497852487DA4244FED /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_5.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = juce_gui_basics_5.cpp; path = JUCE/modules/juce_gui_basics/juce_gui_basics_5.cpp; sourceTree = SOURCE_ROOT; };
+		DB0488785212444DA62B8948 /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core_zlib.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = juce_core_zlib.c; path = JUCE/modules/juce_core/juce_core_zlib.c; sourceTree = SOURCE_ROOT; };
+		DE5F73CD9A05460CA34F8E89 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_ara.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = juce_audio_processors_headless_ara.cpp; path = JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_ara.cpp; sourceTree = SOURCE_ROOT; };
+		E54F469D2CEF42979B9D1C6A /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData3.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData3.cpp; sourceTree = SOURCE_ROOT; };
+		E68F017DF4D34BE5AEF63D7D /* /Users/ema/kAmp/src/utils/ResourceManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ResourceManager.cpp; path = src/utils/ResourceManager.cpp; sourceTree = SOURCE_ROOT; };
+		E7B8FCF826804CF89B7ABFBF /* /Users/ema/kAmp/JUCE/modules/juce_audio_utils/juce_audio_utils.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_audio_utils.mm; path = JUCE/modules/juce_audio_utils/juce_audio_utils.mm; sourceTree = SOURCE_ROOT; };
+		E804F2285D8041F98AA97D2A /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_gui_basics.mm; path = JUCE/modules/juce_gui_basics/juce_gui_basics.mm; sourceTree = SOURCE_ROOT; };
+		EB4045FB409745F19590961D /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats_flac_2.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = juce_audio_formats_flac_2.c; path = JUCE/modules/juce_audio_formats/juce_audio_formats_flac_2.c; sourceTree = SOURCE_ROOT; };
+		EB659A3A650D4B39A49D2151 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_1.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = juce_graphics_libjpg_1.c; path = JUCE/modules/juce_graphics/juce_graphics_libjpg_1.c; sourceTree = SOURCE_ROOT; };
+		EE3ED0A57EEB4ABB9DCF8DB9 /* /Users/ema/kAmp/src/AudioBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = AudioBuffer.cpp; path = src/AudioBuffer.cpp; sourceTree = SOURCE_ROOT; };
+		F255AAE9328D4E0D8EE30CBF /* /Users/ema/kAmp/src/components/PedalSettingsLayoutComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PedalSettingsLayoutComponent.cpp; path = src/components/PedalSettingsLayoutComponent.cpp; sourceTree = SOURCE_ROOT; };
+		F25E8B81AC434471B5A6ADC1 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = JuceHeader.h; path = kAmp_artefacts/JuceLibraryCode/JuceHeader.h; sourceTree = SOURCE_ROOT; };
+		F3727A9F93A74F2EA90D134A /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core_CompilationTime.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = juce_core_CompilationTime.cpp; path = JUCE/modules/juce_core/juce_core_CompilationTime.cpp; sourceTree = SOURCE_ROOT; };
+		F5450298A654467BA81F4DD2 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = juce_gui_basics_4.cpp; path = JUCE/modules/juce_gui_basics/juce_gui_basics_4.cpp; sourceTree = SOURCE_ROOT; };
+		F667EE5399DE47C585DC8599 /* /Users/ema/kAmp/JUCE/modules/juce_gui_extra/juce_gui_extra.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = juce_gui_extra.mm; path = JUCE/modules/juce_gui_extra/juce_gui_extra.mm; sourceTree = SOURCE_ROOT; };
+		F6CA0D442D004620BF313995 /* /Users/ema/kAmp/src/components/BottomMenuBarComponent.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BottomMenuBarComponent.cpp; path = src/components/BottomMenuBarComponent.cpp; sourceTree = SOURCE_ROOT; };
+		FD015ABF66D043B4A99DA7DD /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData5.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = BinaryData5.cpp; path = juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData5.cpp; sourceTree = SOURCE_ROOT; };
+		FE62F610B890483CB90A935F /* /Users/ema/kAmp/src/effects/ChorusEffect.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ChorusEffect.cpp; path = src/effects/ChorusEffect.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C91D803B0B15420B92EE0B15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8257AFF723148709D00E95D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22C410C2826A4E08B076A631 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7B6E0D5A74E840FA92CBD232 /* kAmp */,
+				D15CF41EF2BD40709F91EAEA /* ResourcesBinary */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		28D03DDCB07D4842B3956C6D /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C286865EDD34513ADB64BE4 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		43870576189A4D02A802CC88 /* ResourcesBinary */ = {
+			isa = PBXGroup;
+			children = (
+				67ABD35F69C544A2B6C9F4C3 /* CMake Rules */,
+				28D03DDCB07D4842B3956C6D /* Header Files */,
+				89DCC57EC97E4681858E4F46 /* Source Files */,
+				C1A562A1886A4D6383332E48 /* /Users/ema/kAmp/CMakeLists.txt */,
+			);
+			name = ResourcesBinary;
+			sourceTree = "<group>";
+		};
+		4C315011F1054E72B9F22564 /* kAmp */ = {
+			isa = PBXGroup;
+			children = (
+				F4B2875165E14083B5DDB6DE /* CMake Rules */,
+				C51EF5BF6BB84C0EA86F1E00 /* Header Files */,
+				FD3103C046FD429F8E432B88 /* Resources */,
+				BAB6EB9B9C23437DAB8D218D /* Source Files */,
+				341A8C21759B484EA3BEB096 /* /Users/ema/kAmp/CMakeLists.txt */,
+				2B6FEDFBAA5143D198EA73A3 /* /Users/ema/kAmp/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib */,
+				8D60F7881EFC4B0B90534EDD /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/AppIcon.icns */,
+				BDE2E4F8CA084E32803E5ED3 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo */,
+			);
+			name = kAmp;
+			sourceTree = "<group>";
+		};
+		67ABD35F69C544A2B6C9F4C3 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+				B62D11C35A584FDEB442445C /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp.rule */,
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		79E05A2CF18A40F699ED8B9F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		89DCC57EC97E4681858E4F46 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				7F41167976CA4646A2490F63 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp */,
+				357893DC163349689A167906 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData10.cpp */,
+				A7E5634FD0F54389BE8E208A /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData11.cpp */,
+				3509A34FF82D45F1AA04414F /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData12.cpp */,
+				0452F5FFA8174B739FB83AC6 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData13.cpp */,
+				1C10B0D07CF74E3E89109A9E /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData14.cpp */,
+				602B3DD2405646A39FB6E4AB /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData15.cpp */,
+				87BEE492A91A4E9982E0349F /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData16.cpp */,
+				7BCF922B395A4198AAAF8027 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData2.cpp */,
+				E54F469D2CEF42979B9D1C6A /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData3.cpp */,
+				106AB8323CF34DA3B451C83D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData4.cpp */,
+				FD015ABF66D043B4A99DA7DD /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData5.cpp */,
+				39E37B71D2594751B3A4195D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData6.cpp */,
+				90CD3F5AABE044B79FEF4C2D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData7.cpp */,
+				3D6376F449DE41068B256028 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData8.cpp */,
+				8CE6AEADB77B41BCBBDC035B /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData9.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		8C298282D9634ED793F6C75F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9072CF520563496F85591C01 = {
+			isa = PBXGroup;
+			children = (
+				D0FDB7C098CA4922BC44E6C8 /* ALL_BUILD */,
+				43870576189A4D02A802CC88 /* ResourcesBinary */,
+				4C315011F1054E72B9F22564 /* kAmp */,
+				22C410C2826A4E08B076A631 /* Products */,
+				8C298282D9634ED793F6C75F /* Frameworks */,
+				79E05A2CF18A40F699ED8B9F /* Resources */,
+			);
+			sourceTree = "<group>";
+		};
+		BAB6EB9B9C23437DAB8D218D /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				650411DB5F1E41FAAFC8061D /* /Users/ema/kAmp/JUCE/modules/juce_audio_basics/juce_audio_basics.mm */,
+				B80B583B5DF14BE9921D7E66 /* /Users/ema/kAmp/JUCE/modules/juce_audio_devices/juce_audio_devices.mm */,
+				1959226DEED24E6ABA61B2D5 /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats.mm */,
+				6A97035BBD2A42A7B4CFD91E /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats_flac_1.c */,
+				EB4045FB409745F19590961D /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats_flac_2.c */,
+				6F56B06ADEE742D1ABA89541 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors/juce_audio_processors.mm */,
+				9D5FC33101594EE38E65017D /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless.mm */,
+				DE5F73CD9A05460CA34F8E89 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_ara.cpp */,
+				8FD739664FEA437D92373CB0 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_lv2_libs.cpp */,
+				E7B8FCF826804CF89B7ABFBF /* /Users/ema/kAmp/JUCE/modules/juce_audio_utils/juce_audio_utils.mm */,
+				691722B758CA4A418ECA115B /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core.mm */,
+				F3727A9F93A74F2EA90D134A /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core_CompilationTime.cpp */,
+				DB0488785212444DA62B8948 /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core_zlib.c */,
+				C8DB6603AC114CA088F52FB9 /* /Users/ema/kAmp/JUCE/modules/juce_data_structures/juce_data_structures.mm */,
+				CF5C513D70364B219754AD00 /* /Users/ema/kAmp/JUCE/modules/juce_dsp/juce_dsp.mm */,
+				81F2B0A625F844EC8B0510F8 /* /Users/ema/kAmp/JUCE/modules/juce_events/juce_events.mm */,
+				8A5AA73A1FE740ED996656D9 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics.mm */,
+				07CFC733D3E045CDA5AFCCD0 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp */,
+				9D924B3F830A42F08687DF3C /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c */,
+				EB659A3A650D4B39A49D2151 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_1.c */,
+				484BA943A2854A6EB27C3D89 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_2.c */,
+				99FDF7A768DB442E8F6127A5 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_3.c */,
+				7249145C961C4D7FA2665E1F /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libpng.c */,
+				A99F68CC73C640A4BE5F1A91 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_lunasvg.c */,
+				E804F2285D8041F98AA97D2A /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics.mm */,
+				37A1A803E4B748D0B2923FE6 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_2.cpp */,
+				23AD73CDA9924E62A46B6B75 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_3.cpp */,
+				F5450298A654467BA81F4DD2 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_4.cpp */,
+				D4C6E9497852487DA4244FED /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_5.cpp */,
+				F667EE5399DE47C585DC8599 /* /Users/ema/kAmp/JUCE/modules/juce_gui_extra/juce_gui_extra.mm */,
+				27804753CCBF4D04ADE6464A /* /Users/ema/kAmp/src/ApiClient.cpp */,
+				EE3ED0A57EEB4ABB9DCF8DB9 /* /Users/ema/kAmp/src/AudioBuffer.cpp */,
+				BF5F03C042DF462EB467FE5B /* /Users/ema/kAmp/src/EffectComponentFactory.cpp */,
+				16DA5FDAD2B44A728BBE373F /* /Users/ema/kAmp/src/Main.cpp */,
+				07D3B950DB744ADDA2906321 /* /Users/ema/kAmp/src/MainComponent.cpp */,
+				71ED1DC0D4F640C4A4F0BF1C /* /Users/ema/kAmp/src/Manager.cpp */,
+				5E661F4B78B34A74B0D49573 /* /Users/ema/kAmp/src/Pedalboard.cpp */,
+				97DC421BE9304839A47643F7 /* /Users/ema/kAmp/src/components/AccountComponent.cpp */,
+				F6CA0D442D004620BF313995 /* /Users/ema/kAmp/src/components/BottomMenuBarComponent.cpp */,
+				21549E1B78784CDB9492BD98 /* /Users/ema/kAmp/src/components/ChorusEffectComponent.cpp */,
+				39B24103777441E1B48D2E58 /* /Users/ema/kAmp/src/components/ChromaticTunerComponent.cpp */,
+				1FFDCA53940A441DB20C4C66 /* /Users/ema/kAmp/src/components/EffectComponent.cpp */,
+				AE8565F57220426AAB77F6EA /* /Users/ema/kAmp/src/components/LoginComponent.cpp */,
+				3682D3266BFE46B786FC7578 /* /Users/ema/kAmp/src/components/PedalPowerIndicatorComponent.cpp */,
+				F255AAE9328D4E0D8EE30CBF /* /Users/ema/kAmp/src/components/PedalSettingsLayoutComponent.cpp */,
+				78109D605B764ABD8A42859E /* /Users/ema/kAmp/src/components/PedalboardComponent.cpp */,
+				64E590788DBA4F9ABB43F188 /* /Users/ema/kAmp/src/components/SettingsComponent.cpp */,
+				BDDB9846020345089A8E8499 /* /Users/ema/kAmp/src/components/TopMenuBarComponent.cpp */,
+				834C15198547425FAC3C91A2 /* /Users/ema/kAmp/src/components/effects/BasePedalComponent.cpp */,
+				BC613F6A8E514096AB331EE4 /* /Users/ema/kAmp/src/components/effects/DelayEffectComponent.cpp */,
+				8F9565209F06425886CE193B /* /Users/ema/kAmp/src/components/effects/DistortionEffectComponent.cpp */,
+				8E85C71074C14D40AC863448 /* /Users/ema/kAmp/src/components/effects/EqualizerEffectComponent.cpp */,
+				D2F5562CA33541C9A648BC5D /* /Users/ema/kAmp/src/components/effects/NoiseGateEffectComponent.cpp */,
+				FE62F610B890483CB90A935F /* /Users/ema/kAmp/src/effects/ChorusEffect.cpp */,
+				599AAA9238BA4E75A737863E /* /Users/ema/kAmp/src/effects/ChromaticTuner.cpp */,
+				1FE5F190D24541F7A1E26CF1 /* /Users/ema/kAmp/src/effects/DelayEffect.cpp */,
+				74C8386B2260460CB44E309D /* /Users/ema/kAmp/src/effects/DistortionEffect.cpp */,
+				05D698E88FC9430DAC577E9A /* /Users/ema/kAmp/src/effects/EffectsFactory.cpp */,
+				3CC113E23C284A27A865E730 /* /Users/ema/kAmp/src/effects/EqualizerEffect.cpp */,
+				4CB4085D061643EDBCFAA1A6 /* /Users/ema/kAmp/src/effects/NoiseGateEffect.cpp */,
+				52BE2B7914444B55AA287947 /* /Users/ema/kAmp/src/utils/EffectSerializer.cpp */,
+				C9FBB4D1ECD14531B58968F9 /* /Users/ema/kAmp/src/utils/ModalOverlayComponent.cpp */,
+				E68F017DF4D34BE5AEF63D7D /* /Users/ema/kAmp/src/utils/ResourceManager.cpp */,
+				0B066691A3D14E138A4031EC /* /Users/ema/kAmp/src/utils/components/ModalOverlayComponent.cpp */,
+				3EFA6555E8E8411B8452425B /* /Users/ema/kAmp/src/utils/components/ToggleButtonComponent.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		C51EF5BF6BB84C0EA86F1E00 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				F25E8B81AC434471B5A6ADC1 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		D0FDB7C098CA4922BC44E6C8 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				FF5EA90B6550425085BF23F1 /* CMake Rules */,
+				808A315BE46A481C878C0946 /* /Users/ema/kAmp/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		F4B2875165E14083B5DDB6DE /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+				587C37B3B26446508FBE1742 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h.rule */,
+				35DF4EA58C564AD09027A2DE /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo.rule */,
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		FD3103C046FD429F8E432B88 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				89469F18F06640C9A5C5F523 /* /Users/ema/kAmp/CMakeFiles/kAmp.dir/Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		FF5EA90B6550425085BF23F1 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DA552FF59DDC752CCB48B81 /* ResourcesBinary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F97B65258601443DAD41B942 /* Build configuration list for PBXNativeTarget "ResourcesBinary" */;
+			buildPhases = (
+				63FD0A9B8278A53B8C3BD4F4 /* Generate juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData.h */,
+				DDC49E27F6774586BD35950E /* Sources */,
+				E8257AFF723148709D00E95D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				172643470D8D493AA557B4BE /* PBXTargetDependency */,
+			);
+			name = ResourcesBinary;
+			productName = ResourcesBinary;
+			productReference = D15CF41EF2BD40709F91EAEA /* ResourcesBinary */;
+			productType = "com.apple.product-type.library.static";
+		};
+		E75F3170FDD45DC179FFA442 /* kAmp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8EDEDF29C7504B16862512E6 /* Build configuration list for PBXNativeTarget "kAmp" */;
+			buildPhases = (
+				508DB7DB696A4D1AA0DB42C5 /* Generate kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo */,
+				4A61F5966928844F4E630A57 /* Generate kAmp_artefacts/JuceLibraryCode/JuceHeader.h */,
+				78893057E4B846B191009ED0 /* Resources */,
+				E25293EFE34941048A6C46F4 /* Sources */,
+				C91D803B0B15420B92EE0B15 /* Frameworks */,
+				FD176A6CE3E88581F978084B /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2786B2313AEB4E04AFEA8402 /* PBXTargetDependency */,
+				B299503A02184837BEEEA061 /* PBXTargetDependency */,
+			);
+			name = kAmp;
+			productName = kAmp;
+			productReference = 7B6E0D5A74E840FA92CBD232 /* kAmp */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1DBD786E6DC04E0A97A9E2F6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2630;
+			};
+			buildConfigurationList = C7CCF3FC7DBE4481B68989C1 /* Build configuration list for PBXProject "kAmp" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				450741CF74F7479A80166AE2 /* Debug */,
+				B8F4483707C64709AF5FD877 /* Release */,
+				11D06CE2E0EE4DC5A891D705 /* MinSizeRel */,
+				764BBA3059E142E19E6EE806 /* RelWithDebInfo */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 9072CF520563496F85591C01;
+			projectDirPath = .;
+			projectRoot = "";
+			targets = (
+				E1ECB115353F5A357FDD1324 /* ALL_BUILD */,
+				D22BD1769D7224D4DA091CEC /* install */,
+				E75F3170FDD45DC179FFA442 /* kAmp */,
+				8DA552FF59DDC752CCB48B81 /* ResourcesBinary */,
+				08BF2528A711998C445AA3E8 /* ZERO_CHECK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		329763219C4072A82D5A6FF8 /* Generate CMakeFiles/ALL_BUILD */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ALL_BUILD";
+			outputPaths = (
+/Users/ema/kAmp/CMakeFiles/ALL_BUILD			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/ema/kAmp
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/ema/kAmp
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/ema/kAmp
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/ema/kAmp
+  echo Build\\ all\\ projects
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		3C0110FC8322DE7E50886E21 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		4A61F5966928844F4E630A57 /* Generate kAmp_artefacts/JuceLibraryCode/JuceHeader.h */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+/Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/Debug/Defs.txt,/Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/MinSizeRel/Defs.txt,/Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/RelWithDebInfo/Defs.txt,/Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/Release/Defs.txt			);
+			name = "Generate kAmp_artefacts/JuceLibraryCode/JuceHeader.h";
+			outputPaths = (
+/Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide header /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/Debug/Defs.txt /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide header /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/Release/Defs.txt /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide header /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/MinSizeRel/Defs.txt /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide header /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/RelWithDebInfo/Defs.txt /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/JuceHeader.h
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		508DB7DB696A4D1AA0DB42C5 /* Generate kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo";
+			outputPaths = (
+/Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide pkginfo App /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide pkginfo App /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide pkginfo App /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide pkginfo App /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		63FD0A9B8278A53B8C3BD4F4 /* Generate juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData.h */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/input_file_list,/Users/ema/kAmp/resources/icons/account.png,/Users/ema/kAmp/resources/icons/account.svg,/Users/ema/kAmp/resources/icons/export.png,/Users/ema/kAmp/resources/icons/mute.png,/Users/ema/kAmp/resources/icons/mute.svg,/Users/ema/kAmp/resources/icons/power.png,/Users/ema/kAmp/resources/icons/settings.png,/Users/ema/kAmp/resources/icons/settings.svg,/Users/ema/kAmp/resources/icons/sync.png,/Users/ema/kAmp/resources/icons/tuner.png,/Users/ema/kAmp/resources/icons/tuner.svg,/Users/ema/kAmp/resources/icons/unmute.png,/Users/ema/kAmp/resources/icons/unmute.svg,/Users/ema/kAmp/resources/icons/xmark.png,/Users/ema/kAmp/resources/images/background.png,/Users/ema/kAmp/resources/images/kamp_logo_with_background.png			);
+			name = "Generate juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData.h";
+			outputPaths = (
+/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData.h,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData10.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData11.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData12.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData13.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData14.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData15.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData16.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData2.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData3.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData4.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData5.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData6.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData7.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData8.cpp,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData9.cpp			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide binarydata BinaryData BinaryData.h /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/input_file_list
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide binarydata BinaryData BinaryData.h /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/input_file_list
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide binarydata BinaryData BinaryData.h /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/input_file_list
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/ema/kAmp
+  /Users/ema/kAmp/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide binarydata BinaryData BinaryData.h /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/input_file_list
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		87AF4882E018677E2624B544 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		93426DA6A4AC2C2AC9CE883C /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -DBUILD_TYPE=$CONFIGURATION$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -DBUILD_TYPE=$CONFIGURATION$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -DBUILD_TYPE=$CONFIGURATION$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -DBUILD_TYPE=$CONFIGURATION$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		9B50530E35CC49C82C2FACCF = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		B4AEC5D3E93EE86CEA0D2368 /* Generate CMakeFiles/ZERO_CHECK */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ZERO_CHECK";
+			outputPaths = (
+/Users/ema/kAmp/CMakeFiles/ZERO_CHECK			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/ema/kAmp
+  make -f /Users/ema/kAmp/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/ema/kAmp
+  make -f /Users/ema/kAmp/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/ema/kAmp
+  make -f /Users/ema/kAmp/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/ema/kAmp
+  make -f /Users/ema/kAmp/CMakeScripts/ReRunCMake.make
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		FD176A6CE3E88581F978084B /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}","${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist","$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)","$(TARGET_BUILD_DIR)/$(INFOPLIST_PATH)"			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo /Users/ema/kAmp/kAmp_artefacts/Debug/kAmp.app/Contents
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/account.png /Users/ema/kAmp/resources/icons/account.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/account.svg /Users/ema/kAmp/resources/icons/account.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/export.png /Users/ema/kAmp/resources/icons/export.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/mute.png /Users/ema/kAmp/resources/icons/mute.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/mute.svg /Users/ema/kAmp/resources/icons/mute.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/power.png /Users/ema/kAmp/resources/icons/power.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/settings.png /Users/ema/kAmp/resources/icons/settings.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/settings.svg /Users/ema/kAmp/resources/icons/settings.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/sync.png /Users/ema/kAmp/resources/icons/sync.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/tuner.png /Users/ema/kAmp/resources/icons/tuner.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/tuner.svg /Users/ema/kAmp/resources/icons/tuner.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/unmute.png /Users/ema/kAmp/resources/icons/unmute.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/unmute.svg /Users/ema/kAmp/resources/icons/unmute.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/xmark.png /Users/ema/kAmp/resources/icons/xmark.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/images/background.png /Users/ema/kAmp/resources/images/background.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/images/kamp_logo_with_background.png /Users/ema/kAmp/resources/images/kamp_logo_with_background.png
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo /Users/ema/kAmp/kAmp_artefacts/Release/kAmp.app/Contents
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/account.png /Users/ema/kAmp/resources/icons/account.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/account.svg /Users/ema/kAmp/resources/icons/account.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/export.png /Users/ema/kAmp/resources/icons/export.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/mute.png /Users/ema/kAmp/resources/icons/mute.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/mute.svg /Users/ema/kAmp/resources/icons/mute.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/power.png /Users/ema/kAmp/resources/icons/power.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/settings.png /Users/ema/kAmp/resources/icons/settings.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/settings.svg /Users/ema/kAmp/resources/icons/settings.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/sync.png /Users/ema/kAmp/resources/icons/sync.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/tuner.png /Users/ema/kAmp/resources/icons/tuner.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/tuner.svg /Users/ema/kAmp/resources/icons/tuner.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/unmute.png /Users/ema/kAmp/resources/icons/unmute.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/unmute.svg /Users/ema/kAmp/resources/icons/unmute.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/xmark.png /Users/ema/kAmp/resources/icons/xmark.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/images/background.png /Users/ema/kAmp/resources/images/background.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/images/kamp_logo_with_background.png /Users/ema/kAmp/resources/images/kamp_logo_with_background.png
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo /Users/ema/kAmp/kAmp_artefacts/MinSizeRel/kAmp.app/Contents
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/account.png /Users/ema/kAmp/resources/icons/account.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/account.svg /Users/ema/kAmp/resources/icons/account.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/export.png /Users/ema/kAmp/resources/icons/export.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/mute.png /Users/ema/kAmp/resources/icons/mute.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/mute.svg /Users/ema/kAmp/resources/icons/mute.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/power.png /Users/ema/kAmp/resources/icons/power.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/settings.png /Users/ema/kAmp/resources/icons/settings.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/settings.svg /Users/ema/kAmp/resources/icons/settings.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/sync.png /Users/ema/kAmp/resources/icons/sync.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/tuner.png /Users/ema/kAmp/resources/icons/tuner.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/tuner.svg /Users/ema/kAmp/resources/icons/tuner.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/unmute.png /Users/ema/kAmp/resources/icons/unmute.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/unmute.svg /Users/ema/kAmp/resources/icons/unmute.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/xmark.png /Users/ema/kAmp/resources/icons/xmark.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/images/background.png /Users/ema/kAmp/resources/images/background.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/images/kamp_logo_with_background.png /Users/ema/kAmp/resources/images/kamp_logo_with_background.png
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp/PkgInfo /Users/ema/kAmp/kAmp_artefacts/RelWithDebInfo/kAmp.app/Contents
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/account.png /Users/ema/kAmp/resources/icons/account.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/account.svg /Users/ema/kAmp/resources/icons/account.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/export.png /Users/ema/kAmp/resources/icons/export.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/mute.png /Users/ema/kAmp/resources/icons/mute.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/mute.svg /Users/ema/kAmp/resources/icons/mute.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/power.png /Users/ema/kAmp/resources/icons/power.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/settings.png /Users/ema/kAmp/resources/icons/settings.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/settings.svg /Users/ema/kAmp/resources/icons/settings.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/sync.png /Users/ema/kAmp/resources/icons/sync.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/tuner.png /Users/ema/kAmp/resources/icons/tuner.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/tuner.svg /Users/ema/kAmp/resources/icons/tuner.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/unmute.png /Users/ema/kAmp/resources/icons/unmute.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/unmute.svg /Users/ema/kAmp/resources/icons/unmute.svg
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/icons/xmark.png /Users/ema/kAmp/resources/icons/xmark.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/images/background.png /Users/ema/kAmp/resources/images/background.png
+  cd /Users/ema/kAmp
+  /opt/homebrew/bin/cmake -E copy_if_different /Users/ema/kAmp/resources/images/kamp_logo_with_background.png /Users/ema/kAmp/resources/images/kamp_logo_with_background.png
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		78893057E4B846B191009ED0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0350BF313D8940F8AE161270 /* /Users/ema/kAmp/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib */,
+				8A8B66F3DF254E4C86E2A406 /* /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/AppIcon.icns */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DDC49E27F6774586BD35950E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4F9D1FE45884D7F90E574F3 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData1.cpp */,
+				60AF8EEC2FEF47458922E199 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData10.cpp */,
+				2F6E500FE6934131921510C5 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData11.cpp */,
+				58F48EBB79754666AC63D5D6 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData12.cpp */,
+				1E3CDB73BB664BAD9AF8D5FE /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData13.cpp */,
+				2405AFE63295429EB53240C7 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData14.cpp */,
+				358C4A23C66D483492665226 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData15.cpp */,
+				32F1CA0DC1E547CAB84B1F70 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData16.cpp */,
+				9DBB07974563415A85183CB2 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData2.cpp */,
+				A02B1275D60144D3B09E5988 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData3.cpp */,
+				E5F0D2587DAA4B65AF222E4B /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData4.cpp */,
+				33F70715614042EF8CD9A834 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData5.cpp */,
+				1E08B5B469E54EEB9947FB8B /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData6.cpp */,
+				B3776DF87EBC4798A47F258D /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData7.cpp */,
+				995C7CED1668436995A83B44 /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData8.cpp */,
+				ABF44D0070C74C9EA10AB9FF /* /Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode/BinaryData9.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E25293EFE34941048A6C46F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A725532548E042D4AE8E4351 /* /Users/ema/kAmp/JUCE/modules/juce_audio_basics/juce_audio_basics.mm */,
+				C63ABC3F582B4C889F6F2358 /* /Users/ema/kAmp/JUCE/modules/juce_audio_devices/juce_audio_devices.mm */,
+				1DFA0672DBAA4FF08D718F75 /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats.mm */,
+				2640182D7FE64A04B96C01C6 /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats_flac_1.c */,
+				CCE2E8A11E0347DB8EF53CF8 /* /Users/ema/kAmp/JUCE/modules/juce_audio_formats/juce_audio_formats_flac_2.c */,
+				070959932FD94971BC2D6B77 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors/juce_audio_processors.mm */,
+				748096C60D2542E296061892 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless.mm */,
+				53B96B8B64C9479587640D04 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_ara.cpp */,
+				86FDE77C39234C86BDD96441 /* /Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/juce_audio_processors_headless_lv2_libs.cpp */,
+				9B228CB6A9A24C8487BD3981 /* /Users/ema/kAmp/JUCE/modules/juce_audio_utils/juce_audio_utils.mm */,
+				0B8AB81AE9B94F24B7C18E07 /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core.mm */,
+				659578D781A840DC85CD1122 /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core_CompilationTime.cpp */,
+				6FF51B6AC8064FE8B60CDEF8 /* /Users/ema/kAmp/JUCE/modules/juce_core/juce_core_zlib.c */,
+				7D6669E4A4C84864B9EEB853 /* /Users/ema/kAmp/JUCE/modules/juce_data_structures/juce_data_structures.mm */,
+				28C207A528434E1295500D9F /* /Users/ema/kAmp/JUCE/modules/juce_dsp/juce_dsp.mm */,
+				BBFCB244ECC34AE8A34A6ECC /* /Users/ema/kAmp/JUCE/modules/juce_events/juce_events.mm */,
+				56C53B61E053435BA9ADFAE3 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics.mm */,
+				7822EF9F050240348CD4926F /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp */,
+				752C3AD306854E28B8746FAC /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c */,
+				3B0723E1714247B185B4B9C4 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_1.c */,
+				58719DF4531A48D48BF80012 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_2.c */,
+				4351E1676FC0424EB672DC46 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libjpg_3.c */,
+				0E2CF8E0655643509412F0A1 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_libpng.c */,
+				26CF95C25D944119B49AD819 /* /Users/ema/kAmp/JUCE/modules/juce_graphics/juce_graphics_lunasvg.c */,
+				97730C2C8FBE4C4689BB9CE7 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics.mm */,
+				B9D003D76EBA4BBC8D545972 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_2.cpp */,
+				4698F5531CD54681A377A3FB /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_3.cpp */,
+				9B81113C4452406BA4A079F7 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_4.cpp */,
+				D20F96AB0B304E4CBD281CD2 /* /Users/ema/kAmp/JUCE/modules/juce_gui_basics/juce_gui_basics_5.cpp */,
+				063C431A4D5B4BA6B87B1F62 /* /Users/ema/kAmp/JUCE/modules/juce_gui_extra/juce_gui_extra.mm */,
+				D6C5964D4CAC4494BF500B41 /* /Users/ema/kAmp/src/ApiClient.cpp */,
+				D8749E4018E9478798B31CBC /* /Users/ema/kAmp/src/AudioBuffer.cpp */,
+				9AEF3A6D400947DEA753213C /* /Users/ema/kAmp/src/EffectComponentFactory.cpp */,
+				4181A7472CDD4DBDB42E3A0D /* /Users/ema/kAmp/src/Main.cpp */,
+				57509532C41A4289AFF60BFE /* /Users/ema/kAmp/src/MainComponent.cpp */,
+				F95D85DCE8AC4AF5B699CCD0 /* /Users/ema/kAmp/src/Manager.cpp */,
+				49619AA9D4984902A601CABD /* /Users/ema/kAmp/src/Pedalboard.cpp */,
+				5C9339863EB6461FB769046C /* /Users/ema/kAmp/src/components/AccountComponent.cpp */,
+				6244B2418836401A947C5659 /* /Users/ema/kAmp/src/components/BottomMenuBarComponent.cpp */,
+				CD3BC934F4B84E3A932EE545 /* /Users/ema/kAmp/src/components/ChorusEffectComponent.cpp */,
+				6BBDDF2F5BCE454683D9D7F3 /* /Users/ema/kAmp/src/components/ChromaticTunerComponent.cpp */,
+				2FE470DD84704E4DAF571D63 /* /Users/ema/kAmp/src/components/EffectComponent.cpp */,
+				2199FBF330DA4DCAACF41065 /* /Users/ema/kAmp/src/components/LoginComponent.cpp */,
+				E7C8CE8463304AEAB72FD2EE /* /Users/ema/kAmp/src/components/PedalPowerIndicatorComponent.cpp */,
+				1AD21C3FBDDB43828EE15DDD /* /Users/ema/kAmp/src/components/PedalSettingsLayoutComponent.cpp */,
+				FA87B1DC7918433A9BCD96C5 /* /Users/ema/kAmp/src/components/PedalboardComponent.cpp */,
+				ADFF963EEDFD49FB8014A1C4 /* /Users/ema/kAmp/src/components/SettingsComponent.cpp */,
+				3972051DB47C45F3B21C9F16 /* /Users/ema/kAmp/src/components/TopMenuBarComponent.cpp */,
+				CAA9707A934146DDBD6E4DAF /* /Users/ema/kAmp/src/components/effects/BasePedalComponent.cpp */,
+				5A3D026F69EF4092B3D3585E /* /Users/ema/kAmp/src/components/effects/DelayEffectComponent.cpp */,
+				8CD91B960CC945EC8A0227E9 /* /Users/ema/kAmp/src/components/effects/DistortionEffectComponent.cpp */,
+				24CEF2D165774CD896D0C66A /* /Users/ema/kAmp/src/components/effects/EqualizerEffectComponent.cpp */,
+				FCE2800910F54215914A6EDF /* /Users/ema/kAmp/src/components/effects/NoiseGateEffectComponent.cpp */,
+				6539499BFBBE4F5B91539CDB /* /Users/ema/kAmp/src/effects/ChorusEffect.cpp */,
+				72115BDCF7FF4E84A6294B45 /* /Users/ema/kAmp/src/effects/ChromaticTuner.cpp */,
+				44A7AE2D6725430388DA66D1 /* /Users/ema/kAmp/src/effects/DelayEffect.cpp */,
+				4BDB089FDFE242479EC016FA /* /Users/ema/kAmp/src/effects/DistortionEffect.cpp */,
+				D76648AA486A432CB0C68407 /* /Users/ema/kAmp/src/effects/EffectsFactory.cpp */,
+				5C3308F31D5344BE85417BB2 /* /Users/ema/kAmp/src/effects/EqualizerEffect.cpp */,
+				ED782F6F2DFC46E0846A0F14 /* /Users/ema/kAmp/src/effects/NoiseGateEffect.cpp */,
+				0E531715DF8441B2928B47F3 /* /Users/ema/kAmp/src/utils/EffectSerializer.cpp */,
+				08E6EA6EE2214580979310C6 /* /Users/ema/kAmp/src/utils/ModalOverlayComponent.cpp */,
+				FA3B7D88757E4AC38AFE8B8B /* /Users/ema/kAmp/src/utils/ResourceManager.cpp */,
+				E21E81960FCF40F1827D9A7E /* /Users/ema/kAmp/src/utils/components/ModalOverlayComponent.cpp */,
+				173C3F39E8C04C90B6DEB6D0 /* /Users/ema/kAmp/src/utils/components/ToggleButtonComponent.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		172643470D8D493AA557B4BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08BF2528A711998C445AA3E8 /* ZERO_CHECK */;
+			targetProxy = 4EEF79EFFC3D4F66BFFEAD12 /* PBXContainerItemProxy */;
+		};
+		2786B2313AEB4E04AFEA8402 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DA552FF59DDC752CCB48B81 /* ResourcesBinary */;
+			targetProxy = 57AE29E1992B4732BDF06CD2 /* PBXContainerItemProxy */;
+		};
+		5EC3FE1FD4C343E2A2563162 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E1ECB115353F5A357FDD1324 /* ALL_BUILD */;
+			targetProxy = 8A8636CE49A64C6AAB1E8CDA /* PBXContainerItemProxy */;
+		};
+		929C52F22E6B411ABDBC4521 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E75F3170FDD45DC179FFA442 /* kAmp */;
+			targetProxy = F3AE7A4B58BB404294CDD339 /* PBXContainerItemProxy */;
+		};
+		B171BD6C57A94D479644267D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08BF2528A711998C445AA3E8 /* ZERO_CHECK */;
+			targetProxy = 3631784434054BE7BD3CF881 /* PBXContainerItemProxy */;
+		};
+		B299503A02184837BEEEA061 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08BF2528A711998C445AA3E8 /* ZERO_CHECK */;
+			targetProxy = 8E2F074278CB4108B2664AF3 /* PBXContainerItemProxy */;
+		};
+		F8CB74408C65430ABB350EC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DA552FF59DDC752CCB48B81 /* ResourcesBinary */;
+			targetProxy = 2C8FA5267EA1402EA031AE9B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1CF8C0F16B824EA8A0596595 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CODE_SIGN_ENTITLEMENTS = /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/ema/kAmp/kAmp_artefacts/Debug;
+				ENABLE_HARDENED_RUNTIME = FALSE;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'JUCE_STANDALONE_APPLICATION=1'","'JUCE_IN_APP_PURCHASES=0'","'JUCE_WEB_BROWSER=0'","'JUCE_USE_CURL=0'","'JUCE_APPLICATION_NAME_STRING=\"kAmp\"'","'JUCE_APPLICATION_VERSION_STRING=\"0.0.1\"'","'JUCE_MODULE_AVAILABLE_juce_audio_basics=1'","'JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1'","'DEBUG=1'","'_DEBUG=1'","'JUCE_MODULE_AVAILABLE_juce_core=1'","'JUCE_MODULE_AVAILABLE_juce_audio_utils=1'","'JUCE_MODULE_AVAILABLE_juce_audio_processors=1'","'JUCE_MODULE_AVAILABLE_juce_gui_extra=1'","'JUCE_MODULE_AVAILABLE_juce_gui_basics=1'","'JUCE_MODULE_AVAILABLE_juce_graphics=1'","'JUCE_MODULE_AVAILABLE_juce_events=1'","'JUCE_MODULE_AVAILABLE_juce_data_structures=1'","'JUCE_MODULE_AVAILABLE_juce_audio_processors_headless=1'","'JUCE_MODULE_AVAILABLE_juce_audio_formats=1'","'JUCE_MODULE_AVAILABLE_juce_audio_devices=1'","'JUCE_MODULE_AVAILABLE_juce_dsp=1'","'JUCE_TARGET_HAS_BINARY_DATA=1'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode,/Users/ema/kAmp/include,/Users/ema/kAmp/JUCE/modules,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/VST3_SDK,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lv2,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/serd,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sord,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sord/src,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sratom,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lilv,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lilv/src,"$(inherited)");
+				INFOPLIST_FILE = /Users/ema/kAmp/CMakeFiles/kAmp.dir/Info.plist;
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = ("          -Wall -Wshadow-all -Wshorten-64-to-32 -Wstrict-aliasing -Wuninitialized -Wunused-parameter -Wconversion -Wsign-compare -Wint-conversion -Wconditional-uninitialized -Wconstant-conversion -Wsign-conversion -Wbool-conversion -Wextra-semi -Wunreachable-code -Wcast-align -Wshift-sign-overflow -Wmissing-prototypes -Wnullable-to-nonnull-conversion -Wno-ignored-qualifiers -Wswitch-enum -Wpedantic -Wdeprecated -Wfloat-equal -Wmissing-field-initializers ","$(inherited)");
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++17'        -Wall -Wshadow-all -Wshorten-64-to-32 -Wstrict-aliasing -Wuninitialized -Wunused-parameter -Wconversion -Wsign-compare -Wint-conversion -Wconditional-uninitialized -Wconstant-conversion -Wsign-conversion -Wbool-conversion -Wextra-semi -Wunreachable-code -Wcast-align -Wshift-sign-overflow -Wmissing-prototypes -Wnullable-to-nonnull-conversion -Wno-ignored-qualifiers -Wswitch-enum -Wpedantic -Wdeprecated -Wfloat-equal -Wmissing-field-initializers -Wzero-as-null-pointer-constant -Wunused-private-field -Woverloaded-virtual -Wreorder -Winconsistent-missing-destructor-override ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/ema/kAmp/Debug/libResourcesBinary.a,"-framework CoreAudioKit","-framework DiscRecording","-framework WebKit","-weak_framework Metal","-weak_framework MetalKit","-framework Accelerate","-framework Cocoa","-framework Foundation","-framework IOKit","-framework Security","-framework CoreAudio","-framework CoreMIDI","-framework QuartzCore","-framework AudioToolbox","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.k-147.kAmp";
+				PRODUCT_NAME = kAmp;
+				SECTORDER_FLAGS = "";
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGET_TEMP_DIR = "/Users/ema/kAmp/build/kAmp.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		1DEB219514C24BF9B9C64F53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		2599349AEB674D8EA25A289D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		3A5DE69FB0B14BCB99E7AB3F /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/ema/kAmp/RelWithDebInfo;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=gnu++17' -fPIC ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ResourcesBinary;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/ema/kAmp/build/ResourcesBinary.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		4172A22CAA6E44E6B696D9FD /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CODE_SIGN_ENTITLEMENTS = /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/ema/kAmp/kAmp_artefacts/RelWithDebInfo;
+				ENABLE_HARDENED_RUNTIME = FALSE;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'JUCE_STANDALONE_APPLICATION=1'","'JUCE_IN_APP_PURCHASES=0'","'JUCE_WEB_BROWSER=0'","'JUCE_USE_CURL=0'","'JUCE_APPLICATION_NAME_STRING=\"kAmp\"'","'JUCE_APPLICATION_VERSION_STRING=\"0.0.1\"'","'JUCE_MODULE_AVAILABLE_juce_audio_basics=1'","'JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1'","'NDEBUG=1'","'_NDEBUG=1'","'JUCE_MODULE_AVAILABLE_juce_core=1'","'JUCE_MODULE_AVAILABLE_juce_audio_utils=1'","'JUCE_MODULE_AVAILABLE_juce_audio_processors=1'","'JUCE_MODULE_AVAILABLE_juce_gui_extra=1'","'JUCE_MODULE_AVAILABLE_juce_gui_basics=1'","'JUCE_MODULE_AVAILABLE_juce_graphics=1'","'JUCE_MODULE_AVAILABLE_juce_events=1'","'JUCE_MODULE_AVAILABLE_juce_data_structures=1'","'JUCE_MODULE_AVAILABLE_juce_audio_processors_headless=1'","'JUCE_MODULE_AVAILABLE_juce_audio_formats=1'","'JUCE_MODULE_AVAILABLE_juce_audio_devices=1'","'JUCE_MODULE_AVAILABLE_juce_dsp=1'","'JUCE_TARGET_HAS_BINARY_DATA=1'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode,/Users/ema/kAmp/include,/Users/ema/kAmp/JUCE/modules,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/VST3_SDK,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lv2,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/serd,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sord,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sord/src,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sratom,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lilv,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lilv/src,"$(inherited)");
+				INFOPLIST_FILE = /Users/ema/kAmp/CMakeFiles/kAmp.dir/Info.plist;
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = ("       -DNDEBUG -Wall -Wshadow-all -Wshorten-64-to-32 -Wstrict-aliasing -Wuninitialized -Wunused-parameter -Wconversion -Wsign-compare -Wint-conversion -Wconditional-uninitialized -Wconstant-conversion -Wsign-conversion -Wbool-conversion -Wextra-semi -Wunreachable-code -Wcast-align -Wshift-sign-overflow -Wmissing-prototypes -Wnullable-to-nonnull-conversion -Wno-ignored-qualifiers -Wswitch-enum -Wpedantic -Wdeprecated -Wfloat-equal -Wmissing-field-initializers ","$(inherited)");
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				OTHER_CPLUSPLUSFLAGS = "       -DNDEBUG '-std=gnu++17' -Wall -Wshadow-all -Wshorten-64-to-32 -Wstrict-aliasing -Wuninitialized -Wunused-parameter -Wconversion -Wsign-compare -Wint-conversion -Wconditional-uninitialized -Wconstant-conversion -Wsign-conversion -Wbool-conversion -Wextra-semi -Wunreachable-code -Wcast-align -Wshift-sign-overflow -Wmissing-prototypes -Wnullable-to-nonnull-conversion -Wno-ignored-qualifiers -Wswitch-enum -Wpedantic -Wdeprecated -Wfloat-equal -Wmissing-field-initializers -Wzero-as-null-pointer-constant -Wunused-private-field -Woverloaded-virtual -Wreorder -Winconsistent-missing-destructor-override ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/ema/kAmp/RelWithDebInfo/libResourcesBinary.a,"-framework CoreAudioKit","-framework DiscRecording","-framework WebKit","-weak_framework Metal","-weak_framework MetalKit","-framework Accelerate","-framework Cocoa","-framework Foundation","-framework IOKit","-framework Security","-framework CoreAudio","-framework CoreMIDI","-framework QuartzCore","-framework AudioToolbox","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.k-147.kAmp";
+				PRODUCT_NAME = kAmp;
+				SECTORDER_FLAGS = "";
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGET_TEMP_DIR = "/Users/ema/kAmp/build/kAmp.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		4EE26E964927423EAEDED61E /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		549C334D7E114B7585F72C1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/ema/kAmp/Release;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' -fPIC ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ResourcesBinary;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/ema/kAmp/build/ResourcesBinary.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		57D46A3E23AC4FB48DFF3FC0 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				SDKROOT = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = /Users/ema/kAmp/build;
+			};
+			name = MinSizeRel;
+		};
+		711A996030854082AE711A25 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/ema/kAmp/MinSizeRel;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' -fPIC ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ResourcesBinary;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/ema/kAmp/build/ResourcesBinary.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		7BEF3CB55416499194C2E651 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				SDKROOT = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = /Users/ema/kAmp/build;
+			};
+			name = Release;
+		};
+		9E428F0FF32B4F8491867736 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				SDKROOT = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = /Users/ema/kAmp/build;
+			};
+			name = RelWithDebInfo;
+		};
+		A275B92F945D472D89BC88F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/ema/kAmp/Debug;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++17' -fPIC ";
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ResourcesBinary;
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/ema/kAmp/build/ResourcesBinary.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		AE3EFB098E54483CB1CC30FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		AF3AD90B726544D8A2C6CDA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		B6C62BE5E10A4E13B5502782 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		B88350D5DED24F9F9248C02B /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		B91D33661D5C4354B1249A4E /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CODE_SIGN_ENTITLEMENTS = /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/ema/kAmp/kAmp_artefacts/MinSizeRel;
+				ENABLE_HARDENED_RUNTIME = FALSE;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'JUCE_STANDALONE_APPLICATION=1'","'JUCE_IN_APP_PURCHASES=0'","'JUCE_WEB_BROWSER=0'","'JUCE_USE_CURL=0'","'JUCE_APPLICATION_NAME_STRING=\"kAmp\"'","'JUCE_APPLICATION_VERSION_STRING=\"0.0.1\"'","'JUCE_MODULE_AVAILABLE_juce_audio_basics=1'","'JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1'","'NDEBUG=1'","'_NDEBUG=1'","'JUCE_MODULE_AVAILABLE_juce_core=1'","'JUCE_MODULE_AVAILABLE_juce_audio_utils=1'","'JUCE_MODULE_AVAILABLE_juce_audio_processors=1'","'JUCE_MODULE_AVAILABLE_juce_gui_extra=1'","'JUCE_MODULE_AVAILABLE_juce_gui_basics=1'","'JUCE_MODULE_AVAILABLE_juce_graphics=1'","'JUCE_MODULE_AVAILABLE_juce_events=1'","'JUCE_MODULE_AVAILABLE_juce_data_structures=1'","'JUCE_MODULE_AVAILABLE_juce_audio_processors_headless=1'","'JUCE_MODULE_AVAILABLE_juce_audio_formats=1'","'JUCE_MODULE_AVAILABLE_juce_audio_devices=1'","'JUCE_MODULE_AVAILABLE_juce_dsp=1'","'JUCE_TARGET_HAS_BINARY_DATA=1'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode,/Users/ema/kAmp/include,/Users/ema/kAmp/JUCE/modules,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/VST3_SDK,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lv2,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/serd,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sord,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sord/src,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sratom,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lilv,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lilv/src,"$(inherited)");
+				INFOPLIST_FILE = /Users/ema/kAmp/CMakeFiles/kAmp.dir/Info.plist;
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = ("    -DNDEBUG -Wall -Wshadow-all -Wshorten-64-to-32 -Wstrict-aliasing -Wuninitialized -Wunused-parameter -Wconversion -Wsign-compare -Wint-conversion -Wconditional-uninitialized -Wconstant-conversion -Wsign-conversion -Wbool-conversion -Wextra-semi -Wunreachable-code -Wcast-align -Wshift-sign-overflow -Wmissing-prototypes -Wnullable-to-nonnull-conversion -Wno-ignored-qualifiers -Wswitch-enum -Wpedantic -Wdeprecated -Wfloat-equal -Wmissing-field-initializers ","$(inherited)");
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17' -Wall -Wshadow-all -Wshorten-64-to-32 -Wstrict-aliasing -Wuninitialized -Wunused-parameter -Wconversion -Wsign-compare -Wint-conversion -Wconditional-uninitialized -Wconstant-conversion -Wsign-conversion -Wbool-conversion -Wextra-semi -Wunreachable-code -Wcast-align -Wshift-sign-overflow -Wmissing-prototypes -Wnullable-to-nonnull-conversion -Wno-ignored-qualifiers -Wswitch-enum -Wpedantic -Wdeprecated -Wfloat-equal -Wmissing-field-initializers -Wzero-as-null-pointer-constant -Wunused-private-field -Woverloaded-virtual -Wreorder -Winconsistent-missing-destructor-override ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/ema/kAmp/MinSizeRel/libResourcesBinary.a,"-framework CoreAudioKit","-framework DiscRecording","-framework WebKit","-weak_framework Metal","-weak_framework MetalKit","-framework Accelerate","-framework Cocoa","-framework Foundation","-framework IOKit","-framework Security","-framework CoreAudio","-framework CoreMIDI","-framework QuartzCore","-framework AudioToolbox","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.k-147.kAmp";
+				PRODUCT_NAME = kAmp;
+				SECTORDER_FLAGS = "";
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGET_TEMP_DIR = "/Users/ema/kAmp/build/kAmp.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		BA7D81B1E50B44E5872C016C /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		C426A0B18ADC4E3EA7E98901 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		D0F20BB0D4B142379E450184 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		D3BD36FC5C154338B630C5CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CODE_SIGN_ENTITLEMENTS = /Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode/kAmp.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/ema/kAmp/kAmp_artefacts/Release;
+				ENABLE_HARDENED_RUNTIME = FALSE;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","'JUCE_STANDALONE_APPLICATION=1'","'JUCE_IN_APP_PURCHASES=0'","'JUCE_WEB_BROWSER=0'","'JUCE_USE_CURL=0'","'JUCE_APPLICATION_NAME_STRING=\"kAmp\"'","'JUCE_APPLICATION_VERSION_STRING=\"0.0.1\"'","'JUCE_MODULE_AVAILABLE_juce_audio_basics=1'","'JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1'","'NDEBUG=1'","'_NDEBUG=1'","'JUCE_MODULE_AVAILABLE_juce_core=1'","'JUCE_MODULE_AVAILABLE_juce_audio_utils=1'","'JUCE_MODULE_AVAILABLE_juce_audio_processors=1'","'JUCE_MODULE_AVAILABLE_juce_gui_extra=1'","'JUCE_MODULE_AVAILABLE_juce_gui_basics=1'","'JUCE_MODULE_AVAILABLE_juce_graphics=1'","'JUCE_MODULE_AVAILABLE_juce_events=1'","'JUCE_MODULE_AVAILABLE_juce_data_structures=1'","'JUCE_MODULE_AVAILABLE_juce_audio_processors_headless=1'","'JUCE_MODULE_AVAILABLE_juce_audio_formats=1'","'JUCE_MODULE_AVAILABLE_juce_audio_devices=1'","'JUCE_MODULE_AVAILABLE_juce_dsp=1'","'JUCE_TARGET_HAS_BINARY_DATA=1'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/Users/ema/kAmp/kAmp_artefacts/JuceLibraryCode,/Users/ema/kAmp/juce_binarydata_ResourcesBinary/JuceLibraryCode,/Users/ema/kAmp/include,/Users/ema/kAmp/JUCE/modules,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/VST3_SDK,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lv2,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/serd,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sord,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sord/src,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/sratom,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lilv,/Users/ema/kAmp/JUCE/modules/juce_audio_processors_headless/format_types/LV2_SDK/lilv/src,"$(inherited)");
+				INFOPLIST_FILE = /Users/ema/kAmp/CMakeFiles/kAmp.dir/Info.plist;
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = ("    -DNDEBUG     -flto -Wall -Wshadow-all -Wshorten-64-to-32 -Wstrict-aliasing -Wuninitialized -Wunused-parameter -Wconversion -Wsign-compare -Wint-conversion -Wconditional-uninitialized -Wconstant-conversion -Wsign-conversion -Wbool-conversion -Wextra-semi -Wunreachable-code -Wcast-align -Wshift-sign-overflow -Wmissing-prototypes -Wnullable-to-nonnull-conversion -Wno-ignored-qualifiers -Wswitch-enum -Wpedantic -Wdeprecated -Wfloat-equal -Wmissing-field-initializers ","$(inherited)");
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG '-std=gnu++17'     -flto -Wall -Wshadow-all -Wshorten-64-to-32 -Wstrict-aliasing -Wuninitialized -Wunused-parameter -Wconversion -Wsign-compare -Wint-conversion -Wconditional-uninitialized -Wconstant-conversion -Wsign-conversion -Wbool-conversion -Wextra-semi -Wunreachable-code -Wcast-align -Wshift-sign-overflow -Wmissing-prototypes -Wnullable-to-nonnull-conversion -Wno-ignored-qualifiers -Wswitch-enum -Wpedantic -Wdeprecated -Wfloat-equal -Wmissing-field-initializers -Wzero-as-null-pointer-constant -Wunused-private-field -Woverloaded-virtual -Wreorder -Winconsistent-missing-destructor-override ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/Users/ema/kAmp/Release/libResourcesBinary.a,"-framework CoreAudioKit","-framework DiscRecording","-framework WebKit","-weak_framework Metal","-weak_framework MetalKit","-framework Accelerate","-framework Cocoa","-framework Foundation","-framework IOKit","-framework Security","-framework CoreAudio","-framework CoreMIDI","-framework QuartzCore","-framework AudioToolbox","-flto","-Wl,-weak_reference_mismatches,weak","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.k-147.kAmp";
+				PRODUCT_NAME = kAmp;
+				SECTORDER_FLAGS = "";
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGET_TEMP_DIR = "/Users/ema/kAmp/build/kAmp.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		D3FE6B665B704B7DB1FC9C50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		F27C0C556AB3461D9076CDA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		F6BFD0A0E158461FB05A8FE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				SDKROOT = "";
+				SYMROOT = /Users/ema/kAmp/build;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		68A4C763A1F24EC693839E80 /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB219514C24BF9B9C64F53 /* Debug */,
+				AF3AD90B726544D8A2C6CDA8 /* Release */,
+				B88350D5DED24F9F9248C02B /* MinSizeRel */,
+				D0F20BB0D4B142379E450184 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8EDEDF29C7504B16862512E6 /* Build configuration list for PBXNativeTarget "kAmp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CF8C0F16B824EA8A0596595 /* Debug */,
+				D3BD36FC5C154338B630C5CC /* Release */,
+				B91D33661D5C4354B1249A4E /* MinSizeRel */,
+				4172A22CAA6E44E6B696D9FD /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		93D847FD793446D3BEABA1AA /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3FE6B665B704B7DB1FC9C50 /* Debug */,
+				F27C0C556AB3461D9076CDA1 /* Release */,
+				4EE26E964927423EAEDED61E /* MinSizeRel */,
+				B6C62BE5E10A4E13B5502782 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C7CCF3FC7DBE4481B68989C1 /* Build configuration list for PBXProject "kAmp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6BFD0A0E158461FB05A8FE2 /* Debug */,
+				7BEF3CB55416499194C2E651 /* Release */,
+				57D46A3E23AC4FB48DFF3FC0 /* MinSizeRel */,
+				9E428F0FF32B4F8491867736 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D2700989F5BB4D9895546E98 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2599349AEB674D8EA25A289D /* Debug */,
+				AE3EFB098E54483CB1CC30FB /* Release */,
+				BA7D81B1E50B44E5872C016C /* MinSizeRel */,
+				C426A0B18ADC4E3EA7E98901 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F97B65258601443DAD41B942 /* Build configuration list for PBXNativeTarget "ResourcesBinary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A275B92F945D472D89BC88F5 /* Debug */,
+				549C334D7E114B7585F72C1C /* Release */,
+				711A996030854082AE711A25 /* MinSizeRel */,
+				3A5DE69FB0B14BCB99E7AB3F /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1DBD786E6DC04E0A97A9E2F6 /* Project object */;
+}
