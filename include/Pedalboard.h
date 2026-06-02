@@ -2,6 +2,9 @@
 
 #include "AbstractEffect.h"
 
+#include <juce_core/juce_core.h>
+#include <juce_dsp/juce_dsp.h>
+
 #include <memory>
 #include <vector>
 
@@ -43,4 +46,7 @@ public:
 
 private:
     std::vector<std::unique_ptr<AbstractEffect>> effects;
+    juce::dsp::ProcessSpec currentSpec { 44100.0, 512, 2 };
+    bool isPrepared = false;
+    juce::SpinLock processLock;
 };

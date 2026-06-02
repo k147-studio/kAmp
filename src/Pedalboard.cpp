@@ -8,6 +8,10 @@ Pedalboard::~Pedalboard() = default;
 
 void Pedalboard::apply(const AudioSourceChannelInfo& bufferToFill)
 {
+    const juce::SpinLock::ScopedTryLockType lock(processLock);
+    if (!lock.isLocked())
+        return;
+
     for (auto& effect : effects)
     {
         if (effect->getEnabled())
@@ -17,12 +21,17 @@ void Pedalboard::apply(const AudioSourceChannelInfo& bufferToFill)
 
 void Pedalboard::prepare(const juce::dsp::ProcessSpec& spec)
 {
+    currentSpec = spec;
+    isPrepared = true;
+
+    const juce::SpinLock::ScopedLockType lock(processLock);
     for (auto& effect : effects)
         effect->prepare(spec);
 }
 
 void Pedalboard::reset()
 {
+    const juce::SpinLock::ScopedLockType lock(processLock);
     for (auto& effect : effects)
         effect->reset();
 }
@@ -34,8 +43,13 @@ bool Pedalboard::operator==(const AbstractEffect* effect)
 
 void Pedalboard::append(std::unique_ptr<AbstractEffect> effect)
 {
-    if (effect != nullptr)
-        effects.push_back(std::move(effect));
+    if (effect == nullptr)
+        return;
+
+    const juce::SpinLock::ScopedLockType lock(processLock);
+    if (isPrepared)
+        effect->prepare(currentSpec);
+    effects.push_back(std::move(effect));
 }
 
 void Pedalboard::appendAll(std::vector<std::unique_ptr<AbstractEffect>> newEffects)
@@ -49,12 +63,17 @@ void Pedalboard::insert(std::unique_ptr<AbstractEffect> effect, int index)
     if (effect == nullptr)
         return;
 
+    const juce::SpinLock::ScopedLockType lock(processLock);
+    if (isPrepared)
+        effect->prepare(currentSpec);
+
     const auto clamped = static_cast<size_t>(juce::jlimit(0, static_cast<int>(effects.size()), index));
     effects.insert(effects.begin() + static_cast<std::ptrdiff_t>(clamped), std::move(effect));
 }
 
 void Pedalboard::remove(const AbstractEffect* effect)
 {
+    const juce::SpinLock::ScopedLockType lock(processLock);
     effects.erase(std::remove_if(effects.begin(), effects.end(),
                                  [effect](const std::unique_ptr<AbstractEffect>& owned)
                                  {
@@ -67,6 +86,8 @@ void Pedalboard::move(const AbstractEffect* dragged, const AbstractEffect* targe
 {
     if (dragged == nullptr || target == nullptr || dragged == target)
         return;
+
+    const juce::SpinLock::ScopedLockType lock(processLock);
 
     const auto fromIt = std::find_if(effects.begin(), effects.end(),
                                      [dragged](const std::unique_ptr<AbstractEffect>& owned)
@@ -95,6 +116,7 @@ void Pedalboard::move(const AbstractEffect* dragged, const AbstractEffect* targe
 
 void Pedalboard::clear()
 {
+    const juce::SpinLock::ScopedLockType lock(processLock);
     effects.clear();
 }
 
