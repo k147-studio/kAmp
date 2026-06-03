@@ -12,7 +12,7 @@ MainComponent::MainComponent(std::unique_ptr<Pedalboard> pedalboard)
 
     // Member component — do not let Viewport take ownership.
     pedalboardContainer.setViewedComponent(&pedalboardComponent, false);
-    pedalboardContainer.setScrollBarsShown(true, false);
+    pedalboardContainer.setScrollBarsShown(false, true);
 
     addAndMakeVisible(pedalboardContainer);
     addAndMakeVisible(topMenuBarComponent);
@@ -41,8 +41,9 @@ void MainComponent::resized()
     auto contentBounds = getLocalBounds();
     contentBounds.removeFromTop(topBarHeight);
 
-    const int pedalboardWidth = contentBounds.getWidth();
-    const int pedalboardHeight = pedalboardComponent.getRequiredHeight(pedalboardWidth);
+    const int pedalboardWidth = juce::jmax(contentBounds.getWidth(),
+                                           pedalboardComponent.getRequiredWidth());
+    const int pedalboardHeight = contentBounds.getHeight();
     pedalboardComponent.setSize(pedalboardWidth, pedalboardHeight);
 
     pedalboardContainer.setBounds(contentBounds);
@@ -59,14 +60,12 @@ void MainComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate
     audioEngine.prepare(spec);
 }
 
+void MainComponent::releaseResources()
+{
+    audioEngine.reset();
+}
+
 void MainComponent::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill)
 {
     audioEngine.process(bufferToFill);
-}
-
-void MainComponent::releaseResources()
-{
-    audioEngine.getTuningState().enabled.store(false, std::memory_order_release);
-    topMenuBarComponent.closeAllModals();
-    audioEngine.reset();
 }

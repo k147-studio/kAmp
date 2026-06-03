@@ -82,10 +82,16 @@ protected:
 	DrawableButton enablePedalButton { "power", DrawableButton::ImageFitted };
 
 	/**
+	 * @brief The button to remove the pedal from the board.
+	 */
+	DrawableButton removePedalButton { "remove", DrawableButton::ImageFitted };
+
+	/**
 	 * @brief The indicator for the pedal power status.
 	 */
 	PedalPowerIndicatorComponent* isEnabledIndicator = nullptr;
 
 	void onEnableButtonClicked();
+	void onRemoveButtonClicked();
 	void initializePedal();
 };

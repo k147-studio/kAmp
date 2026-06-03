@@ -12,7 +12,7 @@ PedalboardComponent::PedalboardComponent(Manager& managerToUse)
     flexBox.flexDirection = FlexBox::Direction::row;
     flexBox.justifyContent = FlexBox::JustifyContent::center;
     flexBox.alignItems = FlexBox::AlignItems::center;
-    flexBox.flexWrap = FlexBox::Wrap::wrap;
+    flexBox.flexWrap = FlexBox::Wrap::noWrap;
 
     rebuildFromPedalboard();
 }
@@ -63,8 +63,7 @@ void PedalboardComponent::changeListenerCallback(ChangeBroadcaster*)
 
 void PedalboardComponent::resized()
 {
-    // Never lay out into an empty box — FlexBox would squash children to 0x0,
-    // which then breaks getRequiredHeight() and clips wrapped pedals.
+    // Never lay out into an empty box — FlexBox would squash children to 0x0.
     if (getWidth() <= 0 || getHeight() <= 0)
         return;
 
@@ -85,38 +84,17 @@ void PedalboardComponent::addEffect(EffectComponent* effectComponent)
 int PedalboardComponent::getRequiredWidth() const
 {
     int totalWidth = 0;
-    for (size_t i = 0; i < preferredSizes.size(); ++i)
-        totalWidth += preferredSizes[i].width + PEDALS_MARGIN * 2;
+    for (const auto& size : preferredSizes)
+        totalWidth += size.width + PEDALS_MARGIN * 2;
     return totalWidth;
 }
 
-int PedalboardComponent::getRequiredHeight(const int boardWidth) const
+int PedalboardComponent::getRequiredHeight() const
 {
-    if (preferredSizes.empty())
-        return 0;
-
-    int x = 0;
-    int maxHeightInRow = 0;
-    int totalHeight = 0;
-
+    int maxHeight = 0;
     for (const auto& size : preferredSizes)
-    {
-        const int effectWidth = size.width + PEDALS_MARGIN * 2;
-        const int effectHeight = size.height + PEDALS_MARGIN * 2;
-
-        if (x + effectWidth > boardWidth && x > 0)
-        {
-            totalHeight += maxHeightInRow;
-            x = 0;
-            maxHeightInRow = 0;
-        }
-
-        x += effectWidth;
-        if (effectHeight > maxHeightInRow)
-            maxHeightInRow = effectHeight;
-    }
-
-    return totalHeight + maxHeightInRow;
+        maxHeight = juce::jmax(maxHeight, size.height + PEDALS_MARGIN * 2);
+    return maxHeight;
 }
 
 void PedalboardComponent::onPedalDropped(Component* target, Component* dragged)
@@ -136,6 +114,14 @@ void PedalboardComponent::onPedalDropped(EffectComponent* target, EffectComponen
         return;
 
     manager.move(dragged->getEffect(), target->getEffect());
+}
+
+void PedalboardComponent::removePedal(AbstractEffect* effect)
+{
+    if (effect == nullptr)
+        return;
+
+    manager.remove(effect);
 }
 
 void PedalboardComponent::refreshFlexBox()

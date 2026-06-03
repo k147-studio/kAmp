@@ -22,10 +22,11 @@ public:
     void paint(Graphics& g) override;
 
     int getRequiredWidth() const;
-    int getRequiredHeight(int boardWidth) const;
+    int getRequiredHeight() const;
 
     void onPedalDropped(Component* target, Component* dragged);
     void onPedalDropped(EffectComponent* target, EffectComponent* dragged);
+    void removePedal(AbstractEffect* effect);
 
 private:
     struct PreferredSize

@@ -28,6 +28,11 @@ void BasePedalComponent::onEnableButtonClicked() {
 	isEnabledIndicator->togglePower(enabled);
 }
 
+void BasePedalComponent::onRemoveButtonClicked() {
+	if (auto* parent = dynamic_cast<PedalboardComponent*>(getParentComponent()))
+		parent->removePedal(getEffect());
+}
+
 void BasePedalComponent::initializePedal() {
 	jassert(settingsLayout != nullptr);
 
@@ -43,6 +48,12 @@ void BasePedalComponent::initializePedal() {
 	};
 	addAndMakeVisible(enablePedalButton);
 
+	ResourceManager::configureIconButton(removePedalButton, ResourceManager::getCloseIcon());
+	removePedalButton.onClick = [this] {
+		this->onRemoveButtonClicked();
+	};
+	addAndMakeVisible(removePedalButton);
+
 	addAndMakeVisible(*settingsLayout);
 	addAndMakeVisible(*pedalLabel);
 	addAndMakeVisible(*isEnabledIndicator);
@@ -56,14 +67,16 @@ void BasePedalComponent::initializePedal() {
 		Track(Fr(1))
 	};
 	pedalLayout.templateColumns = {
+		Track(Fr(1)),
 		Track(Fr(1))
 	};
 
 	pedalLayout.items = {
-		GridItem(*settingsLayout),
+		GridItem(*settingsLayout).withArea(1, 1, 2, 3),
 		GridItem(enablePedalButton),
-		GridItem(*isEnabledIndicator),
-		GridItem(*pedalLabel),
+		GridItem(removePedalButton),
+		GridItem(*isEnabledIndicator).withArea(3, 1, 4, 3),
+		GridItem(*pedalLabel).withArea(4, 1, 5, 3),
 	};
 }
 
