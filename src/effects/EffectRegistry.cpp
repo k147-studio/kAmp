@@ -6,20 +6,41 @@
 #include "EqualizerEffect.h"
 #include "NoiseGateEffect.h"
 
+namespace
+{
+const std::vector<EffectDescriptor>& descriptors()
+{
+    static const std::vector<EffectDescriptor> table {
+        // Dynamics
+        { "NoiseGateEffect", "Noise Gate", "Dynamics", [] { return std::make_unique<NoiseGateEffect>(); } },
+        // Drive
+        { "DistortionEffect", "Distortion", "Drive", [] { return std::make_unique<DistortionEffect>(); } },
+        // EQ
+        { "EqualizerEffect", "Equalizer", "EQ", [] { return std::make_unique<EqualizerEffect>(); } },
+        // Modulation
+        { "ChorusEffect", "Chorus", "Modulation", [] { return std::make_unique<ChorusEffect>(); } },
+        // Time
+        { "DelayEffect", "Delay", "Time", [] { return std::make_unique<DelayEffect>(); } },
+    };
+    return table;
+}
+} // namespace
+
+const std::vector<EffectDescriptor>& EffectRegistry::getAvailableEffects()
+{
+    return descriptors();
+}
+
 std::unique_ptr<AbstractEffect> EffectRegistry::create(const String& type)
 {
-    if (type == "DelayEffect")
-        return std::make_unique<DelayEffect>();
-    if (type == "DistortionEffect")
-        return std::make_unique<DistortionEffect>();
-    if (type == "EqualizerEffect")
-        return std::make_unique<EqualizerEffect>();
-    if (type == "NoiseGateEffect")
-        return std::make_unique<NoiseGateEffect>();
-    if (type == "ChorusEffect")
-        return std::make_unique<ChorusEffect>();
     if (type == "Pedalboard")
         return std::make_unique<Pedalboard>();
+
+    for (const auto& descriptor : descriptors())
+    {
+        if (descriptor.type == type)
+            return descriptor.make();
+    }
 
     return nullptr;
 }
