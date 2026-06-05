@@ -6,7 +6,8 @@ MainComponent::MainComponent(std::unique_ptr<Pedalboard> pedalboard)
       pedalboardComponent(manager),
       topMenuBarComponent(deviceManager,
                           &audioEngine.getMuteFlag(),
-                          &audioEngine.getTuningState())
+                          &audioEngine.getTuningState()),
+      bottomMenuBarComponent(manager)
 {
     setAudioChannels(2, 2);
 
@@ -38,8 +39,10 @@ void MainComponent::paint(Graphics& g)
 void MainComponent::resized()
 {
     constexpr int topBarHeight = 50;
+    constexpr int bottomBarHeight = 50;
     auto contentBounds = getLocalBounds();
     contentBounds.removeFromTop(topBarHeight);
+    contentBounds.removeFromBottom(bottomBarHeight);
 
     const int pedalboardWidth = juce::jmax(contentBounds.getWidth(),
                                            pedalboardComponent.getRequiredWidth());
@@ -48,7 +51,9 @@ void MainComponent::resized()
 
     pedalboardContainer.setBounds(contentBounds);
     topMenuBarComponent.setBounds(0, 0, getWidth(), topBarHeight);
+    bottomMenuBarComponent.setBounds(0, getHeight() - bottomBarHeight, getWidth(), bottomBarHeight);
     topMenuBarComponent.toFront(false);
+    bottomMenuBarComponent.toFront(false);
 }
 
 void MainComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate)
@@ -60,12 +65,14 @@ void MainComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate
     audioEngine.prepare(spec);
 }
 
-void MainComponent::releaseResources()
-{
-    audioEngine.reset();
-}
-
 void MainComponent::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill)
 {
     audioEngine.process(bufferToFill);
+}
+
+void MainComponent::releaseResources()
+{
+    audioEngine.getTuningState().enabled.store(false, std::memory_order_release);
+    topMenuBarComponent.closeAllModals();
+    audioEngine.reset();
 }
