@@ -5,6 +5,7 @@
 #include "EffectComponentFactory.h"
 #include "EqualizerEffectComponent.h"
 #include "NoiseGateEffectComponent.h"
+#include "ReverbEffectComponent.h"
 
 EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* effect)
 {
@@ -24,6 +25,8 @@ EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* e
         return new NoiseGateEffectComponent(effect);
     if (type == "ChorusEffect")
         return new ChorusEffectComponent(effect);
+    if (type == "ReverbEffect")
+        return new ReverbEffectComponent(effect);
 
     return nullptr;
 }

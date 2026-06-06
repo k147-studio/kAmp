@@ -5,6 +5,7 @@
 #include "DistortionEffect.h"
 #include "EqualizerEffect.h"
 #include "NoiseGateEffect.h"
+#include "ReverbEffect.h"
 
 namespace
 {
@@ -21,6 +22,7 @@ const std::vector<EffectDescriptor>& descriptors()
         { "ChorusEffect", "Chorus", "Modulation", [] { return std::make_unique<ChorusEffect>(); } },
         // Time
         { "DelayEffect", "Delay", "Time", [] { return std::make_unique<DelayEffect>(); } },
+        { "ReverbEffect", "Reverb", "Time", [] { return std::make_unique<ReverbEffect>(); } },
     };
     return table;
 }
