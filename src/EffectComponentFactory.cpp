@@ -1,5 +1,6 @@
 #include "AbstractEffect.h"
 #include "ChorusEffectComponent.h"
+#include "AutoWahEffectComponent.h"
 #include "DelayEffectComponent.h"
 #include "DistortionEffectComponent.h"
 #include "EffectComponentFactory.h"
@@ -27,6 +28,8 @@ EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* e
         return new ChorusEffectComponent(effect);
     if (type == "ReverbEffect")
         return new ReverbEffectComponent(effect);
+    if (type == "AutoWahEffect")
+        return new AutoWahEffectComponent(effect);
 
     return nullptr;
 }

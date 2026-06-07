@@ -1,6 +1,7 @@
 #include "EffectRegistry.h"
 
 #include "ChorusEffect.h"
+#include "AutoWahEffect.h"
 #include "DelayEffect.h"
 #include "DistortionEffect.h"
 #include "EqualizerEffect.h"
@@ -12,6 +13,7 @@ namespace
 const std::vector<EffectDescriptor>& descriptors()
 {
     static const std::vector<EffectDescriptor> table {
+        { "AutoWahEffect", "Auto Wah", "Filter", [] { return std::make_unique<AutoWahEffect>(); } },
         // Dynamics
         { "NoiseGateEffect", "Noise Gate", "Dynamics", [] { return std::make_unique<NoiseGateEffect>(); } },
         // Drive
