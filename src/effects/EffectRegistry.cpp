@@ -2,6 +2,7 @@
 
 #include "ChorusEffect.h"
 #include "AutoWahEffect.h"
+#include "CompressorEffect.h"
 #include "DelayEffect.h"
 #include "DistortionEffect.h"
 #include "EqualizerEffect.h"
@@ -16,6 +17,7 @@ const std::vector<EffectDescriptor>& descriptors()
         { "AutoWahEffect", "Auto Wah", "Filter", [] { return std::make_unique<AutoWahEffect>(); } },
         // Dynamics
         { "NoiseGateEffect", "Noise Gate", "Dynamics", [] { return std::make_unique<NoiseGateEffect>(); } },
+        { "CompressorEffect", "Compressor", "Dynamics", [] { return std::make_unique<CompressorEffect>(); } },
         // Drive
         { "DistortionEffect", "Distortion", "Drive", [] { return std::make_unique<DistortionEffect>(); } },
         // EQ
