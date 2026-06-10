@@ -4,6 +4,7 @@
 #include "AutoWahEffect.h"
 #include "CompressorEffect.h"
 #include "OverdriveEffect.h"
+#include "PhaserEffect.h"
 #include "DelayEffect.h"
 #include "DistortionEffect.h"
 #include "EqualizerEffect.h"
@@ -26,6 +27,7 @@ const std::vector<EffectDescriptor>& descriptors()
         { "EqualizerEffect", "Equalizer", "EQ", [] { return std::make_unique<EqualizerEffect>(); } },
         // Modulation
         { "ChorusEffect", "Chorus", "Modulation", [] { return std::make_unique<ChorusEffect>(); } },
+        { "PhaserEffect", "Phaser", "Modulation", [] { return std::make_unique<PhaserEffect>(); } },
         // Time
         { "DelayEffect", "Delay", "Time", [] { return std::make_unique<DelayEffect>(); } },
         { "ReverbEffect", "Reverb", "Time", [] { return std::make_unique<ReverbEffect>(); } },

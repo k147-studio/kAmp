@@ -3,6 +3,7 @@
 #include "AutoWahEffectComponent.h"
 #include "CompressorEffectComponent.h"
 #include "OverdriveEffectComponent.h"
+#include "PhaserEffectComponent.h"
 #include "DelayEffectComponent.h"
 #include "DistortionEffectComponent.h"
 #include "EffectComponentFactory.h"
@@ -36,6 +37,8 @@ EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* e
         return new CompressorEffectComponent(effect);
     if (type == "OverdriveEffect")
         return new OverdriveEffectComponent(effect);
+    if (type == "PhaserEffect")
+        return new PhaserEffectComponent(effect);
 
     return nullptr;
 }
