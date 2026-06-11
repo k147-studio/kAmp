@@ -4,6 +4,7 @@
 #include "CompressorEffectComponent.h"
 #include "OverdriveEffectComponent.h"
 #include "PhaserEffectComponent.h"
+#include "TremoloEffectComponent.h"
 #include "DelayEffectComponent.h"
 #include "DistortionEffectComponent.h"
 #include "EffectComponentFactory.h"
@@ -39,6 +40,8 @@ EffectComponent* EffectComponentFactory::CreateEffectComponent(AbstractEffect* e
         return new OverdriveEffectComponent(effect);
     if (type == "PhaserEffect")
         return new PhaserEffectComponent(effect);
+    if (type == "TremoloEffect")
+        return new TremoloEffectComponent(effect);
 
     return nullptr;
 }

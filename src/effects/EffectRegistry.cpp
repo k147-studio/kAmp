@@ -5,6 +5,7 @@
 #include "CompressorEffect.h"
 #include "OverdriveEffect.h"
 #include "PhaserEffect.h"
+#include "TremoloEffect.h"
 #include "DelayEffect.h"
 #include "DistortionEffect.h"
 #include "EqualizerEffect.h"
@@ -28,6 +29,7 @@ const std::vector<EffectDescriptor>& descriptors()
         // Modulation
         { "ChorusEffect", "Chorus", "Modulation", [] { return std::make_unique<ChorusEffect>(); } },
         { "PhaserEffect", "Phaser", "Modulation", [] { return std::make_unique<PhaserEffect>(); } },
+        { "TremoloEffect", "Tremolo", "Modulation", [] { return std::make_unique<TremoloEffect>(); } },
         // Time
         { "DelayEffect", "Delay", "Time", [] { return std::make_unique<DelayEffect>(); } },
         { "ReverbEffect", "Reverb", "Time", [] { return std::make_unique<ReverbEffect>(); } },
